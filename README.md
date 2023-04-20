@@ -11,7 +11,7 @@ Build web applications using React.js for the front end and python/flask for you
 
 ### 1) Installation:
 
-> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
+> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node
 
 It is recomended to install the backend first, make sure you have Python 3.8, Pipenv and a database engine (Posgress recomended)
 
@@ -53,7 +53,7 @@ To update with all yours tables you can edit the file app.py and go to the line 
 
 ### Front-End Manual Installation:
 
--   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
+- Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
@@ -67,3 +67,10 @@ This boilerplate it's 100% read to deploy with Render.com and Heroku in a matter
 This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
 
 You can find other templates and resources like this at the [school github page](https://github.com/4geeksacademy/).
+
+PETSBOOK
+
+Nuestro proyecto se basa en la creación de una web para protectoras de animales. La web va estar estructurada en tres páginas principales; una vista principal donde cualquier usuario puede visitar la página, una vista de registro de usuario/protectora y por último una vista para poder dar de alta a las mascotas.La idea es generar una web que permita a los usuarios y a las protectoras registrarse. Los usuarios podrán acceder a la web con la posibilidad de registro que les permitirá solicitar bien la adopción de los animales o bien la petición de formar parte de la compañía para la gestión de los animales. Por otro lado, las protectoras se podrán dar de alta en la web como Compañías e irán compartiendo datos sobre los animales. Éstas también tendrán la posibilidad de dar capacidad de modificar los datos de los animales (dar de alta, actualizar estado de salud, dar de baja, etc). También habilitaremos la posibildad de donar fondos para contribuir al mantenimiento y el cuidado de las intalaciones y animales dando la posibilidad de especificar el animal al cual queremos donar.
+Por otro lado, estableceremos también un proceso de adopción para asegurarnos que el candidato cumple los requisitos que consideremos básicos para asegurarnos de que tiene la capacidad y voluntad de cuidar al animal. Sin olvidarnos tampoco de un control del estado en el que se encuentran aquellos animales que han sido dados en adopción.El diagrama que nos hemos basado para desarrollar los modelos y la estructura del proyecto es el siguiente:
+
+![image](https://user-images.githubusercontent.com/121254595/233442823-0cfd6716-96c4-4d3d-b065-ed200c5235b3.png)Por otro lado, hemos usado FIGMA para tener una previsualización de nuestro Frontend.https://www.figma.com/file/OLMOCo6o8jMzLvpHzT4jUy/PROTECTORA-DE-ANIMALES?node-id=0-1&t=BTDpDYxaj1rGAIRU-0

@@ -5,8 +5,7 @@ class Historial(db.Model):
     title = db.Column(db.String(120), unique=False, nullable=True)
     description = db.Column(db.String(600), unique=False, nullable=True)
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
-    user_id = db.Column(db.Integer, db.FereignKey('user.id'))
-
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     pet = db.relationship('Pet')
     user = db.relationship('User')
 
