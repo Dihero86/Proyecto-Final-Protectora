@@ -11,6 +11,8 @@ from api.models.db import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from api.models.company import Company
+
 
 #from models import Person
 
@@ -62,6 +64,24 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0 # avoid cache memory
     return response
+
+#get Company
+@app.route('/companies', methods=['GET'])
+def get_companies():
+    companies = Company.query.all()
+    return jsonify([company.serialize() for company in companies])
+
+
+#create_company
+# create_company
+@app.route('/companies', methods=['POST'])
+def create_company():
+    data = request.get_json()
+    company = Company(data['name'], data['CIF'], data['logo'], data['description'], data['address'], data['user_id'])
+    db.session.add(company)
+    db.session.commit()
+    return jsonify({'id': company.id, 'name': company.name, 'CIF': company.CIF, 'logo': company.logo, 'description': company.description, 'address': company.address, 'user_id': company.user_id}), 201
+
 
 
 # this only runs if `$ python src/main.py` is executed
