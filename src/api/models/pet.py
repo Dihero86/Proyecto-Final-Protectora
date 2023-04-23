@@ -26,8 +26,6 @@ class Pet(db.Model):
         self.status_id = status_id
         self.company_id = company_id
 
-    
-
     def serialize(self):
         return {
             "id": self.id,
@@ -38,5 +36,7 @@ class Pet(db.Model):
             "photo": self.photo,
             "description": self.description,
             "status_id": self.status_id,
+            "status": self.status.serialize(),
             "company_id": self.company_id,
+            "company": self.company.serialize(),
         }
