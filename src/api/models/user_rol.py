@@ -2,8 +2,7 @@ from api.models.db import db
 
 class User_rol(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    rol_type = db.Column(db.String(40), unique=True, nullable=False) #puede ser administrador, voluntario o cliente
-    user = db.relationship('User')
+    rol_type = db.Column(db.String(40), unique=True, nullable=False) #ADMIN / CLIENT / WORKER
 
     def __init__(self, rol_type ):
         self.rol_type = rol_type 

@@ -13,7 +13,7 @@ class Pet(db.Model):
     status = db.relationship('Status')
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
     company = db.relationship('Company')
-    adopted_pet = db.relationship('Adopted_Pet')
+
 
 
     def __init__(self, name, age, breed, size, photo, description, status_id, company_id):
