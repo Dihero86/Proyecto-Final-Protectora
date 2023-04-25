@@ -29,5 +29,7 @@ class User(db.Model):
         "name": self.name,
         "last_name": self.last_name,
         "avatar": self.avatar,
+        "user_rol_id": self.user_rol_id,
+        "user_rol": user_rol.serialize()
         }
 
