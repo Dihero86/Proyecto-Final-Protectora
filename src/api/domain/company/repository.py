@@ -8,7 +8,7 @@ def get_all_companies():
 
 
 def new_company(data):
-    new_company = Company(data['name'], data['CIF'], data['logo'], data['description'], data['address'], data['user_id'])
+    new_company = Company(data['name'], data['cif'], data['logo'], data['description'], data['adress'], data['user_id'])
     db.session.add(new_company)
     db.session.commit()
     return new_company.serialize(), 201
@@ -23,17 +23,19 @@ def delete_company(company_id):
 
 
 def update_company(data, company_id):
+    print(data)
     if not isinstance(data, dict):
         return {'error': 'Formato inválido'}, 400
     company = Company.query.get(company_id)
     if not company:
         return {'error': 'Company not found'}, 404
-    company.name = data.get('name', company.name)
-    company.CIF = data.get('CIF', company.CIF)
-    company.logo = data.get('logo', company.logo)
-    company.description = data.get('description', company.description)
-    company.address = data.get('address', company.address)
+    company.name = data.get('name')
+    company.CIF = data.get('cif')
+    company.logo = data.get('logo')
+    company.description = data.get('description')
+    company.address = data.get('adress')
     db.session.commit()
+    print(company.serialize())
     return company.serialize(), 200
 
 
