@@ -35,7 +35,6 @@ def update_company(data, company_id):
     company.description = data.get('description')
     company.address = data.get('adress')
     db.session.commit()
-    print(company.serialize())
     return company.serialize(), 200
 
 
