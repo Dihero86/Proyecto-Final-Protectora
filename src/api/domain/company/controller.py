@@ -33,3 +33,8 @@ def update_company(company_id, data):
     Repository.update_company(data, company_id)
     return {'message': 'Company updated successfully'}, 200
 
+def get_company(company_id):
+    company= Repository.get_company(company_id)
+    if company is None:
+         return {"msg": "Bad Request: Company not Found", "error": True, "status": 404 }
+    return company
