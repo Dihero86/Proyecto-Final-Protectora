@@ -36,7 +36,9 @@ def update_company(data, company_id):
     db.session.commit()
     return company.serialize(), 200
 
-
+def get_company(id):
+    company = Company.query.get(id)  
+    return company
 
 
 

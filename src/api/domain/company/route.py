@@ -34,3 +34,10 @@ def update_company(company_id):
     data = request.get_json()
     update_company = Controller.update_company(company_id, data)
     return jsonify(update_company), 200
+
+@api.route('/company/<int:company_id>',methods=['GET'])
+def get_company(company_id):
+    company = Controller.get_company(company_id)
+    if isinstance(company, Company):
+        return jsonify(company.serialize()),200
+    return jsonify(company),company['status']
