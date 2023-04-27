@@ -1,0 +1,13 @@
+.title {
+  margin: 20px;
+  font-size: 30px;
+  color: #275f70;
+}
+
+.form-label {
+  float: left;
+}
+
+.btn {
+  color: white;
+}

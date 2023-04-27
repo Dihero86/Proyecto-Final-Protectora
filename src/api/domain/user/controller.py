@@ -19,7 +19,10 @@ def create_user(new_user):
         return user_verify
     hashed = bcrypt.hashpw(new_user['password'].encode(), bcrypt.gensalt(14))
     user_rol_id = User_rol.query.filter_by(rol_type="Client").first()
-    return Repository.create_user(new_user['email'],  hashed.decode(), new_user['name'], new_user['last_name'], new_user['avatar'], new_user['user_rol_id'])
+
+    return Repository.create_user(new_user['email'],  hashed.decode(), new_user['name'], new_user['last_name'], user_rol_id.id)
+
+
 
 def login(body):
     user_verify = verify_user_email_and_pass(body)
