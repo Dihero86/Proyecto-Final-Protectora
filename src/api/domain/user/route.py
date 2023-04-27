@@ -7,9 +7,6 @@ import api.domain.user.controller as Controller
 
 api = Blueprint('/api/user', __name__)
 
-# create_user
-
-
 @api.route('/register/client', methods=['POST'])
 def create_user():
     body = request.get_json()
@@ -17,3 +14,11 @@ def create_user():
     if isinstance(user, User):
         return jsonify(user.serialize()), 200
     return jsonify(user)
+
+@api.route('/login', methods=['POST'])
+def login():
+    body = request.get_json()
+    token = Controller.login(body)
+    if token.get('token'):
+        return jsonify(token),200
+    return jsonify(token),token['status']
