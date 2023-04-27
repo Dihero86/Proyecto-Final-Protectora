@@ -7,3 +7,7 @@ def create_user(email, password, name, last_name, avatar, user_rol_id):
     db.session.add(new_user)
     db.session.commit()
     return new_user
+
+def get_user_by_email(email):
+    return User.query.filter_by(email=email).one()
+
