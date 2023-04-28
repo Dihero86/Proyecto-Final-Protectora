@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import catImage from "../../img/cat.png";
+import { addNewUser } from "../service/user";
+import { useNavigate } from "react-router-dom";
 
-export const UserForm = ({ handleSubmit, handleChange }) => {
+export const UserForm = () => {
   const [user, setUser] = useState({
     name: "",
     last_name: "",
@@ -9,6 +11,23 @@ export const UserForm = ({ handleSubmit, handleChange }) => {
     password: "",
   });
   const [passwordCheck, setPasswordCheck] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(user.password, passwordCheck);
+    if (user.password == passwordCheck) {
+      addNewUser(user);
+      navigate("/login_user");
+    } else {
+      alert("las contraseñas no coinciden");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
 
   return (
     <div className="container-fluid">
@@ -45,13 +64,13 @@ export const UserForm = ({ handleSubmit, handleChange }) => {
               ></input>
             </div>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
+              <label htmlFor="inputEmail" className="form-label">
                 EMAIL
               </label>
               <input
                 type="email"
                 className="form-control"
-                id="exampleInputEmail1"
+                id="inputEmail"
                 name="email"
                 onChange={handleChange}
                 value={user.email}
@@ -89,11 +108,7 @@ export const UserForm = ({ handleSubmit, handleChange }) => {
               ></input>
             </div>
             <div>
-              <button
-                className="btn"
-                type="submit"
-                style={{ backgroundColor: "#42A0BD" }}
-              >
+              <button className="btn" type="submit">
                 Enviar
               </button>
             </div>
