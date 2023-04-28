@@ -6,7 +6,7 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home.jsx";
 import { FormPet } from "./pages/formpet.jsx";
 import injectContext from "./store/appContext";
-import { CreateCompany, company } from "./pages/company.jsx";
+import { FormCompany } from "./pages/company.jsx";
 
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
@@ -28,7 +28,7 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<FormPet />} path="/createPet" />
-            <Route element={<CreateCompany />} path="/createCompany" />
+            <Route element={<FormCompany />} path="/createCompany" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />
