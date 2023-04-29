@@ -12,12 +12,11 @@ class User(db.Model):
         db.Integer, db.ForeignKey('user_rol.id'), nullable=True)
     user_rol = db.relationship('User_rol')
 
-    def __init__(self, email, password, name, last_name, avatar, user_rol_id):
+    def __init__(self, email, password, name, last_name, user_rol_id):
         self.email = email
         self.password = password
         self.name = name
         self.last_name = last_name
-        self.avatar = avatar
         self.user_rol_id = user_rol_id
 
     def __repr__(self):
