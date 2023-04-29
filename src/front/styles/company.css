@@ -1,0 +1,18 @@
+h2 {
+  font-family: Arial;
+  color: #275f70;
+}
+
+h5 {
+  font-family: Arial;
+  color: #275f70;
+}
+
+button {
+  background-color: #42a0bd;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -5,9 +5,12 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home.jsx";
 import { FormPet } from "./pages/formpet.jsx";
+
 import { RegisterUser } from "./pages/registerUser.jsx";
 import { LoginUser } from "./pages/loginUser.jsx";
+
 import injectContext from "./store/appContext";
+import { FormCompany } from "./pages/company.jsx";
 
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
@@ -28,6 +31,7 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route element={<Home />} path="/" />
+            <Route element={<FormCompany />} path="/createCompany" />
             <Route element={<FormPet />} path="/create_pet" />
             <Route element={<RegisterUser />} path="/register_user" />
             <Route element={<LoginUser />} path="/login_user" />
