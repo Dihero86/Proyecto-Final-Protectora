@@ -1,16 +1,28 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { addNewUser, createCompany } from "../service/company";
+
 import "../../styles/company.css";
 
 export const FormCompany = () => {
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "",
+    last_name: "",
+    email: "",
+    password: "",
+  });
+
   const [company, setCompany] = useState({
     name: "",
     cif: "",
     logo: "",
     description: "",
     adress: "",
-    user_id: 2,
+    user_id: "",
   });
-
+  //duda, el user ID va ser el 1 que es el que hace alusión al Admin?
   const handleInputChange = (event) => {
     setCompany({
       ...company,
@@ -18,37 +30,30 @@ export const FormCompany = () => {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log("handleSubmit was called!");
-    try {
-      const response = await fetch(
-        "https://3001-dihero86-proyectofinalp-ue2i18bp853.ws-eu96.gitpod.io/api/company",
-        {
-          method: "POST",
-          body: JSON.stringify(company),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setCompany({
-        name: "",
-        cif: "",
-        logo: "",
-        adress: "",
-        description: "",
-        user_id: 2,
-      });
-    } catch (error) {
-      console.log("error register company", error);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(user.password, passwordCheck);
+    if (user.password == passwordCheck) {
+      try {
+        const userId = await addNewUser(user);
+        await createCompany(company, userId);
+        navigate("/petgallery");
+      } catch (error) {
+        console.log(error);
+        alert("Error creating user or company.");
+      }
+    } else {
+      alert("Passwords do not match.");
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div className="p-5">
         <h2 className="mb-5">Registros de Protectoras/Asociaciones</h2>
         <div className="row g-4">
@@ -66,6 +71,8 @@ export const FormCompany = () => {
               title="Completa el nombre"
               placeholder="Añade el Nombre"
               name="name"
+              onChange={handleChange}
+              value={user.name}
             />
           </div>
           <div className="col-6 text-start">
@@ -81,6 +88,8 @@ export const FormCompany = () => {
               title="last_name"
               name="last_name"
               placeholder="Añade el Apellido"
+              onChange={handleChange}
+              value={user.last_name}
             />
           </div>
           <div className="col-6 text-start">
@@ -93,6 +102,8 @@ export const FormCompany = () => {
               id="email"
               placeholder="name@example.com"
               name="email"
+              onChange={handleChange}
+              value={user.email}
             />
           </div>
           <div className="col-6 text-start">
@@ -105,6 +116,8 @@ export const FormCompany = () => {
               id="exampleFormControlInput1"
               placeholder="Ingrese su contraseña"
               name="password"
+              onChange={handleChange}
+              value={user.password}
             />
           </div>
           <div className="col-6 text-start mb-5">
@@ -117,6 +130,11 @@ export const FormCompany = () => {
               id="password"
               placeholder="Repita su contraseña"
               name="password"
+              value={passwordCheck}
+              onChange={(e) => {
+                setPasswordCheck(e.target.value);
+              }}
+              required
             />
           </div>
         </div>
