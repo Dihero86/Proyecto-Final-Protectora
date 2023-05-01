@@ -4,7 +4,7 @@ from api.models.db import db
 class Company(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    cif = db.Column(db.Integer, nullable=False)
+    cif = db.Column(db.String(199), nullable=False)
     logo = db.Column(db.String(255)) #es un string?
     description = db.Column(db.String(500))
     adress = db.Column(db.String(255))
