@@ -1,18 +1,15 @@
 import { URL } from ".";
-const HEADERS = {
-    "Content-Type": "application/json"
-}
+const HEADERS = { "Content-Type": "application/json" }
 
 export const createPet = async (pet) => {
     try {
-        const response = await fetch(`${URL}/api/pet/create`, {
-            methods: "POST",
-            headers: HEADERS,
-            body: JSON.stringify(pet)
-        });
-        const data = await response.json()
-
-    } catch (error) {
-        console.log('error register pet', error)
+        const response = await fetch(`${URL}/api/pet/create/`, {
+            method: "POST",
+            //headers: HEADERS,
+            body: pet
+        })
+    }
+    catch (error) {
+        console.log("error", error)
     }
 }

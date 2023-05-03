@@ -7,7 +7,6 @@ class Pet(db.Model):
     age = db.Column(db.Integer)
     breed = db.Column(db.String(100))
     size = db.Column(db.String(50))
-    photo = db.Column(db.String(255))
     description = db.Column(db.String(500))
     status_id = db.Column(db.Integer, db.ForeignKey('status.id'), nullable=False)
     status = db.relationship('Status')
@@ -16,12 +15,11 @@ class Pet(db.Model):
 
 
 
-    def __init__(self, name, age, breed, size, photo, description, status_id, company_id):
+    def __init__(self, name, age, breed, size, description, status_id, company_id):
         self.name = name
         self.age = age
         self.breed = breed
         self.size = size
-        self.photo = photo
         self.description = description
         self.status_id = status_id
         self.company_id = company_id
@@ -33,7 +31,6 @@ class Pet(db.Model):
             "age": self.age,
             "breed": self.breed,
             "size": self.size,
-            "photo": self.photo,
             "description": self.description,
             "status_id": self.status_id,
             "status": self.status.serialize(),
