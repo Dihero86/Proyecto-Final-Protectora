@@ -1,0 +1,27 @@
+.city-menu {
+  float: right;
+  margin-bottom: 20px;
+  background-color: #42a0bd;
+  color: white;
+}
+.blue-background {
+  background-color: #99ddf2;
+  display: flex;
+}
+.list {
+  display: flex;
+  flex-direction: row;
+}
+.company-card {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.company-logo {
+  width: 200px;
+  height: 200px;
+}
+.company-info {
+  background-color: #42a0bd;
+  font-size: 15px;
+}
