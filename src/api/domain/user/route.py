@@ -22,3 +22,11 @@ def login():
     if token.get('token'):
         return jsonify(token),200
     return jsonify(token),token['status']
+
+@api.route('/register/volunteer/<int:company_id>', methods=['POST'])
+def create_volunteer(company_id):
+    body = request.get_json()
+    volunteer = Controller.create_volunteer(body, company_id)
+    if isinstance(volunteer, User):
+        return jsonify(volunteer.serialize()), 200
+    return jsonify(volunteer),volunteer['status']

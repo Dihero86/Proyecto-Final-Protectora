@@ -12,6 +12,7 @@ import { AllCompanies } from "./pages/allCompanies.jsx";
 
 import injectContext from "./store/appContext";
 import { FormCompany } from "./pages/company.jsx";
+import { PetGallery } from "./pages/petgallery.jsx";
 
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
@@ -33,6 +34,7 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<FormCompany />} path="/createCompany" />
+            <Route element={<PetGallery />} path="/petgallery" />
             <Route element={<FormPet />} path="/create_pet" />
             <Route element={<RegisterUser />} path="/register_user" />
             <Route element={<LoginUser />} path="/login_user" />

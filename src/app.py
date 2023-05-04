@@ -18,6 +18,7 @@ import api.domain.user.route as api_user
 import api.domain.pet.route as api_pet
 import api.domain.adoption_process.route as api_adoption_process
 from flask_jwt_extended import JWTManager
+import cloudinary
 
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(
@@ -39,6 +40,18 @@ db.init_app(app)
 
 app.config["JWT_SECRET_KEY"] = os.environ['JWT_SECRET_KEY']
 jwt=JWTManager(app)
+
+app.config['CLOUD_NAME'] = os.environ.get('CLOUD_NAME')
+app.config['CLOUD_API_KEY'] = os.environ.get('CLOUD_API_KEY')
+app.config['CLOUD_API_SECRET'] = os.environ.get('CLOUD_API_SECRET')
+
+cloudinary.config(
+    cloud_name = app.config['CLOUD_NAME'],
+    api_key = app.config['CLOUD_API_KEY'],
+    api_secret = app.config['CLOUD_API_SECRET'],
+    secure = True
+)
+
 # Allow CORS requests to this API
 CORS(app)
 
