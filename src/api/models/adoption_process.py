@@ -5,13 +5,13 @@ class Adoption_process(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), nullable=False)
     description = db.Column(db.String(240), nullable=False)
-    status = db.Column(db.String(40), nullable=False) #puede ser el string "rechazada" o "aprobada"
+    status = db.Column(db.String(40), nullable=False) #puede ser el string "rechazada" o "aprobada" o "pendiente"
     user = db.relationship('User')
     pet = db.relationship('Pet')
 
-    def __init__(self, user_id, pets_id, description, status):
+    def __init__(self, user_id, pet_id, description, status):
         self.user_id = user_id
-        self.pets_id = pets_id
+        self.pet_id = pet_id
         self.description = description
         self.status = status
        
@@ -22,7 +22,7 @@ class Adoption_process(db.Model):
         return {
         "id": self.id,
         "user_id": self.user_id,
-        "pets_id": self.pets_id,
+        "pet_id": self.pet_id,
         "description": self.description,
         "status": self.status
         }

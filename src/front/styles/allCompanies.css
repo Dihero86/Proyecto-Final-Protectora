@@ -1,3 +1,9 @@
+.all-cities {
+  float: left;
+  margin-bottom: 20px;
+  background-color: #42a0bd;
+  color: white;
+}
 .city-menu {
   float: right;
   margin-bottom: 20px;
@@ -11,6 +17,8 @@
 .list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .company-card {
   margin: 20px;

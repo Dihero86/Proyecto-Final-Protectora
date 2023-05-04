@@ -4,17 +4,13 @@ import { getAllCompanies } from "../service";
 
 export const AllCompanies = () => {
   const [companies, setCompanies] = useState([]);
+  const [filter, setFilter] = useState([]);
 
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
         const companies = await getAllCompanies();
         setCompanies(companies);
-        companies.map((company) => {
-          let city = company.city;
-          return setCities(cities.push(city));
-        });
-        console.log(cities);
       } catch (err) {
         console.log(err);
       }
@@ -22,13 +18,29 @@ export const AllCompanies = () => {
     fetchCompanies();
   }, []);
 
+  const filterCities = (cityName) => {
+    const result = companies.filter((company) => company.city == cityName);
+    return setFilter(result);
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-12">
           <h1 className="title">Protectoras/ Asociaciones/ Compañías</h1>
         </div>
-        <div className="col-md-12">
+        <div className="col-md-6">
+          <button
+            className="all-cities"
+            type="button"
+            onClick={() => {
+              setFilter([]);
+            }}
+          >
+            Ver todas
+          </button>
+        </div>
+        <div className="col-md-6">
           <div className="dropdown">
             <button
               className="btn dropdown-toggle city-menu"
@@ -36,13 +48,13 @@ export const AllCompanies = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Ciudad
+              Filtrar por ciudad
             </button>
             <ul className="dropdown-menu">
               {companies.map((company) => {
                 return (
-                  <li>
-                    <a className="dropdown-item">{company.city}</a>
+                  <li onClick={() => filterCities(company.city)}>
+                    <p className="dropdown-item">{company.city}</p>
                   </li>
                 );
               })}
@@ -51,37 +63,69 @@ export const AllCompanies = () => {
         </div>
         <div className="col-md-12 blue-background">
           <ul className="list">
-            {companies.map((company) => {
-              return (
-                <li key={company.id} className="company-card">
-                  {company.logo ? (
-                    company.logo
-                  ) : (
-                    <img
-                      src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
-                      className="card-img-top company-logo"
-                      alt="..."
-                    />
-                  )}
-                  <div className="company-info">
-                    <p className="company-name">{company.name}</p>
-                    <p className="company-address">
-                      <i class="fa-solid fa-location-dot"></i>
-                      {` ${company.adress}`} <br />
-                      {company.city}
-                    </p>
-                    <p className="company-phone">
-                      <i class="fa-solid fa-phone"></i>
-                      {` ${company.phone} `}
-                    </p>
-                    <p className="company-email">
-                      <i class="fa-solid fa-envelope"></i>
-                      {` ${company.email} `}
-                    </p>
-                  </div>
-                </li>
-              );
-            })}
+            {filter.length == 0
+              ? companies.map((company) => {
+                  return (
+                    <li key={company.id} className="company-card">
+                      {company.logo ? (
+                        company.logo
+                      ) : (
+                        <img
+                          src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                          className="card-img-top company-logo"
+                          alt="..."
+                        />
+                      )}
+                      <div className="company-info">
+                        <p className="company-name">{company.name}</p>
+                        <p className="company-address">
+                          <i class="fa-solid fa-location-dot"></i>
+                          {` ${company.adress}`} <br />
+                          {company.city}
+                        </p>
+                        <p className="company-phone">
+                          <i class="fa-solid fa-phone"></i>
+                          {` ${company.phone} `}
+                        </p>
+                        <p className="company-email">
+                          <i class="fa-solid fa-envelope"></i>
+                          {` ${company.email} `}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })
+              : filter.map((company) => {
+                  return (
+                    <li key={company.id} className="company-card">
+                      {company.logo ? (
+                        company.logo
+                      ) : (
+                        <img
+                          src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                          className="card-img-top company-logo"
+                          alt="..."
+                        />
+                      )}
+                      <div className="company-info">
+                        <p className="company-name">{company.name}</p>
+                        <p className="company-address">
+                          <i class="fa-solid fa-location-dot"></i>
+                          {` ${company.adress}`} <br />
+                          {company.city}
+                        </p>
+                        <p className="company-phone">
+                          <i class="fa-solid fa-phone"></i>
+                          {` ${company.phone} `}
+                        </p>
+                        <p className="company-email">
+                          <i class="fa-solid fa-envelope"></i>
+                          {` ${company.email} `}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
       </div>
