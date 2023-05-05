@@ -14,8 +14,7 @@ def create_user_admin(body):
     body["company"]["user_id"] = user.id
     company = Company_controller.new_company(body["company"])
     volunteer = Repository.add_volunteer(user.id, user.id)
-    message = f"Usuario createdo con ID {user.id}, Compañía creada con ID, y voluntario creado con ID:"
+    message = f"Usuario createdo con ID {user.id}, Compañía creada con ID {user.id}. El usuario también ha sido añadido a Voluntario"
     return {"user_id": user.id , "message": message }
     
-
-#pasarle user.id y company.id para que tb sea voluntario a la vez que admin y tenga sus permisos
+#duda sobre si está bien pasarle como segundo parámetro el user.id. En principio el admin ha de crear una compañía.
