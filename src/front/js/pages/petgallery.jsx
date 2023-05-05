@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAllPets } from "../service/petgallery.js"; // import the function to fetch the pets
+import "../../styles/petgallery.css";
 
 export const PetGallery = () => {
   const [pets, setPets] = useState([]);
@@ -15,6 +16,45 @@ export const PetGallery = () => {
 
   return (
     <div className="container-fluid px-5">
+      <div className="row mb-3">
+        <div className="col">
+          <div className="btn-group">
+            <button
+              type="button"
+              className="btn btn-danger dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Filter
+            </button>
+            <ul className="dropdown-menu">
+              <li>
+                <a className="dropdown-item" href="#">
+                  Option 1
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item" href="#">
+                  Option 2
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item" href="#">
+                  Option 3
+                </a>
+              </li>
+              <li>
+                <hr className="dropdown-divider" />
+              </li>
+              <li>
+                <a className="dropdown-item" href="#">
+                  Option 4
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <h1 className="titulo">Galería de Mascotas</h1>
       <div className="row row-cols-1 row-cols-md-4 g-4">
         {pets.map((pet, index) => (
