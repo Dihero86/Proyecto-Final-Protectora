@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { addNewUserAndCompany, createCompany } from "../service/company.js";
+import { addNewUserAndCompany, createCompany } from "../service/companyuser.js";
 
 import "../../styles/company.css";
 
