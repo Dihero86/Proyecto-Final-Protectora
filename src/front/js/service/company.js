@@ -4,7 +4,7 @@ const HEADERS = {
   "Content-Type": "application/json",
 };
 
-export const createCompany = async (company, userId, onSuccess, onError) => {
+export const createCompany = async (company, userId) => {
   try {
     const response = await fetch(`${URL}/api/register/company/user`, {
       method: "POST",
@@ -13,19 +13,14 @@ export const createCompany = async (company, userId, onSuccess, onError) => {
     });
     const data = await response.json();
     console.log(data);
-    onSuccess(); // call the success handler
+    return data;
   } catch (error) {
     console.log("error register company", error);
-    onError(error); // call the error handler with the error object
+    throw error;
   }
 };
 
-export const addNewUserAndCompany = async (
-  userData,
-  companyData,
-  onSuccess,
-  onError
-) => {
+export const addNewUserAndCompany = async (userData, companyData) => {
   try {
     const response = await fetch(`${URL}/api/register/company/user`, {
       method: "POST",
@@ -35,9 +30,9 @@ export const addNewUserAndCompany = async (
 
     const data = await response.json(); // Parse response body as JSON
     console.log(data);
-    onSuccess(data); // call the success handler with the response data
-  } catch (err) {
-    console.log(err);
-    onError(err); // call the error handler with the error object
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };

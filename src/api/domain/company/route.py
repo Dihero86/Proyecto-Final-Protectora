@@ -44,6 +44,7 @@ def get_company(company_id):
 
 
 
+#hay que moverlo al route company_user
 @api.route('/register/company/user', methods=['POST'])
 def create_user_admin():
     body = request.get_json()

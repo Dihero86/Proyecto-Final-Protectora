@@ -16,6 +16,8 @@ def create_user_admin(body):
     user = User_controller.create_user(body["user"], "admin")
     body["company"]["user_id"] = user.id
     company = Company_controller.new_company(body["company"])
-    return {"message": "User and company created successfully"}
+    message = f"User created with id {user.id}"
+    return {"user_id": user.id, "message": message}
+    
 
 #pasarle user.id y company.id para que tb sea voluntario a la vez que admin y tenga sus permisos

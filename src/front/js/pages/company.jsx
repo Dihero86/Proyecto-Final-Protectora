@@ -35,18 +35,9 @@ export const FormCompany = () => {
     console.log(user.password, passwordCheck);
     if (user.password == passwordCheck) {
       try {
-        addNewUserAndCompany(
-          user,
-          company,
-          (data) => {
-            console.log(data);
-            navigate("/petgallery");
-          },
-          (error) => {
-            console.log(error);
-            alert("Error creating user or company.");
-          }
-        );
+        const data = await addNewUserAndCompany(user, company);
+        console.log(data);
+        navigate("/petgallery");
       } catch (error) {
         console.log(error);
         alert("Error creating user or company.");
