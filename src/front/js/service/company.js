@@ -2,6 +2,7 @@ import { URL } from ".";
 const HEADERS = {
   "Content-Type": "application/json",
 };
+
 export const createCompany = async (company, userId) => {
   try {
     const response = await fetch(
@@ -14,23 +15,13 @@ export const createCompany = async (company, userId) => {
     );
     const data = await response.json();
 
-    return data;
-
     console.log(data);
-    setCompany({
-      name: "",
-      cif: "",
-      logo: "",
-      adress: "",
-      description: "",
-      user_id: "",
-    });
 
+    return data;
   } catch (error) {
     console.log("error register company", error);
   }
 };
-
 
 export const getAllCompanies = async () => {
   try {
@@ -41,6 +32,8 @@ export const getAllCompanies = async () => {
     return data;
   } catch (err) {
     console.log("ERROR GET ALL COMPANIES", err);
+  }
+};
 
 export const addNewUser = async (data) => {
   try {
@@ -57,6 +50,5 @@ export const addNewUser = async (data) => {
     return result.id; // Return ID of new user
   } catch (err) {
     console.log(err);
-
   }
 };
