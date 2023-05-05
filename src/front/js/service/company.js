@@ -6,7 +6,7 @@ const HEADERS = {
 
 export const createCompany = async (company, userId) => {
   try {
-    const response = await fetch(`${URL}/api/register`, {
+    const response = await fetch(`${URL}/api/register/company/user`, {
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify({ ...company, user_id: userId }),
@@ -28,7 +28,7 @@ export const createCompany = async (company, userId) => {
 
 export const addNewUser = async (data) => {
   try {
-    const response = await fetch(`${URL}/api/register`, {
+    const response = await fetch(`${URL}/api/register/company/user`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },

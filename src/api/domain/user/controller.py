@@ -12,15 +12,15 @@ def verify_user_email_and_pass(user):
     if user['password'] is None or user['password'] == "":
         return {"msg": "Bad request", "error": True, "status": 400}
     return user
-
-def create_user(new_user):
+#añadir rol type al lado de user new_user,rol_type
+def create_user(new_user,rol_type):
     user_verify = verify_user_email_and_pass(new_user)
     if user_verify.get('error') is not None:
         return user_verify
     hashed = bcrypt.hashpw(new_user['password'].encode(), bcrypt.gensalt(14))
-    user_rol_id = User_rol.query.filter_by(rol_type="client").first()
+    user_rol_id = User_rol.query.filter_by(rol_type=rol_type).first()
 
-    return Repository.create_user(new_user['email'],  hashed.decode(), new_user['name'], new_user['last_name'], user_rol_id.id)
+    return Repository.create_user(new_user['email'], hashed.decode(), new_user['name'], new_user['last_name'], user_rol_id.id)
 
 def login(body):
     user_verify = verify_user_email_and_pass(body)
@@ -42,11 +42,6 @@ def create_volunteer(body,company_id):
     company = Company_contoller.get_company(company_id)
     if not isinstance(company, Company):
         return {"msg": "Bad Request: Company not Found", "error": True, "status": 404 }
-    user_verify = verify_user_email_and_pass(body)
-    if user_verify.get('error') is not None:
-        return user_verify
-    hashed = bcrypt.hashpw(body['password'].encode(), bcrypt.gensalt(14))
-    user_rol_id = User_rol.query.filter_by(rol_type="volunteer").first()
-    volunteer = Repository.create_user(body['email'],hashed.decode(), body['name'], body['last_name'], user_rol_id.id)
-    add_volunteer = Volunteer_controller.add_volunteer(volunteer.id, company_id)
-    return volunteer
+    user=create_user(body,"volunteer")
+    add_volunteer = Volunteer_controller.add_volunteer(user.id, company_id)
+    return user

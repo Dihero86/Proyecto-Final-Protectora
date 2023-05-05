@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { addNewUser, createCompany } from "../service/company.js";
+import { addNewUserAndCompany, createCompany } from "../service/company.js";
 
 import "../../styles/company.css";
 
@@ -35,9 +35,18 @@ export const FormCompany = () => {
     console.log(user.password, passwordCheck);
     if (user.password == passwordCheck) {
       try {
-        const userId = await addNewUser(user);
-        await createCompany(company, userId);
-        navigate("/petgallery");
+        addNewUserAndCompany(
+          user,
+          company,
+          (data) => {
+            console.log(data);
+            navigate("/petgallery");
+          },
+          (error) => {
+            console.log(error);
+            alert("Error creating user or company.");
+          }
+        );
       } catch (error) {
         console.log(error);
         alert("Error creating user or company.");
