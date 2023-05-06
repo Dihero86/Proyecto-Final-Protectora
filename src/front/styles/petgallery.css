@@ -1,5 +1,9 @@
-.button {
-  position: absolute;
-  top: 0;
-  left: 0;
+.boton {
+  display: flex;
+  width: 100%;
+  margin-top: 1%;
+}
+
+.Buscar {
+  margin-left: auto;
 }
