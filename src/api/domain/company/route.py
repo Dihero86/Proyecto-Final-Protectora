@@ -2,24 +2,23 @@ from flask import request, jsonify, Blueprint, Flask
 import api.domain.company.repository as Repository
 import api.domain.company.controller as Controller
 from api.models.index import db, Company
+from flask import Flask, request, jsonify, url_for, Blueprint
+from flask_jwt_extended import jwt_required, get_jwt
+from api.models.index import User, User_rol
+from api.utils import generate_sitemap, APIException
+import api.domain.user.controller as Controller
+
+
 
 api = Blueprint('/api', __name__)
 
-#get all_company
+
 @api.route('/company', methods=['GET'])
 def get_all_companies():
     companies = Repository.get_all_companies()
     return jsonify(companies),200
         
 
-# create_company, #checkear método post
-@api.route('/company', methods=['POST'])
-def new_company():
-    body = request.get_json()
-    new_company = Controller.new_company(body)
-    return jsonify(new_company),201
-    
-#añadir método PUT y DELETE de compañía y crear un endpoint para un id concreto de la compañía
 
 
 
@@ -41,3 +40,8 @@ def get_company(company_id):
     if isinstance(company, Company):
         return jsonify(company.serialize()),200
     return jsonify(company),company['status']
+
+
+
+
+

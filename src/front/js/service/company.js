@@ -1,5 +1,4 @@
 import { URL } from ".";
-
 const HEADERS = {
   "Content-Type": "application/json",
 };
@@ -15,17 +14,24 @@ export const createCompany = async (company, userId) => {
       }
     );
     const data = await response.json();
+
     console.log(data);
-    setCompany({
-      name: "",
-      cif: "",
-      logo: "",
-      adress: "",
-      description: "",
-      user_id: "",
-    });
+
+    return data;
   } catch (error) {
     console.log("error register company", error);
+  }
+};
+
+export const getAllCompanies = async () => {
+  try {
+    const res = await fetch(`${URL}/api/company`, {
+      method: "GET",
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.log("ERROR GET ALL COMPANIES", err);
   }
 };
 
@@ -39,7 +45,6 @@ export const addNewUser = async (data) => {
         headers: { "Content-Type": "application/json" },
       }
     );
-
     const result = await response.json(); // Parse response body as JSON
     console.log(result.id);
     return result.id; // Return ID of new user
