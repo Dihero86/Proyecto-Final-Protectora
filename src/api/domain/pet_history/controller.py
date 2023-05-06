@@ -28,16 +28,10 @@ def get_history(pet_id,user):
         return check_data 
     return Repository.get_history(pet_id)
 
-def edit_history(pet_id,body,user):
+def edit_history(pet_id,history_id,body,user):
     check_data = get_volunteer_and_pet(pet_id, user)
     if check_data.get('error') is not None:
         return check_data 
     if body["description"] is None or body["description"]=="":
         return {"msg": "Bad Request: Description is not correct", "error": True, "status": 400 }    
-    return Repository.edit_history(pet_id, body, user["id"])
-
-def delete_history(pet_id,user):
-    check_data = get_volunteer_and_pet(pet_id, user)
-    if check_data.get('error') is not None:
-        return check_data 
-    return Repository.delete_history(pet_id)
+    return Repository.edit_history(pet_id,history_id, body, user["id"])

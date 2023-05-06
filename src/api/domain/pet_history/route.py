@@ -20,23 +20,14 @@ def create_history(pet_id):
 def get_history(pet_id):
     user = get_jwt()["sub"]
     pet_history = Controller.get_history(pet_id,user)
-    if isinstance(pet_history, Historial):
-        return jsonify(pet_history.serialize()),201
-    return jsonify(pet_history),pet_history["status"]
+    return jsonify(pet_history),200
 
-@api.route("/<int:pet_id>",methods=["PUT"])
+@api.route("/<int:pet_id>/<int:history_id>",methods=["PUT"])
 @jwt_required()
-def edit_history(pet_id):
+def edit_history(pet_id,history_id):
     body = request.get_json()
     user = get_jwt()["sub"]
-    pet_history = Controller.edit_history(pet_id,body,user)
+    pet_history = Controller.edit_history(pet_id,history_id,body,user)
     if isinstance(pet_history, Historial):
         return jsonify(pet_history.serialize()),201
-    return jsonify(pet_history),pet_history["status"]
-
-@api.route("/<int:pet_id>",methods=["DELETE"])
-@jwt_required()
-def delete_history(pet_id):
-    user = get_jwt()["sub"]
-    pet_history = Controller.delete_history(pet_id, user)
     return jsonify(pet_history),pet_history["status"]
