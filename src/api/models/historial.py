@@ -3,8 +3,8 @@ from api.models.db import db
 class Historial(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=False, nullable=True)
-    description = db.Column(db.String(600), unique=False, nullable=True)
-    pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
+    description = db.Column(db.String(600), unique=False, nullable=False)
+    pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'), unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     pet = db.relationship('Pet')
     user = db.relationship('User')

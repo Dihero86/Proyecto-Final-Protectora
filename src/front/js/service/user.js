@@ -1,5 +1,5 @@
 const URL =
-  "https://3001-dihero86-proyectofinalp-w9cfj8cpm4w.ws-eu96.gitpod.io";
+  "https://3001-dihero86-proyectofinalp-v2mqfydp22q.ws-eu96b.gitpod.io";
 
 export const addNewUser = async (data) => {
   try {
