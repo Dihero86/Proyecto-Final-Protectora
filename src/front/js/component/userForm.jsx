@@ -15,7 +15,7 @@ export const UserForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user.password, passwordCheck);
+
     if (user.password == passwordCheck) {
       addNewUser(user);
       navigate("/login_user");
