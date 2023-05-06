@@ -7,12 +7,12 @@ from flask_jwt_extended import jwt_required, get_jwt
 from api.models.index import User, User_rol
 from api.utils import generate_sitemap, APIException
 import api.domain.user.controller as Controller
-import api.domain.companyuser.controller as Controller
+
 
 
 api = Blueprint('/api', __name__)
 
-#get all_company
+
 @api.route('/company', methods=['GET'])
 def get_all_companies():
     companies = Repository.get_all_companies()
@@ -44,9 +44,4 @@ def get_company(company_id):
 
 
 
-#hay que moverlo al route company_user
-@api.route('/register/company/user', methods=['POST'])
-def create_user_admin():
-    body = request.get_json()
-    result = Controller.create_user_admin(body)
-    return jsonify(result), 200
+
