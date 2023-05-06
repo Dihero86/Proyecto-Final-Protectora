@@ -3,6 +3,7 @@ from api.models.db import db
 
 class Company(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
     name = db.Column(db.String(100),unique=True, nullable=False)
     cif = db.Column(db.Integer,unique=True, nullable=False)
     logo = db.Column(db.String(255), unique=True, nullable=True) 
@@ -11,6 +12,8 @@ class Company(db.Model):
     adress = db.Column(db.String(255), unique=True, nullable=False)
     phone = db.Column(db.Integer, unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+
+
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User')
