@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { addNewUser, createCompany } from "../service/company";
+import { addNewUserAndCompany, createCompany } from "../service/companyuser.js";
 
 import "../../styles/company.css";
 
@@ -35,8 +35,8 @@ export const FormCompany = () => {
     console.log(user.password, passwordCheck);
     if (user.password == passwordCheck) {
       try {
-        const userId = await addNewUser(user);
-        await createCompany(company, userId);
+        const data = await addNewUserAndCompany(user, company);
+        console.log(data);
         navigate("/petgallery");
       } catch (error) {
         console.log(error);
