@@ -7,7 +7,7 @@ def get_all_adoption_processes():
 
 
 def create_adoption_process(user_id, pet_id, description, status):
-    new_process = Adoption_process(user_id=user_id, pet_id=pet_id, description=description, status=status)
+    new_process = Adoption_process(user_id, pet_id, description, status)
     db.session.add(new_process)
     db.session.commit()
     return new_process
