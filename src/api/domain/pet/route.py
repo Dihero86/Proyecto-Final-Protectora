@@ -7,12 +7,16 @@ api = Blueprint('api/pet', __name__)
 
 @api.route('/create', methods=['POST']) #crea una mascota
 def create_pet():
-    body = request.get_json()
-    pet = Controller.create_pet(body)
+    try:
+        fotos = request.files
+        body = request.form.to_dict()
+        pet = Controller.create_pet(body["pet"],fotos)
+        if isinstance(pet, Pet):
+            return jsonify(pet.serialize()),201
+        return jsonify(pet),pet["status"]
+    except Exception as error:
+        return jsonify("error interno"),500
 
-    if isinstance(pet, Pet):
-        return jsonify(pet.serialize()),201
-    return jsonify(pet),pet["status"]
 
 @api.route('/', methods=['GET']) #get todas las mascotas
 def get_all_pet():
