@@ -10,7 +10,7 @@ export const PetGallery = () => {
     const fetchPets = async () => {
       const petData = await getAllPets();
       setPets(petData);
-      // generate a list of all unique breed types from the pets
+
       const uniqueBreeds = Array.from(new Set(petData.map((pet) => pet.breed)));
       setBreedTypes(uniqueBreeds);
     };
@@ -47,9 +47,6 @@ export const PetGallery = () => {
                 Option 3
               </a>
             </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
           </ul>
         </div>
         <div className="btn-group">
@@ -69,9 +66,6 @@ export const PetGallery = () => {
                 </a>
               </li>
             ))}
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
           </ul>
         </div>
         <div className="btn-group">
@@ -99,41 +93,13 @@ export const PetGallery = () => {
                 Option 3
               </a>
             </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
           </ul>
         </div>
         <div className="Buscar">
           <div className="btn-group">
-            <button
-              type="button"
-              className="btn dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Buscar
+            <button class="btn btn-primary" type="submit">
+              Button
             </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Option 1
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Option 2
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Option 3
-                </a>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-            </ul>
           </div>
         </div>
       </div>
