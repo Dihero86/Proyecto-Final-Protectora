@@ -1,5 +1,5 @@
 import api.domain.adoption_process.repository as Repository
-from api.models.index import db, Adoption_process
+from api.models.index import db, Adoption_process, Volunteer
 
 
 def get_all_adoption_processes():
@@ -12,11 +12,12 @@ def create_adoption_process(new_process, status):
     return Repository.create_adoption_process(new_process['user_id'], new_process['pet_id'], new_process['description'], status)
 
 
-def delete_adoption_process(adoption_process_id):
-    if user['id'] is None or user['id'] != volunteer['user_id'] :
-        return {"msg": "No tiene el acceso permitido", "error": True, "status": 400 }
-    
-    if adoption_process_id is None:
+def delete_adoption_process(adoption_process, volunteer):
+
+    if volunteer['company_id'] is None :
+        return {"msg": "No puede realizar esta operación", "error": True, "status": 400 }
+
+    if adoption_process[] is None:
         return {'error': 'ID Proceso de adopción no encontrado'}, 400
     adoption_process = Adoption_process.query.get(adoption_process_id)
     if not adoption_process:
