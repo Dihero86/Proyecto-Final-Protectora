@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { getAllPets } from "../service/petgallery.js"; // import the function to fetch the pets
+import { getAllPets } from "../service/petgallery.js";
 import "../../styles/petgallery.css";
 
 export const PetGallery = () => {
   const [pets, setPets] = useState([]);
+  const [breedTypes, setBreedTypes] = useState([]);
 
   useEffect(() => {
     const fetchPets = async () => {
-      const petData = await getAllPets(); // fetch the pets
-      setPets(petData); // set the pets in state
+      const petData = await getAllPets();
+      setPets(petData);
+      // generate a list of all unique breed types from the pets
+      const uniqueBreeds = Array.from(new Set(petData.map((pet) => pet.breed)));
+      setBreedTypes(uniqueBreeds);
     };
 
-    fetchPets(); // call the fetchPets function when the component mounts
+    fetchPets();
   }, []);
 
   return (
@@ -58,21 +62,13 @@ export const PetGallery = () => {
             Raza
           </button>
           <ul className="dropdown-menu">
-            <li>
-              <a className="dropdown-item" href="#">
-                Option 1
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Option 2
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Option 3
-              </a>
-            </li>
+            {breedTypes.map((breed, index) => (
+              <li key={index}>
+                <a className="dropdown-item" href="#">
+                  {breed}
+                </a>
+              </li>
+            ))}
             <li>
               <hr className="dropdown-divider" />
             </li>
