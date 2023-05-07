@@ -7,3 +7,11 @@
 .Buscar {
   margin-left: auto;
 }
+
+.boton > .btn-group:not(:last-child) {
+  margin-right: 1%;
+}
+
+.main {
+  margin: 5%;
+}
