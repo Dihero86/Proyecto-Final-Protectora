@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt
 from api.models.index import User, User_rol
 from api.utils import generate_sitemap, APIException
 import api.domain.user.controller as Controller
-import api.domain.companyuser.controller as Controller
+import api.domain.companyuser.controller as CompanyUserController
 
 
 api = Blueprint('/api/user', __name__)
@@ -39,5 +39,5 @@ def create_volunteer(company_id):
 @api.route('/register/company/admin', methods=['POST'])
 def create_user_admin():
     body = request.get_json()
-    result = Controller.create_user_admin(body)
+    result = CompanyUserController.create_user_admin(body)
     return jsonify(result), 200

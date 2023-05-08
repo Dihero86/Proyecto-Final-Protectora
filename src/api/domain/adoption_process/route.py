@@ -5,25 +5,16 @@ import api.domain.adoption_process.controller as Controller
 
 api = Blueprint('/api/adoption_process', __name__)
 
-# get all adoption processes
-@api.route('/', methods=['GET'])
-@jwt_required()
-def get_all_adoption_processes():
-    info_token = get_jwt()
-    user = info_token['sub']
-    print(user)
-    adoption_processes = Controller.get_all_adoption_processes()
-    return jsonify(adoption_processes), 200
 
 # create an adoption process
-@api.route('/create', methods=['POST'])
+@api.route('/create/<int:pet_id>', methods=['POST'])
 @jwt_required()
-def create_adoption_process():
+def create_adoption_process(pet_id):
     info_token = get_jwt()
     user = info_token['sub']
     print(user)
     body = request.get_json()
-    adoption_process = Controller.create_adoption_process(body, "pending")
+    adoption_process = Controller.create_adoption_process(body, user, pet_id)
     if isinstance(adoption_process, Adoption_process):
         return jsonify(adoption_process.serialize()), 200
     return jsonify(adoption_process)
@@ -46,17 +37,17 @@ def update_adoption_process(adoption_process_id):
     user = info_token['sub']
     print(user)
     data = request.get_json()
-    update_adoption_process = Controller.update_adoption_process(adoption_process_id, data)
+    update_adoption_process = Controller.update_adoption_process(adoption_process_id, data, user)
     return jsonify(update_adoption_process), 200
 
 #get an adoption process
-@api.route('/<int:adoption_process_id>',methods=['GET'])
+@api.route('/',methods=['GET'])
 @jwt_required()
-def get_adoption_process(adoption_process_id):
+def get_adoption_process():
     info_token = get_jwt()
     user = info_token['sub']
     print(user)
-    adoption_process = Controller.get_adoption_process(adoption_process_id)
+    adoption_process = Controller.get_adoption_process(user_id)
     if isinstance(adoption_process, Adoption_process):
         return jsonify(adoption_process.serialize()),200
     return jsonify(adoption_process),adoption_process['status']

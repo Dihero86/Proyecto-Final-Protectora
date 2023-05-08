@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_jwt_extended import jwt_required, get_jwt
 from api.models.index import User, User_rol
 from api.utils import generate_sitemap, APIException
-import api.domain.user.controller as Controller
+
 
 
 
