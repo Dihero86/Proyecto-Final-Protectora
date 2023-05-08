@@ -6,6 +6,7 @@ export const PetGallery = () => {
   const [pets, setPets] = useState([]);
   const [breedTypes, setBreedTypes] = useState([]);
   const [statusTypes, setStatusTypes] = useState([]);
+  const [selectedBreeds, setSelectedBreeds] = useState([]);
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -23,6 +24,31 @@ export const PetGallery = () => {
 
     fetchPets();
   }, []);
+
+  const handleBreedSelection = (event) => {
+    const selectedBreed = event.target.value;
+    if (event.target.checked) {
+      setSelectedBreeds((prevSelectedBreeds) => [
+        ...prevSelectedBreeds,
+        selectedBreed,
+      ]);
+    } else {
+      setSelectedBreeds((prevSelectedBreeds) =>
+        prevSelectedBreeds.filter((breed) => breed !== selectedBreed)
+      );
+    }
+  };
+
+  const handleStatusSelection = (event) => {
+    const selectedStatus = event.target.value;
+    setSelectedStatus((prevSelectedStatus) =>
+      prevSelectedStatus.includes(selectedStatus)
+        ? prevSelectedStatus.filter((status) => status !== selectedStatus)
+        : [...prevSelectedStatus, selectedStatus]
+    );
+  };
+
+  const filteredPets = pets.filter((pet) => selectedBreeds.includes(pet.breed));
 
   return (
     <div className="main">
@@ -68,7 +94,12 @@ export const PetGallery = () => {
             {breedTypes.map((breed, index) => (
               <li key={index}>
                 <label className="dropdown-item">
-                  <input type="checkbox" name={breed} value={breed} />
+                  <input
+                    type="checkbox"
+                    name={breed}
+                    value={breed}
+                    onChange={handleBreedSelection}
+                  />
                   {breed}
                 </label>
               </li>
@@ -88,7 +119,12 @@ export const PetGallery = () => {
             {statusTypes.map((status, index) => (
               <li key={index}>
                 <label className="dropdown-item">
-                  <input type="checkbox" name={status} value={status} />
+                  <input
+                    type="checkbox"
+                    name={status}
+                    value={status}
+                    onChange={handleStatusSelection}
+                  />
                   {status}
                 </label>
               </li>
@@ -109,8 +145,12 @@ export const PetGallery = () => {
           <div className="col"></div>
         </div>
 
+        {pets.length === 0 && <p>Loading...</p>}
+
         <div className="row row-cols-1 row-cols-md-4 g-4">
-          {pets.map((pet, index) => (
+          {" "}
+          {/*Si pongo filtered.map me muestra los que selecciono, pero con pets.map me muestra solamente las mascotas que tengo creadas pero no se me actualiza cuando pulso , linea 157: hay que modifcarlo y debe de atacar la tabla pet gallery donde solo hay un id y una imagen.*/}
+          {filteredPets.map((pet, index) => (
             <div key={index} className="col">
               <div className="card">
                 <img
