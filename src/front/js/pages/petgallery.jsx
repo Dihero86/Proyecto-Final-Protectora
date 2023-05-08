@@ -49,7 +49,7 @@ export const PetGallery = () => {
               </a>
             </li>
             <li>
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item" href="#" type="checkbox">
                 Option 3
               </a>
             </li>
@@ -67,9 +67,10 @@ export const PetGallery = () => {
           <ul className="dropdown-menu">
             {breedTypes.map((breed, index) => (
               <li key={index}>
-                <a className="dropdown-item" href="#">
+                <label className="dropdown-item">
+                  <input type="checkbox" name={breed} value={breed} />
                   {breed}
-                </a>
+                </label>
               </li>
             ))}
           </ul>
@@ -86,16 +87,17 @@ export const PetGallery = () => {
           <ul className="dropdown-menu">
             {statusTypes.map((status, index) => (
               <li key={index}>
-                <a className="dropdown-item" href="#">
+                <label className="dropdown-item">
+                  <input type="checkbox" name={status} value={status} />
                   {status}
-                </a>
+                </label>
               </li>
             ))}
           </ul>
         </div>
         <div className="Buscar">
           <div className="btn-group">
-            <button class="btn btn-primary" type="submit">
+            <button className="btn btn-primary" type="submit">
               Button
             </button>
           </div>
