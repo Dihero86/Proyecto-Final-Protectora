@@ -1,6 +1,7 @@
 import api.domain.adoption_process.repository as Repository
 from api.models.index import db, Adoption_process
 import api.domain.pet.controller as PetController
+import api.domain.volunteers.controller as VolunteersController
 
 
 def get_all_adoption_processes():
@@ -27,7 +28,14 @@ def delete_adoption_process(adoption_process, volunteer):
     return {'msg': 'Proceso de adopción borrado satisfactoriamente'}, 204
 
 def update_adoption_process(adoption_process_id, data, user):
-    pass
+    volunteer = VolunteersController.get_volunteer(user['id'])
+    adoption_process= Repository.get_adoption_process(adoption_process_id)
+    if volunteer.company_id == adoption_process.pet.company_id : 
+        Repository.update_adoption_process(data, adoption_process_id)
+        return "proceso actualizado"
+    return "no tienes permiso para hacer esto"
+
+
 def get_adoption_process(adoption_process_id):
     adoption_process= Repository.get_adoption_process(adoption_process_id)
     if adoption_process is None:

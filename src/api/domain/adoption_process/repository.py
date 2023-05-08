@@ -18,16 +18,11 @@ def delete_adoption_process(adoption_process_id, user_id, company_id,):
     return "Proceso de adopción borrado satisfactoriamente."
 
 def update_adoption_process(data, adoption_process_id):
-    print(data)
-    if not isinstance(data, dict):
-        return {'error': 'Formato inválido'}, 400
-    adoption_process = Adoption_process.query.get(adoption_process_id)
-    if not adoption_process:
-        return {'error': 'Proceso de adopción no encontrado'}, 404
-    adoption_process.description= data.get('description')
-    adoption_process.status= data.get('status')
+    adoption_process = get_adoption_process(adoption_process_id)
+    adoption_process.description = body['description']
+    adoption_process.status = body ['status']
     db.session.commit()
-    return adoption_process.serialize(), 200
+    return adoption_process
 
 def get_adoption_process(id):
     adoption_process = Adoption_process.query.get(id)  

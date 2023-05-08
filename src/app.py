@@ -17,6 +17,7 @@ import api.domain.company.route as api_company
 import api.domain.user.route as api_user
 import api.domain.pet.route as api_pet
 import api.domain.adoption_process.route as api_adoption_process
+import api.domain.pet_history.route as api_history_pet
 from flask_jwt_extended import JWTManager
 import cloudinary
 
@@ -67,7 +68,7 @@ app.register_blueprint(api_company.api, url_prefix='/api')
 app.register_blueprint(api_user.api, url_prefix='/api/user')
 app.register_blueprint(api_pet.api, url_prefix='/api/pet')
 app.register_blueprint(api_adoption_process.api, url_prefix='/api/adoption_process')
-
+app.register_blueprint(api_history_pet.api, url_prefix='/api/history')
 # Handle/serialize errors like a JSON object
 
 
