@@ -5,6 +5,7 @@ import "../../styles/petgallery.css";
 export const PetGallery = () => {
   const [pets, setPets] = useState([]);
   const [breedTypes, setBreedTypes] = useState([]);
+  const [statusTypes, setStatusTypes] = useState([]);
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -13,6 +14,11 @@ export const PetGallery = () => {
 
       const uniqueBreeds = Array.from(new Set(petData.map((pet) => pet.breed)));
       setBreedTypes(uniqueBreeds);
+
+      const uniqueStatusTypes = Array.from(
+        new Set(petData.map((pet) => pet.status.type))
+      );
+      setStatusTypes(uniqueStatusTypes);
     };
 
     fetchPets();
@@ -78,21 +84,13 @@ export const PetGallery = () => {
             Estado de Salud
           </button>
           <ul className="dropdown-menu">
-            <li>
-              <a className="dropdown-item" href="#">
-                Option 1
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Option 2
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Option 3
-              </a>
-            </li>
+            {statusTypes.map((status, index) => (
+              <li key={index}>
+                <a className="dropdown-item" href="#">
+                  {status}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="Buscar">
