@@ -35,5 +35,4 @@ class Pet(db.Model):
             "status_id": self.status_id,
             "status": self.status.serialize(),
             "company_id": self.company_id,
-            "company": self.company.serialize(),
         }
