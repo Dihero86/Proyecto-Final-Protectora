@@ -1,17 +1,42 @@
-.boton {
+.all-pets {
+  float: left;
+  margin-bottom: 20px;
+  background-color: #42a0bd;
+  color: white;
+}
+.menu {
+  float: right;
+  margin-bottom: 20px;
+  background-color: #42a0bd;
+  color: white;
+}
+.blue-background {
+  background-color: #99ddf2;
   display: flex;
   width: 100%;
-  margin-top: 1%;
+  min-height: 60vh;
 }
-
-.Buscar {
-  margin-left: auto;
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-
-.boton > .btn-group:not(:last-child) {
-  margin-right: 1%;
+.pet-card {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100%;
 }
-
-.main {
-  margin: 5%;
+.pet-photo {
+  width: 200px;
+  height: 200px;
+}
+.pet-info {
+  background-color: #42a0bd;
+  font-size: 15px;
+}
+.dropdown-item {
+  text-align: center;
 }
