@@ -1,5 +1,5 @@
 import api.domain.adoption_process.repository as Repository
-from api.models.index import db, Adoption_process
+from api.models.index import db, Adoption_process,Company
 import api.domain.pet.controller as PetController
 import api.domain.volunteers.controller as VolunteersController
 
@@ -8,9 +8,9 @@ def get_all_adoption_processes():
     return Repository.get_all_adoption_processes()
 
 
-def create_adoption_process(body, user, pet_id):
+def create_adoption_process(body, user, pet_id, company_id):
     pet = PetController.get_one_pet(pet_id)
-    Repository.create_adoption_process(user['id'], pet_id, body['description'], "pending")
+    Repository.create_adoption_process(user['id'], pet_id, body['description'], 'pending', company_id)
     return "el proceso de adopción se creó correctramente"
 
 

@@ -11,7 +11,7 @@ class Adoption_process(db.Model):
     user = db.relationship('User')
     pet = db.relationship('Pet')
 
-    def __init__(self, user_id, pet_id, description, status, company_id):
+    def __init__(self, user_id, pet_id, description, status,company_id):
         self.user_id = user_id
         self.pet_id = pet_id
         self.description = description
@@ -24,5 +24,6 @@ class Adoption_process(db.Model):
         "user_id": self.user_id,
         "pet_id": self.pet_id,
         "description": self.description,
-        "status": self.status
+        "status": self.status,
+
         }

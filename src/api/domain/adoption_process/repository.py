@@ -5,8 +5,8 @@ def get_all_adoption_processes():
     adoption_processes_serializes = list(map(lambda adoption_process : adoption_process.serialize(), adoption_processes))
     return adoption_processes_serializes
 
-def create_adoption_process(user_id, pet_id, description, status):
-    new_process = Adoption_process(user_id, pet_id, description, status)
+def create_adoption_process(user_id, pet_id, description, status,company_id):
+    new_process = Adoption_process(user_id, pet_id, description, status,company_id)
     db.session.add(new_process)
     db.session.commit()
     return new_process
