@@ -1,8 +1,9 @@
 import api.domain.pet.repository as Repository
 from cloudinary.uploader import upload
-from api.models.index import Status
+from api.models.index import Status, Company, CompanyVolunteers
 import api.domain.company.controller as Company_contoller
 import json
+import api.domain.volunteers.controller as Volunteer_controller
 
 def get_volunteer_company(user_id,company_id):
     volunteer = Volunteer_controller.get_volunteer(user_id)
@@ -11,9 +12,9 @@ def get_volunteer_company(user_id,company_id):
     company = Company_contoller.get_company(company_id)
     if not isinstance(company, Company): #compruebo que existe la compañia
         return {"msg": "Bad Request: Company not Found", "error": True, "status": 404 }
-    if volunteer.company_id != company_id: #compruebo que sean de la misma company
+    if volunteer.company_id != company.id: #compruebo que sean de la misma company
         return {"msg": "Forbidden", "error": True, "status": 403 }
-    return volunteer
+    return volunteer.serialize()
 
 def upload_fotos(fotos):
     array_fotos= list(fotos.lists())
@@ -23,7 +24,9 @@ def upload_fotos(fotos):
 
 def create_pet(data,fotos,user):
     body = json.loads(data)
-    ckeckdata = get_volunteer_company(user["id"], body["company_id"])
+    checkdata = get_volunteer_company(user["id"], body["company_id"])
+    if checkdata.get("error"):
+        return checkdata
     if body['name'] is None or body['name']=="":
         return {"msg": "Bad Request: Name is not correct", "error": True, "status": 400 }
     status_id= Status.query.filter_by(type=body["status"]).one()
