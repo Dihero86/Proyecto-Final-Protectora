@@ -32,7 +32,7 @@ export const UserForm = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-8">
+        <div className="col-md-12">
           <h1 className="title">Regístrate y empieza a adoptar</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
