@@ -48,7 +48,7 @@ def get_adoption_process():
     info_token = get_jwt()
     user = info_token['sub']
     print(user)
-    adoption_process = Controller.get_adoption_process(user_id)
+    adoption_process = Controller.get_adoption_process(user['id'])
     if isinstance(adoption_process, Adoption_process):
         return jsonify(adoption_process.serialize()),200
     return jsonify(adoption_process),adoption_process['status']
