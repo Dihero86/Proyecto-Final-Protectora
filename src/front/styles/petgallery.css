@@ -1,5 +1,42 @@
-.button {
-  position: absolute;
-  top: 0;
-  left: 0;
+.all-pets {
+  float: left;
+  margin-bottom: 20px;
+  background-color: #42a0bd;
+  color: white;
+}
+.menu {
+  float: right;
+  margin-bottom: 20px;
+  background-color: #42a0bd;
+  color: white;
+}
+.blue-background {
+  background-color: #99ddf2;
+  display: flex;
+  width: 100%;
+  min-height: 60vh;
+}
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pet-card {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100%;
+}
+.pet-photo {
+  width: 200px;
+  height: 200px;
+}
+.pet-info {
+  background-color: #42a0bd;
+  font-size: 15px;
+}
+.dropdown-item {
+  text-align: center;
 }
