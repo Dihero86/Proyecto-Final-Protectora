@@ -3,6 +3,7 @@ from api.models.db import db
 
 class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(100), unique=False, nullable=False)
     name = db.Column(db.String(100), nullable=False)
     age = db.Column(db.Integer)
     breed = db.Column(db.String(100))
@@ -15,7 +16,7 @@ class Pet(db.Model):
 
 
 
-    def __init__(self, name, age, breed, size, description, status_id, company_id):
+    def __init__(self, type, name, age, breed, size, description, status_id, company_id):
         self.name = name
         self.age = age
         self.breed = breed
@@ -27,6 +28,7 @@ class Pet(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "type": self.type,
             "name": self.name,
             "age": self.age,
             "breed": self.breed,
