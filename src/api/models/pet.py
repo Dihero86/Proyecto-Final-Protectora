@@ -13,8 +13,7 @@ class Pet(db.Model):
     status = db.relationship('Status')
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
     company = db.relationship('Company')
-
-
+    pet_Gallery= db.relationship('Pet_Gallery',back_populates="pet")
 
     def __init__(self, type, name, birth_date, breed, size, description, status_id, company_id):
         self.name = name
@@ -37,5 +36,5 @@ class Pet(db.Model):
             "status_id": self.status_id,
             "status": self.status.serialize(),
             "company_id": self.company_id,
-            "company": self.company.serialize(),
+            "pet_Gallery": list(map(lambda picture: picture.serialize(),self.pet_Gallery))
         }

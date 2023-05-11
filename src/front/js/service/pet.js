@@ -1,11 +1,13 @@
 import { URL } from ".";
-const HEADERS = { "Content-Type": "application/json" };
 
 export const createPet = async (pet) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${URL}/api/pet/create/`, {
       method: "POST",
-      //headers: HEADERS,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: pet,
     });
   } catch (error) {
