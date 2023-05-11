@@ -17,31 +17,22 @@
   padding: 20px;
   min-height: 60vh;
   margin-right: 10px;
-  justify-content: center;
+  justify-content: space-around;
 }
 .pic-one {
   background-color: white;
-  margin-bottom: 10px;
 }
 .pic-two {
   background-color: white;
-  margin-top: 10px;
-  margin-right: 10px;
 }
 .pic-three {
-  margin-top: 10px;
-  margin-left: 10px;
   background-color: white;
 }
 .pic-four {
   background-color: white;
-  margin-top: 10px;
-  margin-right: 10px;
 }
 .pic-five {
   background-color: white;
-  margin-top: 10px;
-  margin-left: 10px;
 }
 .info-div {
   background-color: #42a0bd;
@@ -63,6 +54,10 @@
 .start-adoption-process {
   float: left;
   margin-left: 20px;
+}
+
+.start-reception-process {
+  float: center;
 }
 .start-donation-process {
   float: right;

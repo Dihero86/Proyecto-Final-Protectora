@@ -16,11 +16,13 @@ export const getAllPets = async () => {
   }
 };
 
-export const getOnePet = async (id) => {
+export const getOnePet = async (pet_id) => {
   try {
-    const response = await fetch(`${URL}/api/pet/${id}`, {
+    const response = await fetch(`${URL}/api/pet/${pet_id}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
     const data = await response.json();

@@ -38,7 +38,7 @@ const Layout = () => {
             <Route element={<FormPet />} path="/create_pet" />
             <Route element={<RegisterUser />} path="/register_user" />
             <Route element={<LoginUser />} path="/login_user" />
-            <Route element={<OnePet />} path="/one_pet" />
+            <Route element={<OnePet />} path="/one_pet/:pet_id" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />
