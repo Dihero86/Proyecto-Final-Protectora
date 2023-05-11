@@ -7,7 +7,7 @@ import api.domain.pet.controller as PetController
 api = Blueprint('/api/adoption_process', __name__)
 
 
-# create an adoption process
+# create an adoption process -- OK 
 @api.route('/create/<int:pet_id>', methods=['POST'])
 @jwt_required()
 def create_adoption_process(pet_id):
@@ -24,7 +24,7 @@ def create_adoption_process(pet_id):
         
         
 
-#get all the adoption process
+#get all the adoption process -- OK
 @api.route('/',methods=['GET'])
 @jwt_required()
 def get_adoption_process():
@@ -36,6 +36,20 @@ def get_adoption_process():
         return jsonify(adoption_processes.serialize()),200
     return jsonify(adoption_processes)
 
+
+
+
+#get all the adoption process by company -- pending
+@api.route('/',methods=['GET'])
+@jwt_required()
+def get_adoption_process():
+    info_token = get_jwt()
+    user = info_token['sub']
+    print(user)
+    adoption_processes = Controller.get_all_adoption_processes()
+    if isinstance(adoption_processes, Adoption_process):
+        return jsonify(adoption_processes.serialize()),200
+    return jsonify(adoption_processes)
 
 
 # delete an adoption process 
