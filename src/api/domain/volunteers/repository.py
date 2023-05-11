@@ -7,5 +7,5 @@ def add_volunteer(user_id,company_id):
     return new_volunteer
 
 def get_volunteer(user_id):
-    user = CompanyVolunteers.query.filter_by(user_id=user_id).one()
+    user = CompanyVolunteers.query.filter_by(user_id=user_id).first()
     return user
