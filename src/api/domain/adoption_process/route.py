@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models.index import db, Adoption_process
 from flask_jwt_extended import jwt_required, get_jwt
 import api.domain.adoption_process.controller as Controller
+import api.domain.pet.controller as PetController
 
 api = Blueprint('/api/adoption_process', __name__)
 
@@ -14,7 +15,8 @@ def create_adoption_process(pet_id):
     user = info_token['sub']
     print(user)
     body = request.get_json()
-    company_id = 1 
+    pet = PetController.get_one_pet(pet_id)
+    company_id = pet.company_id
     adoption_process = Controller.create_adoption_process(body, user, pet_id,company_id)
     if isinstance(adoption_process, Adoption_process):
         return jsonify(adoption_process.serialize()), 200

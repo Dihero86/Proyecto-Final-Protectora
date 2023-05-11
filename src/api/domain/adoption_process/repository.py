@@ -10,6 +10,7 @@ def create_adoption_process(user_id, pet_id, description, status,company_id):
     db.session.add(new_process)
     db.session.commit()
     return new_process
+   
 
 def delete_adoption_process(adoption_process_id, user_id, company_id,):
     adoption_process = Adoption_process.query.get(adoption_process_id)
