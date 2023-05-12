@@ -45,3 +45,8 @@ def get_adoption_process(adoption_process_id):
 
 def get_all_adoption_processes_by_company(company_id):
     return Repository.get_all_adoption_processes_by_company(company_id)
+
+
+def get_all_adoption_processes_by_user_id(user_id):
+    return Repository.get_all_adoption_processes_by_user_id(user_id)
+

@@ -30,8 +30,14 @@ def get_adoption_process(id):
     return adoption_process
 
 
+
 def get_all_adoption_processes_by_company(company_id):
     adoption_processes = Adoption_process.query.filter_by(company_id=company_id).all()
     adoption_processes_serialized = list(map(lambda adoption_process : adoption_process.serialize(), adoption_processes))
     return adoption_processes_serialized
 
+
+def get_all_adoption_processes_by_user_id(user_id):
+    adoption_processes = Adoption_process.query.filter_by(user_id=user_id).all()
+    adoption_processes_serialized = list(map(lambda adoption_process : adoption_process.serialize(), adoption_processes))
+    return adoption_processes_serialized

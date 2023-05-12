@@ -13,7 +13,6 @@ api = Blueprint('/api/adoption_process', __name__)
 def create_adoption_process(pet_id):
     info_token = get_jwt()
     user = info_token['sub']
-    print(user)
     body = request.get_json()
     pet = PetController.get_one_pet(pet_id)
     company_id = pet.company_id
@@ -30,7 +29,6 @@ def create_adoption_process(pet_id):
 def get_all_adoption_processes():
     info_token = get_jwt()
     user = info_token['sub']
-    print(user)
     adoption_processes = Controller.get_all_adoption_processes()
     if isinstance(adoption_processes, Adoption_process):
         return jsonify(adoption_processes.serialize()),200
@@ -43,7 +41,6 @@ def get_all_adoption_processes():
 def get_company_by_id(company_id):
     info_token = get_jwt()
     user = info_token['sub']
-    print(user)
     adoption_processes = Controller.get_all_adoption_processes_by_company(company_id)
     return jsonify(adoption_processes), 200
 
@@ -54,14 +51,37 @@ def get_company_by_id(company_id):
 def get_adoption_process_by_id(adoption_process_id):
     info_token = get_jwt()
     user = info_token['sub']
-    print(user)
     adoption_process = Controller.get_adoption_process(adoption_process_id)
     if adoption_process is None:
-        return jsonify({'error': 'Adoption process not found'}), 404
+        return jsonify({'error': 'Proceso de adopción no encontrado'}), 404
     adoption_process_serialized = adoption_process.serialize()
     return jsonify(adoption_process_serialized), 200
 
 
+
+#get an adoption process by user_id --ok
+@api.route('/company/user/<int:user_id>', methods=['GET'])
+@jwt_required()
+def get_adoption_process_by_user_id(user_id):
+    info_token = get_jwt()
+    user = info_token['sub']
+    adoption_processes = Controller.get_all_adoption_processes_by_user_id(user_id)
+    if adoption_processes is None:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+
+    return jsonify(adoption_processes), 200
+
+
+#update an adoption process -- pending
+@api.route('/update/<int:adoption_process_id>', methods=['PUT'])
+@jwt_required()
+def update_adoption_process(adoption_process_id):
+    info_token = get_jwt()
+    user = info_token['sub']
+    print(user)
+    data = request.get_json()
+    update_adoption_process = Controller.update_adoption_process(adoption_process_id, data, user)
+    return jsonify(update_adoption_process), 200
 
 
 
@@ -75,25 +95,6 @@ def delete_adoption_process(adoption_process_id):
     delete_adoption_process = Controller.delete_adoption_process(adoption_process_id)
     return jsonify(delete_adoption_process), 201
 
-#update an adoption process
-@api.route('/<int:adoption_process_id>', methods=['PUT'])
-@jwt_required()
-def update_adoption_process(adoption_process_id):
-    info_token = get_jwt()
-    user = info_token['sub']
-    print(user)
-    data = request.get_json()
-    update_adoption_process = Controller.update_adoption_process(adoption_process_id, data, user)
-    return jsonify(update_adoption_process), 200
 
-#get an adoption process
-# @api.route('/',methods=['GET'])
-# @jwt_required()
-# def get_adoption_process():
-#     info_token = get_jwt()
-#     user = info_token['sub']
-#     print(user)
-#     adoption_process = Controller.get_adoption_process(user['id'])
-#     if isinstance(adoption_process, Adoption_process):
-#         return jsonify(adoption_process.serialize()),200
-#     return jsonify(adoption_process),adoption_process['status']
+
+
