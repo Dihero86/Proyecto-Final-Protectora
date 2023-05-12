@@ -29,3 +29,9 @@ def get_adoption_process(id):
     adoption_process = Adoption_process.query.get(id)  
     return adoption_process
 
+
+def get_all_adoption_processes_by_company(company_id):
+    adoption_processes = Adoption_process.query.filter_by(company_id=company_id).all()
+    adoption_processes_serialized = list(map(lambda adoption_process : adoption_process.serialize(), adoption_processes))
+    return adoption_processes_serialized
+

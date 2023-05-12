@@ -41,3 +41,7 @@ def get_adoption_process(adoption_process_id):
     if adoption_process is None:
          return {"msg": "Proceso de adopción no encontrado", "error": True, "status": 404 }
     return adoption_process
+
+
+def get_all_adoption_processes_by_company(company_id):
+    return Repository.get_all_adoption_processes_by_company(company_id)

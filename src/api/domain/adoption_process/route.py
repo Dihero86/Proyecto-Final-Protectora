@@ -27,7 +27,7 @@ def create_adoption_process(pet_id):
 #get all the adoption process -- OK
 @api.route('/',methods=['GET'])
 @jwt_required()
-def get_adoption_process():
+def get_all_adoption_processes():
     info_token = get_jwt()
     user = info_token['sub']
     print(user)
@@ -35,21 +35,40 @@ def get_adoption_process():
     if isinstance(adoption_processes, Adoption_process):
         return jsonify(adoption_processes.serialize()),200
     return jsonify(adoption_processes)
+
+#get adoption process by company_id --OK
+@api.route('/<int:company_id>', methods=['GET'])
+@jwt_required()
+def get_company_by_id(company_id):
+    info_token = get_jwt()
+    user = info_token['sub']
+    print(user)
+    adoption_processes = Controller.get_all_adoption_processes_by_company(company_id)
+    return jsonify(adoption_processes), 200
+
+
+def get_adoption_processes_by_company(company_id):
+    company = Company.query.get(company_id)
+    if company is None:
+        return "Company not found"
+
+    adoption_processes = Adoption_process.query.filter_by(company=company).all()
+    return adoption_processes
 
 
 
 
 #get all the adoption process by company -- pending
-@api.route('/',methods=['GET'])
-@jwt_required()
-def get_adoption_process():
-    info_token = get_jwt()
-    user = info_token['sub']
-    print(user)
-    adoption_processes = Controller.get_all_adoption_processes()
-    if isinstance(adoption_processes, Adoption_process):
-        return jsonify(adoption_processes.serialize()),200
-    return jsonify(adoption_processes)
+# @api.route('/',methods=['GET'])
+# @jwt_required()
+# def get_adoption_process():
+#     info_token = get_jwt()
+#     user = info_token['sub']
+#     print(user)
+#     adoption_processes = Controller.get_all_adoption_processes()
+#     if isinstance(adoption_processes, Adoption_process):
+#         return jsonify(adoption_processes.serialize()),200
+#     return jsonify(adoption_processes)
 
 
 # delete an adoption process 
