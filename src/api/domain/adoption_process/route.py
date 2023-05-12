@@ -38,7 +38,7 @@ def get_all_adoption_processes():
 
 
 #get adoption process by company_id --OK
-@api.route('/<int:company_id>', methods=['GET'])
+@api.route('/company/<int:company_id>', methods=['GET'])
 @jwt_required()
 def get_company_by_id(company_id):
     info_token = get_jwt()
@@ -46,6 +46,20 @@ def get_company_by_id(company_id):
     print(user)
     adoption_processes = Controller.get_all_adoption_processes_by_company(company_id)
     return jsonify(adoption_processes), 200
+
+
+#get an adoption process bý_id --OK
+@api.route('/<int:adoption_process_id>', methods=['GET'])
+@jwt_required()
+def get_adoption_process_by_id(adoption_process_id):
+    info_token = get_jwt()
+    user = info_token['sub']
+    print(user)
+    adoption_process = Controller.get_adoption_process(adoption_process_id)
+    if adoption_process is None:
+        return jsonify({'error': 'Adoption process not found'}), 404
+    adoption_process_serialized = adoption_process.serialize()
+    return jsonify(adoption_process_serialized), 200
 
 
 
