@@ -11,7 +11,8 @@ import api.domain.company.controller as CompanyController
 def get_all_adoption_processes():
     return Repository.get_all_adoption_processes()
 
-
+#traérmelo aquí como en pet_history_controller , create_data linea 16-21 , para poder
+#reutilizarlo
 def create_adoption_process(body, user, pet_id):
     pet = PetController.get_one_pet(pet_id)
     if not isinstance(pet, Pet): #compruebo que existe la mascota
