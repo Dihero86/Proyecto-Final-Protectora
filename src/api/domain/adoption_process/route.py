@@ -8,6 +8,8 @@ api = Blueprint('/api/adoption_process', __name__)
 
 
 # create an adoption process -- OK 
+
+#tiene que ser usuario normal para poder crearlo --OK
 @api.route('/create/<int:pet_id>', methods=['POST'])
 @jwt_required()
 def create_adoption_process(pet_id):
@@ -60,6 +62,7 @@ def get_adoption_process_by_id(adoption_process_id):
 
 
 #get an adoption process by user_id --ok
+#tiene que ser usuario normal, debe de poder ver sus procesos abiertos
 @api.route('/company/user/<int:user_id>', methods=['GET'])
 @jwt_required()
 def get_adoption_process_by_user_id(user_id):

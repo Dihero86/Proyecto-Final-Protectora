@@ -1,7 +1,9 @@
 import api.domain.adoption_process.repository as Repository
-from api.models.index import db, Adoption_process,Company
+from api.models.index import db, Adoption_process,Company,CompanyVolunteers
 import api.domain.pet.controller as PetController
 import api.domain.volunteers.controller as VolunteersController
+
+
 
 
 def get_all_adoption_processes():
@@ -9,6 +11,9 @@ def get_all_adoption_processes():
 
 
 def create_adoption_process(body, user, pet_id, company_id):
+    volunteer = VolunteersController.get_volunteer(user["id"])
+    if not isinstance(volunteer, CompanyVolunteers): #compruebo que existe el voluntario
+        return {"msg": "Forbidden", "error": True, "status": 403 }
     pet = PetController.get_one_pet(pet_id)
     Repository.create_adoption_process(user['id'], pet_id, body['description'], 'pending', company_id)
     return "el proceso de adopción se creó correctramente"
@@ -26,6 +31,8 @@ def delete_adoption_process(adoption_process, volunteer):
         return {'error': 'Proceso de adopción no encontrado'}, 404
     Repository.delete_adoption_process(adoption_process_id)
     return {'msg': 'Proceso de adopción borrado satisfactoriamente'}, 204
+
+
 
 def update_adoption_process(data, adoption_process_id):
     # volunteer = VolunteersController.get_volunteer(user['id'])
