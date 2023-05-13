@@ -33,7 +33,7 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route element={<Home />} path="/" />
-            <Route element={<FormCompany />} path="/create_company" />
+            <Route element={<FormCompany />} path="/createcompany" />
             <Route element={<PetGallery />} path="/pet_gallery" />
             <Route element={<FormPet />} path="/create_pet" />
             <Route element={<RegisterUser />} path="/register_user" />
