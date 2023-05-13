@@ -41,7 +41,7 @@ def get_all_adoption_processes():
 def get_company_by_id(company_id):
     info_token = get_jwt()
     user = info_token['sub']
-    adoption_processes = Controller.get_all_adoption_processes_by_company(company_id)
+    adoption_processes = Controller.get_all_adoption_processes_by_company(company_id, user)
     return jsonify(adoption_processes), 200
 
 

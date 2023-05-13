@@ -11,7 +11,7 @@ api = Blueprint('/api/user', __name__)
 @api.route('/register/client', methods=['POST'])
 def create_user():
     body = request.get_json()
-    user = Controller.create_user(body,"admin")
+    user = Controller.create_user(body,"client")
     if isinstance(user, User):
         return jsonify(user.serialize()), 200
     return jsonify(user)
