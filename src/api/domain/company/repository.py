@@ -8,10 +8,11 @@ def get_all_companies():
 
 
 def new_company(data):
-    new_company = Company(data['name'], data['cif'], data['logo'], data['description'], data['adress'], data['user_id'])
+    new_company = Company(data['name'], data['cif'], data['logo'], data['description'], data['city'], data['adress'],data['phone'], data['email'], data['user_id'])
     db.session.add(new_company)
     db.session.commit()
     return new_company
+
 
 
 def delete_company(company_id):
