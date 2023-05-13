@@ -13,7 +13,6 @@ def new_company(data):
     db.session.commit()
     return new_company
 
-    name, cif, logo, description, city, adress, phone, email, user_id
 
 
 def delete_company(company_id):
