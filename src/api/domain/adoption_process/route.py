@@ -16,9 +16,7 @@ def create_adoption_process(pet_id):
     info_token = get_jwt()
     user = info_token['sub']
     body = request.get_json()
-    pet = PetController.get_one_pet(pet_id)
-    company_id = pet.company_id
-    adoption_process = Controller.create_adoption_process(body, user, pet_id,company_id)
+    adoption_process = Controller.create_adoption_process(body, user, pet_id)
     if isinstance(adoption_process, Adoption_process):
         return jsonify(adoption_process.serialize()), 200
     return jsonify(adoption_process)

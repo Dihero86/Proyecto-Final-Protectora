@@ -1,7 +1,8 @@
 import api.domain.adoption_process.repository as Repository
-from api.models.index import db, Adoption_process,Company,CompanyVolunteers
+from api.models.index import db, Adoption_process,Company,CompanyVolunteers, Pet
 import api.domain.pet.controller as PetController
 import api.domain.volunteers.controller as VolunteersController
+
 
 
 
@@ -10,11 +11,14 @@ def get_all_adoption_processes():
     return Repository.get_all_adoption_processes()
 
 
-def create_adoption_process(body, user, pet_id, company_id):
-    volunteer = VolunteersController.get_volunteer(user["id"])
-    if not isinstance(volunteer, CompanyVolunteers): #compruebo que existe el voluntario
-        return {"msg": "Forbidden", "error": True, "status": 403 }
+def create_adoption_process(body, user, pet_id):
     pet = PetController.get_one_pet(pet_id)
+    if not isinstance(pet, Pet): #compruebo que existe la mascota
+        return {"msg": "Bad Request: Pet not Found", "error": True, "status": 404 }
+    adoption_check = Adoption_process.query.filter_by(user_id=user['id'], pet_id=pet_id).first()
+    if isinstance(adoption_check, Adoption_process):
+        return {"msg": "Bad Request: Esta mascota ya tiene un proceso de adopción abierto", "error": True, "status": 404 }
+    company_id = pet.company_id
     Repository.create_adoption_process(user['id'], pet_id, body['description'], 'pending', company_id)
     return "el proceso de adopción se creó correctramente"
 
@@ -35,7 +39,6 @@ def delete_adoption_process(adoption_process, volunteer):
 
 
 def update_adoption_process(data, adoption_process_id):
-    # volunteer = VolunteersController.get_volunteer(user['id'])
     adoption_process= Repository.get_adoption_process(adoption_process_id)
     Repository.update_adoption_process(data, adoption_process_id)
         
@@ -55,5 +58,6 @@ def get_all_adoption_processes_by_company(company_id):
 
 
 def get_all_adoption_processes_by_user_id(user_id):
+    
     return Repository.get_all_adoption_processes_by_user_id(user_id)
 
