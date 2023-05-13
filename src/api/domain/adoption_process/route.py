@@ -80,7 +80,7 @@ def update_adoption_process(adoption_process_id):
     user = info_token['sub']
     print(user)
     data = request.get_json()
-    update_adoption_process = Controller.update_adoption_process(adoption_process_id, data, user)
+    update_adoption_process = Controller.update_adoption_process(data, adoption_process_id)
     return jsonify(update_adoption_process), 200
 
 

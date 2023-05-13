@@ -20,8 +20,8 @@ def delete_adoption_process(adoption_process_id, user_id, company_id,):
 
 def update_adoption_process(data, adoption_process_id):
     adoption_process = get_adoption_process(adoption_process_id)
-    adoption_process.description = body['description']
-    adoption_process.status = body ['status']
+    adoption_process.description = data['description']
+    adoption_process.status = data ['status']
     db.session.commit()
     return adoption_process
 
