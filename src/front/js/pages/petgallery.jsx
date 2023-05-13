@@ -1,77 +1,198 @@
 import React, { useState, useEffect } from "react";
-import { getAllPets } from "../service/petgallery.js"; // import the function to fetch the pets
+import { getAllPets } from "../service/petgallery.js";
 import "../../styles/petgallery.css";
 
 export const PetGallery = () => {
   const [pets, setPets] = useState([]);
+  const [filter, setFilter] = useState([]);
+
+  console.log(pets);
 
   useEffect(() => {
     const fetchPets = async () => {
-      const petData = await getAllPets(); // fetch the pets
-      setPets(petData); // set the pets in state
+      try {
+        const pets = await getAllPets();
+        setPets(pets);
+      } catch (err) {
+        console.log(err);
+      }
     };
-
-    fetchPets(); // call the fetchPets function when the component mounts
+    fetchPets();
   }, []);
 
+  const filterPets = (petType) => {
+    if (filter.length == 0) {
+      const result = pets.filter((pet) => pet.type == petType);
+      return setFilter(result);
+    } else {
+      const result = filter.filter((pet) => pet.type == petType);
+      return setFilter(result);
+    }
+  };
+
+  const filterCities = (cityName) => {
+    if (filter.length == 0) {
+      const result = pets.filter((pet) => pet.company.city == cityName);
+      return setFilter(result);
+    } else {
+      const result = filter.filter((pet) => pet.company.city == cityName);
+      return setFilter(result);
+    }
+  };
+
+  const filterSizes = (petSize) => {
+    if (filter.length == 0) {
+      const result = pets.filter((pet) => pet.size == petSize);
+      return setFilter(result);
+    } else {
+      const result = filter.filter((pet) => pet.size == petSize);
+      return setFilter(result);
+    }
+  };
+
+  const petTypes = () => {
+    const types = pets.map((pet) => pet.type);
+    const listTypes = new Set(types);
+    return [...listTypes];
+  };
+
+  const petSizes = () => {
+    const sizes = pets.map((pet) => pet.size);
+    const listSizes = new Set(sizes);
+    return [...listSizes];
+  };
+
+  const petCities = () => {
+    const cities = pets.map((pet) => pet.company.city);
+    const listCities = new Set(cities);
+    return [...listCities];
+  };
+
   return (
-    <div className="container-fluid px-5">
-      <div className="row mb-3">
-        <div className="col">
-          <div className="btn-group">
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-12">
+          <h1 className="title">Galería de Mascotas</h1>
+        </div>
+        <div className="col-md-6">
+          <button
+            className="all-pets"
+            type="button"
+            onClick={() => {
+              setFilter([]);
+            }}
+          >
+            Ver todas
+          </button>
+        </div>
+        <div className="col-md-4">
+          <div className="dropdown">
             <button
+              className="btn dropdown-toggle menu"
               type="button"
-              className="btn btn-danger dropdown-toggle"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Filter
+              Ciudad
             </button>
             <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Option 1
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Option 2
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Option 3
-                </a>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Option 4
-                </a>
-              </li>
+              {petCities().map((city) => {
+                return (
+                  <li onClick={() => filterCities(city)}>
+                    <p className="dropdown-item">{city}</p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
-      </div>
-      <h1 className="titulo">Galería de Mascotas</h1>
-      <div className="row row-cols-1 row-cols-md-4 g-4">
-        {pets.map((pet, index) => (
-          <div key={index} className="col">
-            <div className="card">
-              <img
-                src={pet.photo}
-                className="card-img-top"
-                alt={`Photo of ${pet.name}`}
-              />
-              <div className="card-body">
-                <h5 className="card-title">{pet.name}</h5>
-                <p className="card-text">{`Age: ${pet.age}, Breed: ${pet.breed}`}</p>
-              </div>
-            </div>
+        <div className="col-md-1">
+          <div className="dropdown">
+            <button
+              className="btn dropdown-toggle menu"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Animal
+            </button>
+            <ul className="dropdown-menu">
+              {petTypes().map((type) => {
+                return (
+                  <li onClick={() => filterPets(type)}>
+                    <p className="dropdown-item">{type}</p>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        ))}
+        </div>
+        <div className="col-md-1">
+          <div className="dropdown">
+            <button
+              className="btn dropdown-toggle menu"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Tamaño
+            </button>
+            <ul className="dropdown-menu">
+              {petSizes().map((size) => {
+                return (
+                  <li onClick={() => filterSizes(size)}>
+                    <p className="dropdown-item">{size}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+        <div className="col-md-12 blue-background">
+          <ul className="list">
+            {filter.length == 0
+              ? pets.map((pet) => {
+                  return (
+                    <li key={pet.id} className="pet-card">
+                      {pet.photo ? (
+                        pet.photo
+                      ) : (
+                        <img
+                          src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                          className="card-img-top company-logo"
+                          alt="..."
+                        />
+                      )}
+                      <div className="pet-info">
+                        <p className="pet-name">{pet.name}</p>
+                        <p className="pet-age">{pet.age}</p>
+                        <p className="pet-breed">{pet.breed}</p>
+                      </div>
+                    </li>
+                  );
+                })
+              : filter.map((pet) => {
+                  return (
+                    <li key={pet.id} className="pet-card">
+                      {pet.photo ? (
+                        pet.photo
+                      ) : (
+                        <img
+                          src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                          className="card-img-top company-logo"
+                          alt="..."
+                        />
+                      )}
+                      <div className="pet-info">
+                        <p className="pet-name">{pet.name}</p>
+                        <p className="pet-age">{pet.age}</p>
+                        <p className="pet-breed">{pet.breed}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+          </ul>
+        </div>
       </div>
     </div>
   );

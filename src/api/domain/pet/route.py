@@ -1,16 +1,19 @@
 from flask import Flask, request, jsonify, Blueprint
 from api.models.index import db, Pet
+from flask_jwt_extended import jwt_required, get_jwt
 
 import api.domain.pet.controller as Controller
 
 api = Blueprint('api/pet', __name__)
 
 @api.route('/create', methods=['POST']) #crea una mascota
+@jwt_required()
 def create_pet():
+    user = get_jwt()["sub"] 
     try:
         fotos = request.files
         body = request.form.to_dict()
-        pet = Controller.create_pet(body["pet"],fotos)
+        pet = Controller.create_pet(body["pet"],fotos,user)
         if isinstance(pet, Pet):
             return jsonify(pet.serialize()),201
         return jsonify(pet),pet["status"]

@@ -28,7 +28,7 @@ export const addNewUserAndCompany = async (userData, companyData) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    const data = await response.json(); // Parse response body as JSON
+    const data = await response.json();
 
     return data;
   } catch (error) {
