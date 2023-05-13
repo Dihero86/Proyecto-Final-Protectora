@@ -34,13 +34,6 @@ def update_adoption_process(data, adoption_process_id):
         
     return "proceso de adopción actualizado"
 
-# def update_adoption_process(adoption_process_id, data, user):
-#     # volunteer = VolunteersController.get_volunteer(user['id'])
-#     adoption_process= Repository.get_adoption_process(adoption_process_id)
-#     if volunteer.company_id == adoption_process.pet.company_id : 
-#         Repository.update_adoption_process(data, adoption_process_id)
-#         return "proceso actualizado"
-#     return "no tienes permiso para hacer esto"
 
 
 def get_adoption_process(adoption_process_id):

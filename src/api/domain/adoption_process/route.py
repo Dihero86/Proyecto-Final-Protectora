@@ -72,7 +72,7 @@ def get_adoption_process_by_user_id(user_id):
     return jsonify(adoption_processes), 200
 
 
-#update an adoption process -- pending
+#update an adoption process -- Ok
 @api.route('/update/<int:adoption_process_id>', methods=['PUT'])
 @jwt_required()
 def update_adoption_process(adoption_process_id):
