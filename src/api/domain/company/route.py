@@ -7,6 +7,7 @@ from flask_jwt_extended import jwt_required, get_jwt
 from api.models.index import User, User_rol
 from api.utils import generate_sitemap, APIException
 
+
 api = Blueprint('/api', __name__)
 
 @api.route('/company', methods=['GET'])

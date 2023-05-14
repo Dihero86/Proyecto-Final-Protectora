@@ -4,6 +4,7 @@ def add_volunteer(user_id,company_id):
     new_volunteer = Repository.add_volunteer(user_id, company_id)    
     if user_id=="" or user_id is None:
         return {"msg": "Internal error" },500
+    
     return new_volunteer
 
 def get_volunteer(user_id):
