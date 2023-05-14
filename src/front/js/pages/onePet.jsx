@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/onePet.css";
 import { getOnePet } from "../service/petgallery.js";
+import { getOneCompany } from "../service/company.js";
 import { useParams } from "react-router-dom";
 
 export const OnePet = () => {
   const [pet, setPet] = useState({});
+  const [company, setCompany] = useState({});
   const [state, setState] = useState(false);
   const params = useParams();
 
   const getInfoPet = async (pet_id) => {
     const data = await getOnePet(pet_id);
     setPet(data);
+    const company_id = data.company_id;
+    const companyInfo = await getOneCompany(company_id);
+    setCompany(companyInfo);
     setState(true);
   };
+
   useEffect(() => {
     getInfoPet(params.pet_id);
   }, []);
-
   const startAdoptionProcess = () => {};
   return (
     <div className="container_fluid">
@@ -74,7 +79,12 @@ export const OnePet = () => {
             <p className="pet-type">Especie: {pet.type}</p>
             <p className="pet-breed">Raza: {pet.breed}</p>
             <p className="pet-age">Fecha de nacimiento: {pet.birth_date}</p>
-            <p className="pet-city">Localización: {pet.city}</p>
+            <p className="pet-company">
+              {company.description}: {company.name}
+            </p>
+            <p className="pet-city">
+              Localización: {company.adress} ,{company.city}{" "}
+            </p>
           </div>
           <div className="col-md-12 mt-4 description-pet">
             <h1 className="subtitle m-4">Su historia: </h1>
@@ -82,9 +92,59 @@ export const OnePet = () => {
           </div>
         </div>
         <div className="col-12 mb-3 buttons-div">
-          <button type="button" className=" col-xs-12 btn adoption-process">
+          <button
+            type="button"
+            className=" col-xs-12 btn adoption-process"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
             <i className="fa-solid fa-heart"></i> ADOPTAR
           </button>
+
+          <div
+            className="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                    Solicitud de Adopción
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  Se va a proceder a enviar sus datos de usuario
+                  (Nombre/Apellidos/Email), junto a una solicitud de adopción
+                  para <b>{pet.name}</b>. Contactarán con Ud. en los próximos
+                  días vía email.
+                  {/* Mirar de incluir el telefono de la compañia */}
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn adoption-process"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                  <button type="button" className="btn adoption-process">
+                    Continuar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <button type="button" className=" col-xs-12 btn donation-process">
             <i className="fa-solid fa-hand-holding-dollar"></i> APADRINAR
           </button>

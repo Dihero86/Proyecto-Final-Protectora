@@ -8,12 +8,12 @@ export const FormPet = () => {
   const [max, setMax] = useState(false);
 
   const [pet, setPet] = useState({
-    type: "perro",
+    type: "Canina",
     name: "",
     birth_date: "",
     breed: "",
     size: "",
-    company_id: 2,
+    company_id: 1,
     description: "",
     status: "",
   });
