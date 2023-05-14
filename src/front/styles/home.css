@@ -1,7 +1,30 @@
-/*
-    home.css: This website contains selectors only used in home.css
+.image-container {
+  height: 500px;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+#portada {
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.texto {
+  position: absolute;
+  top: 120px;
+  right: 50px;
+  text-align: center;
+  width: 30%;
+}
+
+#title {
+  text-align: center;
+  color: #275f70;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+#description {
+  color: black;
+  font-size: 1rem;
+}
