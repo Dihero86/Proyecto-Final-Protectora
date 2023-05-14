@@ -1,74 +1,58 @@
 .row {
-  justify-content: center;
+  justify-content: space-around;
+  display: flex;
 }
 .title {
-  margin: 20px;
-  font-size: 30px;
+  font-size: 50px;
   color: #275f70;
-  font-size: 30px;
 }
 .subtitle {
-  font-size: 20px;
+  color: #275f70;
 }
-.img-div {
+.images-div {
   background-color: #9ddef2;
+  padding: 20px;
+  align-items: center;
+  display: flex;
+}
+.photo-div {
+  background-color: #42a0bd;
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
-  min-height: 60vh;
   margin-right: 10px;
   justify-content: space-around;
 }
-.pic-one {
-  background-color: white;
-}
-.pic-two {
-  background-color: white;
-}
-.pic-three {
-  background-color: white;
-}
-.pic-four {
-  background-color: white;
-}
-.pic-five {
-  background-color: white;
+
+.photo {
+  width: 100%;
+  object-fit: scale-down;
 }
 .info-div {
   background-color: #42a0bd;
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
-  min-height: 60vh;
-  margin-left: 10px;
 }
 .info-pet {
   background-color: #9ddef2;
-  margin-bottom: 10px;
-  align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
   color: #496770;
-}
-.start-adoption-process {
-  float: left;
-  margin-left: 20px;
-}
-
-.start-reception-process {
-  float: center;
-}
-.start-donation-process {
-  float: right;
-  margin-right: 20px;
+  padding: 20px;
 }
 .description-pet {
   background-color: #9ddef2;
-  margin-top: 10px;
-  align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
   color: #496770;
+  padding: 10px;
+}
+.buttons-div {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }

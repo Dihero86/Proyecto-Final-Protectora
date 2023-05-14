@@ -16,6 +16,7 @@ class Pet(db.Model):
     pet_Gallery= db.relationship('Pet_Gallery',back_populates="pet")
 
     def __init__(self, type, name, birth_date, breed, size, description, status_id, company_id):
+        self.type = type
         self.name = name
         self.birth_date = birth_date
         self.breed = breed

@@ -26,7 +26,7 @@ export const getOnePet = async (pet_id) => {
     });
 
     const data = await response.json();
-    console.log(data);
+
     return data;
   } catch (error) {
     console.log("Error getting items: ", error);
