@@ -15,9 +15,17 @@ export const createCompany = async (company, userId) => {
     );
     const data = await response.json();
 
-    console.log(data);
-
     return data;
+
+    console.log(data);
+    setCompany({
+      name: "",
+      cif: "",
+      logo: "",
+      adress: "",
+      description: "",
+      user_id: "",
+    });
   } catch (error) {
     console.log("error register company", error);
   }
