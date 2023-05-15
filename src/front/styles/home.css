@@ -1,5 +1,6 @@
 .image-container {
   height: 500px;
+  position: relative;
 }
 
 #portada {
@@ -21,7 +22,27 @@
   text-align: center;
   color: #275f70;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .texto {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 40%;
+  }
+
+  #title {
+    font-size: 1.5rem;
+  }
+
+  #portada {
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    object-position: 60% 50%;
+  }
 }
 
 #description {
@@ -29,7 +50,7 @@
   font-size: 1rem;
 }
 
-.col-lg-4 {
+.boxini {
   color: white;
   background-color: #275f70;
   padding: 10px;
@@ -37,18 +58,8 @@
   border: solid 5px #42a0bd;
 }
 
-button {
-  color: #fff;
-  background-color: #42a0bd;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-button:hover {
-  color: #fff;
-  background: #496770;
-  cursor: pointer;
+#pets {
+  background-color: #9ddef2;
+  border-radius: 10px;
+  width: 80%;
 }

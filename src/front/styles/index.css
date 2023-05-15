@@ -6,8 +6,25 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Kaisei HarunoUmi";
 }
 
 footer {
   margin-top: auto;
+}
+
+button {
+  color: #fff;
+  background-color: #42a0bd;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  color: #fff;
+  background: #496770;
+  cursor: pointer;
 }

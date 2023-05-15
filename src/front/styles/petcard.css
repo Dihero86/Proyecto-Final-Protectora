@@ -1,0 +1,30 @@
+#cardpet {
+  border-radius: 5px;
+  transition: transform 0.2s;
+  border: solid 5px #42a0bd;
+  background-color: #42a0bd;
+}
+
+#cardpet:hover {
+  transform: scale(1.4);
+  cursor: pointer;
+}
+
+.petimage {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  color: #496770;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.card-text {
+  color: white;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: lighter;
+}

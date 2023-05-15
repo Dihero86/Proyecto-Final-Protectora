@@ -9,7 +9,7 @@ export const Navbar = () => {
     >
       <div className="container-fluid">
         <Link style={{ textDecoration: 'none' }} to="/">
-          <h1 className="text-white"> Petsbook</h1>
+          <h1 className="text-white"><strong>Petsbook</strong> </h1>
         </Link>
 
         <button
