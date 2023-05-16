@@ -190,7 +190,7 @@ export const FormCompany = () => {
             />
           </div>
           <div className="col-6 text-start">
-            <label htmlFor="logo" className="form-label">
+            <label htmlFor="city" className="form-label">
               Ciudad
             </label>
             <input
@@ -204,7 +204,7 @@ export const FormCompany = () => {
             />
           </div>
           <div className="col-6 text-start">
-            <label htmlFor="logo" className="form-label">
+            <label htmlFor="phone" className="form-label">
               Teléfono
             </label>
             <input
@@ -219,7 +219,7 @@ export const FormCompany = () => {
             />
           </div>
           <div className="col-6 text-start">
-            <label htmlFor="logo" className="form-label">
+            <label htmlFor="email" className="form-label">
               Email
             </label>
             <input
@@ -244,6 +244,20 @@ export const FormCompany = () => {
               onChange={handleInputChange}
               value={company.description}
             ></textarea>
+          </div>
+          <div className="col-6 text-start">
+            <label htmlFor="logo" className="form-label">
+              Logo
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="logo"
+              placeholder="Introduce tu dirección de correo electrónico"
+              name="logo"
+              onChange={handleInputChange}
+              value={company.logo}
+            />
           </div>
         </div>
         <button type="submit" className="mt-5" onClick={handleSubmit}>
