@@ -5,14 +5,11 @@ const HEADERS = {
 
 export const createCompany = async (company, userId) => {
   try {
-    const response = await fetch(
-      `https://3001-dihero86-proyectofinalp-9vse1fmfwa3.ws-eu96.gitpod.io/api/company`,
-      {
-        method: "POST",
-        headers: HEADERS,
-        body: JSON.stringify({ ...company, user_id: userId }),
-      }
-    );
+    const response = await fetch(`${URL}/api/company`, {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify({ ...company, user_id: userId }),
+    });
     const data = await response.json();
 
     return data;
@@ -43,6 +40,7 @@ export const getAllCompanies = async () => {
   }
 };
 
+
 export const getOneCompany = async (company_id) => {
   try {
     const response = await fetch(`${URL}/api/company/${company_id}`, {
@@ -56,19 +54,16 @@ export const getOneCompany = async (company_id) => {
   }
 };
 
-export const addNewUser = async (data) => {
+export const addNewUsers = async (data) => {
   try {
-    const response = await fetch(
-      `https://3001-dihero86-proyectofinalp-9vse1fmfwa3.ws-eu96.gitpod.io/api/user/register/client`,
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    const result = await response.json(); // Parse response body as JSON
+    const response = await fetch(`${URL}/api/user/register/client`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+    const result = await response.json();
     console.log(result.id);
-    return result.id; // Return ID of new user
+    return result.id;
   } catch (err) {
     console.log(err);
   }
