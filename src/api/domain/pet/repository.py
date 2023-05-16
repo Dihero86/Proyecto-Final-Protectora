@@ -1,7 +1,8 @@
 from api.models.index import db, Pet, Pet_Gallery
 
 def create_pet(body,status_id):
-    new_pet= Pet(body["type"],body["name"],body["age"],body["breed"],body["size"],body["description"],status_id,body["company_id"])
+    print(body)
+    new_pet= Pet(body["type"],body["name"],body["birth_date"],body["breed"],body["size"],body["description"],status_id,body["company_id"])
     db.session.add(new_pet)
     db.session.commit()
     return new_pet

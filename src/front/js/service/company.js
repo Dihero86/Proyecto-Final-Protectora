@@ -43,3 +43,33 @@ export const getAllCompanies = async () => {
   }
 };
 
+export const getOneCompany = async (company_id) => {
+  try {
+    const response = await fetch(`${URL}/api/company/${company_id}`, {
+      method: "GET",
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log("Error getOneCompany: ", error);
+  }
+};
+
+export const addNewUser = async (data) => {
+  try {
+    const response = await fetch(
+      `https://3001-dihero86-proyectofinalp-9vse1fmfwa3.ws-eu96.gitpod.io/api/user/register/client`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const result = await response.json(); // Parse response body as JSON
+    console.log(result.id);
+    return result.id; // Return ID of new user
+  } catch (err) {
+    console.log(err);
+  }
+};
