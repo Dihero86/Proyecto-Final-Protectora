@@ -12,6 +12,7 @@ import { AllCompanies } from "./pages/allCompanies.jsx";
 
 import injectContext from "./store/appContext";
 import { FormCompany } from "./pages/company.jsx";
+import { FormVolunteer } from "./pages/formvolunteer.jsx";
 import { PetGallery } from "./pages/petgallery.jsx";
 import { OnePet } from "./pages/onePet.jsx";
 
@@ -41,6 +42,10 @@ const Layout = () => {
             <Route element={<LoginUser />} path="/login_user" />
             <Route element={<OnePet />} path="/one_pet/:pet_id" />
             <Route element={<AllCompanies />} path="/companies" />
+            <Route
+              element={<FormVolunteer />}
+              path="/register_volunteer/:company_id"
+            />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

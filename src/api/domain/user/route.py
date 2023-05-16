@@ -29,6 +29,7 @@ def login():
 @api.route('/register/volunteer/<int:company_id>', methods=['POST'])
 def create_volunteer(company_id):
     body = request.get_json()
+    print(body, company_id)
     volunteer = Controller.create_volunteer(body, company_id)
     if isinstance(volunteer, User):
         return jsonify(volunteer.serialize()), 200

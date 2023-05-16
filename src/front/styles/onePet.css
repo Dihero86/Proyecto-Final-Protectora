@@ -23,10 +23,14 @@
   margin-right: 10px;
   justify-content: space-around;
 }
-
 .photo {
   width: 100%;
   object-fit: scale-down;
+  transition: transform 0.2s;
+}
+.photo:hover {
+  transform: scale(1.4);
+  cursor: pointer;
 }
 .info-div {
   background-color: #42a0bd;

@@ -1,39 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import catImage from "../../img/cat.png";
-import { addNewUser } from "../service/user";
-import { useNavigate } from "react-router-dom";
 
-export const UserForm = () => {
-  const [user, setUser] = useState({
-    name: "",
-    last_name: "",
-    email: "",
-    password: "",
-  });
-  const [passwordCheck, setPasswordCheck] = useState("");
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (user.password == passwordCheck) {
-      addNewUser(user);
-      navigate("/login_user");
-    } else {
-      alert("las contraseñas no coinciden");
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-  };
-
+export const UserForm = ({
+  handleChange,
+  handleSubmit,
+  user,
+  setPasswordCheck,
+  passwordCheck,
+}) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-12">
-          <h1 className="title">Regístrate y empieza a adoptar</h1>
+        <div className="col-8 p-5">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="inputName" className="form-label">
@@ -108,13 +86,13 @@ export const UserForm = () => {
               ></input>
             </div>
             <div>
-              <button className="btn" type="submit">
+              <button className="btn m-5" type="submit">
                 Enviar
               </button>
             </div>
           </form>
         </div>
-        <div className="col-md-4">
+        <div className="col-4 mx-0">
           <div className="imagen">
             <img src={catImage} className="img-fluid" />
           </div>

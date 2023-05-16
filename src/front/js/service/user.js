@@ -26,3 +26,20 @@ export const loginUser = async (user) => {
     console.log("ERROR LOGIN USER", err);
   }
 };
+
+export const addNewVolunteer = async (company_id, user) => {
+  try {
+    const res = await fetch(
+      `${URL}/api/user/register/volunteer/${company_id}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      }
+    );
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log("ERROR REGISTER VOLUNTEER", err);
+  }
+};

@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import "../../styles/registerUser.css";
+import React, { useState, useEffect, useContext } from "react";
 import { UserForm } from "../component/userForm.jsx";
-import { addNewUser } from "../service/user";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { addNewVolunteer } from "../service/user.js";
 
-export const RegisterUser = () => {
+export const FormVolunteer = () => {
+  const params = useParams();
+
   const [user, setUser] = useState({
     name: "",
     last_name: "",
     email: "",
     password: "",
   });
+
   const [passwordCheck, setPasswordCheck] = useState("");
   const navigate = useNavigate();
 
@@ -18,10 +21,11 @@ export const RegisterUser = () => {
     e.preventDefault();
 
     if (user.password == passwordCheck) {
-      addNewUser(user);
-      navigate("/login_user");
+      addNewVolunteer(params.company_id, user);
+
+      // navigate("/login_user");
     } else {
-      console.log("las contraseñas no coinciden");
+      alert("las contraseñas no coinciden");
     }
   };
 
@@ -30,10 +34,9 @@ export const RegisterUser = () => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-
   return (
-    <div className="row ">
-      <h1 className="title m-5">Empieza a adoptar</h1>
+    <div className="row">
+      <h1 className="title m-5">Empieza a colaborar como voluntario</h1>
       <UserForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}

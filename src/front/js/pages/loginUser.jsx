@@ -56,7 +56,7 @@ export const LoginUser = () => {
                 value={userAccess.password}
                 required
               ></input>
-              <div className="mb-3">
+              <div className="m-3">
                 <input type="submit" value="Enviar" className="btn"></input>
               </div>
             </div>
