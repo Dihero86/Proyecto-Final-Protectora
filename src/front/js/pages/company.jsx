@@ -189,6 +189,49 @@ export const FormCompany = () => {
               value={company.adress}
             />
           </div>
+          <div className="col-6 text-start">
+            <label htmlFor="logo" className="form-label">
+              Ciudad
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="city"
+              placeholder="Introduce tu dirección"
+              name="city"
+              onChange={handleInputChange}
+              value={company.city}
+            />
+          </div>
+          <div className="col-6 text-start">
+            <label htmlFor="logo" className="form-label">
+              Teléfono
+            </label>
+            <input
+              type="tel"
+              pattern="[0-9]*"
+              className="form-control"
+              id="phone"
+              placeholder="Introduce tu número de teléfono"
+              name="phone"
+              onChange={handleInputChange}
+              value={company.phone}
+            />
+          </div>
+          <div className="col-6 text-start">
+            <label htmlFor="logo" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Introduce tu dirección de correo electrónico"
+              name="email"
+              onChange={handleInputChange}
+              value={company.email}
+            />
+          </div>
           <div className="col-md-4 text-start">
             <label htmlFor="exampleFormControlInput1" className="form-label">
               Descripción
@@ -201,20 +244,6 @@ export const FormCompany = () => {
               onChange={handleInputChange}
               value={company.description}
             ></textarea>
-          </div>
-          <div className="col-6 text-start">
-            <label htmlFor="logo" className="form-label">
-              Insertar Logo
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="logo"
-              placeholder="Introduce tu dirección"
-              name="logo"
-              onChange={handleInputChange}
-              value={company.logo}
-            />
           </div>
         </div>
         <button type="submit" className="mt-5" onClick={handleSubmit}>
