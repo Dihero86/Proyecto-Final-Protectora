@@ -43,6 +43,19 @@ export const getAllCompanies = async () => {
   }
 };
 
+export const getOneCompany = async (company_id) => {
+  try {
+    const response = await fetch(`${URL}/api/company/${company_id}`, {
+      method: "GET",
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log("Error getOneCompany: ", error);
+  }
+};
+
 export const addNewUser = async (data) => {
   try {
     const response = await fetch(

@@ -6,8 +6,6 @@ export const PetGallery = () => {
   const [pets, setPets] = useState([]);
   const [filter, setFilter] = useState([]);
 
-  console.log(pets);
-
   useEffect(() => {
     const fetchPets = async () => {
       try {
@@ -165,7 +163,7 @@ export const PetGallery = () => {
                       )}
                       <div className="pet-info">
                         <p className="pet-name">{pet.name}</p>
-                        <p className="pet-age">{pet.age}</p>
+                        <p className="pet-age">{pet.birth_date}</p>
                         <p className="pet-breed">{pet.breed}</p>
                       </div>
                     </li>
@@ -185,7 +183,7 @@ export const PetGallery = () => {
                       )}
                       <div className="pet-info">
                         <p className="pet-name">{pet.name}</p>
-                        <p className="pet-age">{pet.age}</p>
+                        <p className="pet-age">{pet.birth_date}</p>
                         <p className="pet-breed">{pet.breed}</p>
                       </div>
                     </li>

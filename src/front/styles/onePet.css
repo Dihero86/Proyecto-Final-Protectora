@@ -1,0 +1,58 @@
+.row {
+  justify-content: space-around;
+  display: flex;
+}
+.title {
+  font-size: 50px;
+  color: #275f70;
+}
+.subtitle {
+  color: #275f70;
+}
+.images-div {
+  background-color: #9ddef2;
+  padding: 20px;
+  align-items: center;
+  display: flex;
+}
+.photo-div {
+  background-color: #42a0bd;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin-right: 10px;
+  justify-content: space-around;
+}
+
+.photo {
+  width: 100%;
+  object-fit: scale-down;
+}
+.info-div {
+  background-color: #42a0bd;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.info-pet {
+  background-color: #9ddef2;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: #496770;
+  padding: 20px;
+}
+.description-pet {
+  background-color: #9ddef2;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: #496770;
+  padding: 10px;
+}
+.buttons-div {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}

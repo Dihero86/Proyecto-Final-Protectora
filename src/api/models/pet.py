@@ -5,7 +5,7 @@ class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(100), unique=False, nullable=False)
     name = db.Column(db.String(100), nullable=False)
-    age = db.Column(db.Integer)
+    birth_date = db.Column(db.String(100), unique=False, nullable=True)
     breed = db.Column(db.String(100))
     size = db.Column(db.String(50))
     description = db.Column(db.String(500))
@@ -15,9 +15,10 @@ class Pet(db.Model):
     company = db.relationship('Company')
     pet_Gallery= db.relationship('Pet_Gallery',back_populates="pet")
 
-    def __init__(self, type, name, age, breed, size, description, status_id, company_id):
+    def __init__(self, type, name, birth_date, breed, size, description, status_id, company_id):
+        self.type = type
         self.name = name
-        self.age = age
+        self.birth_date = birth_date
         self.breed = breed
         self.size = size
         self.description = description
@@ -29,7 +30,7 @@ class Pet(db.Model):
             "id": self.id,
             "type": self.type,
             "name": self.name,
-            "age": self.age,
+            "birth_date": self.birth_date,
             "breed": self.breed,
             "size": self.size,
             "description": self.description,
