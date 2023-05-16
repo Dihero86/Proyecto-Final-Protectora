@@ -49,7 +49,7 @@ export const getOneCompany = async (company_id) => {
       method: "GET",
     });
     const data = await response.json();
-    console.log("data de getOneCompany en el company.js", data);
+
     return data;
   } catch (error) {
     console.log("Error getOneCompany: ", error);

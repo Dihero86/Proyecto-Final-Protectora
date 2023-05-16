@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/onePet.css";
-import { getOnePet } from "../service/petgallery.js";
+import { getOnePet, startAdoptionProcess } from "../service/petgallery.js";
 import { getOneCompany } from "../service/company.js";
 import { useParams } from "react-router-dom";
 
@@ -8,6 +8,10 @@ export const OnePet = () => {
   const [pet, setPet] = useState({});
   const [company, setCompany] = useState({});
   const [state, setState] = useState(false);
+  const [input, setInput] = useState({
+    description: "",
+  });
+
   const params = useParams();
 
   const getInfoPet = async (pet_id) => {
@@ -22,7 +26,12 @@ export const OnePet = () => {
   useEffect(() => {
     getInfoPet(params.pet_id);
   }, []);
-  const startAdoptionProcess = () => {};
+
+  const getInputValue = (e) => {
+    setInput({ description: e.target.value });
+    console.log(input);
+  };
+
   return (
     <div className="container_fluid">
       <div className="row">
@@ -76,9 +85,8 @@ export const OnePet = () => {
         <div className="col-sm-5 mb-3 info-div">
           <div className="col-md-12 info-pet">
             <h1 className="subtitle m-4">Sus datos: </h1>
-            <p className="pet-type">Especie: {pet.type}</p>
-            <p className="pet-breed">Raza: {pet.breed}</p>
             <p className="pet-age">Fecha de nacimiento: {pet.birth_date}</p>
+            <p className="pet-breed">Raza: {pet.breed}</p>
             <p className="pet-company">
               {company.description}: {company.name}
             </p>
@@ -124,11 +132,20 @@ export const OnePet = () => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  Se va a proceder a enviar sus datos de usuario
-                  (Nombre/Apellidos/Email), junto a una solicitud de adopción
-                  para <b>{pet.name}</b>. Contactarán con Ud. en los próximos
-                  días vía email.
-                  {/* Mirar de incluir el telefono de la compañia */}
+                  Se va a proceder a enviar una solicitud de adopción a la{" "}
+                  <b>
+                    {company.description} {company.name}
+                  </b>
+                  , en <b>{company.city}</b>. ¿Está seguro de que quiere
+                  continuar? Añada un comentario contándonos un poco más sobre
+                  Utd y porqué le gustaría adoptar/acoger a <b>{pet.name}</b>.
+                  <div className="form-floating">
+                    <textarea
+                      className="form-control my-3"
+                      id="floatingTextarea"
+                      onChange={(e) => getInputValue(e)}
+                    ></textarea>
+                  </div>
                 </div>
                 <div className="modal-footer">
                   <button
@@ -138,9 +155,21 @@ export const OnePet = () => {
                   >
                     Cancelar
                   </button>
-                  <button type="button" className="btn adoption-process">
-                    Continuar
+                  <button
+                    type="button"
+                    className="btn adoption-process"
+                    onClick={() => {
+                      startAdoptionProcess(input, pet.id);
+                      alert(
+                        `Contactarán con Ud. en los próximos días vía email.\n (${company.email}, ${company.phone})`
+                      );
+                    }}
+                    data-bs-dismiss="modal"
+                  >
+                    Enviar
                   </button>
+                  {/*    ----ALERT DESPUES DE ENVIAR----
+                   */}
                 </div>
               </div>
             </div>
