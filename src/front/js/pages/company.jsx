@@ -250,7 +250,7 @@ export const FormCompany = () => {
               Logo
             </label>
             <input
-              type="text"
+              type="file"
               className="form-control"
               id="logo"
               placeholder="Introduce tu dirección de correo electrónico"
