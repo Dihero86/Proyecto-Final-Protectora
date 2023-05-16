@@ -245,20 +245,6 @@ export const FormCompany = () => {
               value={company.description}
             ></textarea>
           </div>
-          <div className="col-6 text-start">
-            <label htmlFor="logo" className="form-label">
-              Logo
-            </label>
-            <input
-              type="file"
-              className="form-control"
-              id="logo"
-              placeholder="Introduce tu dirección de correo electrónico"
-              name="logo"
-              onChange={handleInputChange}
-              value={company.logo}
-            />
-          </div>
         </div>
         <button type="submit" className="mt-5" onClick={handleSubmit}>
           Enviar
