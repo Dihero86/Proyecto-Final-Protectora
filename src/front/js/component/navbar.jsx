@@ -8,7 +8,7 @@ export const Navbar = () => {
       style={{ backgroundColor: "#275F70" }}
     >
       <div className="container-fluid">
-        <Link style={{ textDecoration: 'none' }} to="/">
+        <Link className="link" to="/">
           <h1 className="text-white"><strong>Petsbook</strong> </h1>
         </Link>
 

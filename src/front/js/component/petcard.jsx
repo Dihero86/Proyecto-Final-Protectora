@@ -6,7 +6,7 @@ export const Petcard = ({ pet }) => {
     const navigate = useNavigate();
 
     const handleClick = (event) => {
-        console.log(pet.id)
+        navigate(`/one_pet/${pet.id}`)
     }
 
     return (

@@ -28,3 +28,7 @@ button:hover {
   background: #496770;
   cursor: pointer;
 }
+
+.link {
+  text-decoration: none;
+}
