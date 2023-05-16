@@ -1,34 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import catImage from "../../img/cat.png";
-import { addNewUser } from "../service/user";
-import { useNavigate } from "react-router-dom";
 
-export const UserForm = () => {
-  const [user, setUser] = useState({
-    name: "",
-    last_name: "",
-    email: "",
-    password: "",
-  });
-  const [passwordCheck, setPasswordCheck] = useState("");
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (user.password == passwordCheck) {
-      addNewUser(user);
-      navigate("/login_user");
-    } else {
-      alert("las contraseñas no coinciden");
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-  };
-
+export const UserForm = ({
+  handleChange,
+  handleSubmit,
+  user,
+  setPasswordCheck,
+  passwordCheck,
+}) => {
   return (
     <div className="container-fluid">
       <div className="row">
