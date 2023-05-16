@@ -7,8 +7,6 @@ class User_rol(db.Model):
     def __init__(self, rol_type ):
         self.rol_type = rol_type 
 
-    def __repr__(self):
-        return f'<User_rol {self.rol_type}>'
 
     def serialize(self):
         return {
