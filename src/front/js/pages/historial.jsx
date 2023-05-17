@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getHistorial } from "../service/historial";
 
 export const Historial = () => {
-  const [historyData, setHistoryData] = useState(null);
+  const [historialData, setHistorialData] = useState(null);
   const { pet_id } = useParams();
 
   useEffect(() => {
@@ -11,10 +11,10 @@ export const Historial = () => {
       try {
         const data = await getHistorial(pet_id);
         if (Array.isArray(data)) {
-          setHistoryData(data);
+          setHistorialData(data);
         } else {
           console.log("Invalid history data:", data);
-          setHistoryData([]);
+          setHistorialData([]);
         }
       } catch (err) {
         console.log(err);
@@ -26,25 +26,31 @@ export const Historial = () => {
 
   return (
     <div>
-      <h2>Pet History</h2>
-      {historyData ? (
+      <h2>Historial de la mascota</h2>
+      {historialData ? (
         <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col">Create At</th>
+              <th scope="col">Título</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Fecha de creación</th>
             </tr>
           </thead>
           <tbody>
-            {historyData.map(
+            {historialData.map(
               ({ id, title, description, create_at, user_id }) => (
                 <tr key={id}>
                   <th scope="row">{id}</th>
                   <td>{title}</td>
                   <td>{description}</td>
-                  <td>{create_at}</td>
+                  <td>
+                    {new Date(create_at).toLocaleDateString("es-ES", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </td>
                 </tr>
               )
             )}
