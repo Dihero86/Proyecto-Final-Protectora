@@ -4,15 +4,18 @@ const HEADERS = {
   "Content-Type": "application/json",
 };
 
-export const getHistorial = async () => {
+export const getHistorial = async (petId) => {
   try {
-    const res = await fetch(`${URL}/api/history/<int:pet_id>`, {
+    const token = localStorage.getItem("token");
+    const res = await fetch(`${URL}/api/history/${petId}`, {
       method: "GET",
-      headers: HEADERS,
+      headers: {
+        ...HEADERS,
+        Authorization: `Bearer ${token}`,
+      },
     });
-    const data = await res.json();
-    return data;
+    return await res.json();
   } catch (err) {
-    console.log("Error get Pet historial", err);
+    console.log("Error getting pet history", err);
   }
 };

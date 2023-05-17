@@ -1,34 +1,36 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getHistorial } from "../service/historial";
 
-export const Historial = ({ petId }) => {
+export const Historial = () => {
   const [historyData, setHistoryData] = useState(null);
+  const { pet_id } = useParams();
 
   useEffect(() => {
-    const fetchHistorial = async () => {
+    const fetchHistory = async () => {
       try {
-        const res = await fetch(`/api/history/${petId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await res.json();
-        setHistoryData(data); // Store the fetched data
+        const data = await getHistorial(pet_id);
+        if (Array.isArray(data)) {
+          setHistoryData(data);
+        } else {
+          console.log("Invalid history data:", data);
+          setHistoryData([]);
+        }
       } catch (err) {
-        console.log("Error fetching pet history", err);
+        console.log(err);
       }
     };
 
-    fetchHistorial();
-  }, [petId]);
+    fetchHistory();
+  }, [pet_id]);
 
   return (
     <div>
       <h2>Pet History</h2>
       {historyData ? (
         <ul>
-          {historyData.map((item) => (
-            <li key={item.id}>{item.description}</li>
+          {historyData.map(({ id, description }) => (
+            <li key={id}>{description}</li>
           ))}
         </ul>
       ) : (
