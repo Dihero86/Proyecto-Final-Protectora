@@ -16,6 +16,6 @@ class CompanyVolunteers(db.Model):
     def serialize(self):
         return{
             "id": self.id,
-            "user_id": self.user_id,
             "company_id": self.company_id,
+            "user": self.user.serialize(),
         }

@@ -9,6 +9,7 @@ import { FormPet } from "./pages/formpet.jsx";
 import { RegisterUser } from "./pages/registerUser.jsx";
 import { LoginUser } from "./pages/loginUser.jsx";
 import { AllCompanies } from "./pages/allCompanies.jsx";
+import { AllVolunteers } from "./pages/allVolunteers.jsx";
 
 import injectContext from "./store/appContext";
 import { FormCompany } from "./pages/company.jsx";
@@ -42,6 +43,7 @@ const Layout = () => {
             <Route element={<LoginUser />} path="/login_user" />
             <Route element={<OnePet />} path="/one_pet/:pet_id" />
             <Route element={<AllCompanies />} path="/companies" />
+            <Route element={<AllVolunteers />} path="/volunteers/:company_id" />
             <Route
               element={<FormVolunteer />}
               path="/register_volunteer/:company_id"
