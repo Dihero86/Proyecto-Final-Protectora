@@ -28,11 +28,28 @@ export const Historial = () => {
     <div>
       <h2>Pet History</h2>
       {historyData ? (
-        <ul>
-          {historyData.map(({ id, description }) => (
-            <li key={id}>{description}</li>
-          ))}
-        </ul>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Create At</th>
+            </tr>
+          </thead>
+          <tbody>
+            {historyData.map(
+              ({ id, title, description, create_at, user_id }) => (
+                <tr key={id}>
+                  <th scope="row">{id}</th>
+                  <td>{title}</td>
+                  <td>{description}</td>
+                  <td>{create_at}</td>
+                </tr>
+              )
+            )}
+          </tbody>
+        </table>
       ) : (
         <p>Loading history...</p>
       )}
