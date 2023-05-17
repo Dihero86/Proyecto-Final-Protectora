@@ -37,5 +37,6 @@ class Pet(db.Model):
             "status_id": self.status_id,
             "status": self.status.serialize(),
             "company_id": self.company_id,
+            "company": self.company.serialize(),
             "pet_Gallery": list(map(lambda picture: picture.serialize(),self.pet_Gallery))
         }
