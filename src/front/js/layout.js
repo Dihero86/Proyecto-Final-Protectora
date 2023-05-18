@@ -14,7 +14,7 @@ import { AllVolunteers } from "./pages/allVolunteers.jsx";
 import injectContext from "./store/appContext";
 import { FormCompany } from "./pages/company.jsx";
 import { FormVolunteer } from "./pages/formvolunteer.jsx";
-import { PetGallery } from "./pages/petgallery.jsx";
+import { AllPets } from "./pages/allpets.jsx";
 import { OnePet } from "./pages/onePet.jsx";
 import { Historial } from "./pages/historial.jsx";
 
@@ -38,7 +38,7 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<FormCompany />} path="/createcompany" />
-            <Route element={<PetGallery />} path="/pet_gallery" />
+            <Route element={<AllPets />} path="/pet_gallery" />
             <Route element={<FormPet />} path="/create_pet" />
             <Route element={<RegisterUser />} path="/register_user" />
             <Route element={<LoginUser />} path="/login_user" />

@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { getAllPets } from "../service/petgallery.js";
-import "../../styles/petgallery.css";
+import "../../styles/allpets.css";
+import { Petcard } from "../component/petcard.jsx";
 
-export const PetGallery = () => {
+export const AllPets = () => {
   const [pets, setPets] = useState([]);
-  const [filter, setFilter] = useState([]);
+  const [petFilter, setPetFilter] = useState([]);
+  const [checked, setChecked] = useState({})
+
+  const getPets = async () => {
+    const data = await getAllPets();
+    setPets(data);
+  }
 
   useEffect(() => {
-    const fetchPets = async () => {
-      try {
-        const pets = await getAllPets();
-        setPets(pets);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchPets();
+    getPets()
   }, []);
 
   const filterPets = (petType) => {
-    if (filter.length == 0) {
+    if (petFilter.length == 0) {
       const result = pets.filter((pet) => pet.type == petType);
-      return setFilter(result);
+      return setPetFilter(result);
     } else {
-      const result = filter.filter((pet) => pet.type == petType);
-      return setFilter(result);
+      const result = petFilter.filter((pet) => pet.type == petType);
+      return setPetFilter(result);
     }
   };
 
   const filterCities = (cityName) => {
-    if (filter.length == 0) {
+    if (petFilter.length == 0) {
       const result = pets.filter((pet) => pet.company.city == cityName);
-      return setFilter(result);
+      return setPetFilter(result);
     } else {
-      const result = filter.filter((pet) => pet.company.city == cityName);
-      return setFilter(result);
+      const result = petFilter.filter((pet) => pet.company.city == cityName);
+      return setPetFilter(result);
     }
   };
 
   const filterSizes = (petSize) => {
-    if (filter.length == 0) {
+    if (petFilter.length == 0) {
       const result = pets.filter((pet) => pet.size == petSize);
-      return setFilter(result);
+      return setPetFilter(result);
     } else {
-      const result = filter.filter((pet) => pet.size == petSize);
-      return setFilter(result);
+      const result = petFilter.filter((pet) => pet.size == petSize);
+      return setPetFilter(result);
     }
   };
 
@@ -77,7 +76,7 @@ export const PetGallery = () => {
             className="all-pets"
             type="button"
             onClick={() => {
-              setFilter([]);
+              setPetFilter([]);
             }}
           >
             Ver todas
@@ -146,50 +145,12 @@ export const PetGallery = () => {
             </ul>
           </div>
         </div>
-        <div className="col-md-12 blue-background">
-          <ul className="list">
-            {filter.length == 0
-              ? pets.map((pet) => {
-                  return (
-                    <li key={pet.id} className="pet-card">
-                      {pet.photo ? (
-                        pet.photo
-                      ) : (
-                        <img
-                          src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
-                          className="card-img-top company-logo"
-                          alt="..."
-                        />
-                      )}
-                      <div className="pet-info">
-                        <p className="pet-name">{pet.name}</p>
-                        <p className="pet-age">{pet.birth_date}</p>
-                        <p className="pet-breed">{pet.breed}</p>
-                      </div>
-                    </li>
-                  );
-                })
-              : filter.map((pet) => {
-                  return (
-                    <li key={pet.id} className="pet-card">
-                      {pet.photo ? (
-                        pet.photo
-                      ) : (
-                        <img
-                          src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
-                          className="card-img-top company-logo"
-                          alt="..."
-                        />
-                      )}
-                      <div className="pet-info">
-                        <p className="pet-name">{pet.name}</p>
-                        <p className="pet-age">{pet.birth_date}</p>
-                        <p className="pet-breed">{pet.breed}</p>
-                      </div>
-                    </li>
-                  );
-                })}
-          </ul>
+
+        <div className="row blue-background">
+          {petFilter.length == 0 ?
+            pets.map((pet, index) => <Petcard key={index} pet={pet} />) :
+            petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)
+          }
         </div>
       </div>
     </div>
