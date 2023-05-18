@@ -12,3 +12,9 @@ def get_volunteer(user_id):
     if volunteer is None:
         return {"msg": "Bad Request: Volunteer not Found", "error": True, "status": 404 }
     return volunteer
+
+def get_volunteers_of_company(company_id):
+    volunteers = Repository.get_volunteers_of_company(company_id)
+    if volunteers is None:
+        return {"msg": "This Company have not volunteers yet", "error": True, "status": 401}
+    return volunteers
