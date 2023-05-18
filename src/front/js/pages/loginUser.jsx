@@ -37,14 +37,14 @@ export const LoginUser = () => {
         <div className="col-md-8">
           <h1 className="title">Acceso Usuario</h1>
 
-          <form className="d-flex flex-column m-auto" onChange={handleChange} onSubmit={handleSubmbit}>
+          <form className="d-flex flex-column m-auto f-login" onChange={handleChange} onSubmit={handleSubmbit}>
 
             <label htmlFor="inputEmail" className="form-label">
               EMAIL
             </label>
             <input
               type="email"
-              className="form-control"
+              className="form-control inp-login"
               name="email"
               id="inputEmail"
               value={userAccess.email}
@@ -56,7 +56,7 @@ export const LoginUser = () => {
             </label>
             <input
               type="password"
-              className="form-control"
+              className="form-control inp-login"
               name="password"
               id="inputPassword"
               value={userAccess.password}
