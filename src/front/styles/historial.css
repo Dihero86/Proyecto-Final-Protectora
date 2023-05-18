@@ -25,3 +25,14 @@ input[type="text"] {
 button {
   width: 50%;
 }
+
+.detalles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+  width: 50%;
+  margin-top: 20px;
+}
