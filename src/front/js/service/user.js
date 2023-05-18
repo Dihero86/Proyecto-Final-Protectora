@@ -43,3 +43,16 @@ export const addNewVolunteer = async (company_id, user) => {
     console.log("ERROR REGISTER VOLUNTEER", err);
   }
 };
+
+export const getAllVolunteers = async (company_id) => {
+  try {
+    const res = await fetch(`${URL}/api/volunteers/company/${company_id}`, {
+      method: "GET",
+    });
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    console.log("ERROR GET ALL VOLUNTEERS OF A COMPANY", err);
+  }
+};

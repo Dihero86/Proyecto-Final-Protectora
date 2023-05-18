@@ -9,12 +9,14 @@ import { FormPet } from "./pages/formpet.jsx";
 import { RegisterUser } from "./pages/registerUser.jsx";
 import { LoginUser } from "./pages/loginUser.jsx";
 import { AllCompanies } from "./pages/allCompanies.jsx";
+import { AllVolunteers } from "./pages/allVolunteers.jsx";
 
 import injectContext from "./store/appContext";
 import { FormCompany } from "./pages/company.jsx";
 import { FormVolunteer } from "./pages/formvolunteer.jsx";
 import { AllPets } from "./pages/allpets.jsx";
 import { OnePet } from "./pages/onePet.jsx";
+import { Historial } from "./pages/historial.jsx";
 
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
@@ -42,6 +44,11 @@ const Layout = () => {
             <Route element={<LoginUser />} path="/login_user" />
             <Route element={<OnePet />} path="/one_pet/:pet_id" />
             <Route element={<AllCompanies />} path="/companies" />
+
+            <Route element={<AllVolunteers />} path="/volunteers/:company_id" />
+
+            <Route element={<Historial />} path="/historial/:pet_id" />
+
             <Route
               element={<FormVolunteer />}
               path="/register_volunteer/:company_id"
