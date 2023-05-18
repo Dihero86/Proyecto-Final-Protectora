@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getHistorial } from "../service/historial";
+import { getHistorial, createHistorialEntry } from "../service/historial";
+import "../../styles/historial.css";
 
 export const Historial = () => {
   const [historialData, setHistorialData] = useState(null);
+  const [newEntry, setNewEntry] = useState({
+    title: "",
+    description: "",
+  });
   const { pet_id } = useParams();
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
         const data = await getHistorial(pet_id);
-        if (Array.isArray(data)) {
-          setHistorialData(data);
-        } else {
-          console.log("Invalid history data:", data);
-          setHistorialData([]);
-        }
+        setHistorialData(Array.isArray(data) ? data : []);
       } catch (err) {
         console.log(err);
       }
@@ -24,24 +24,67 @@ export const Historial = () => {
     fetchHistory();
   }, [pet_id]);
 
+  const handleInputChange = (e) => {
+    setNewEntry({
+      ...newEntry,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const createdEntry = await createHistorialEntry(pet_id, newEntry);
+      setHistorialData([...historialData, createdEntry]);
+      setNewEntry({
+        title: "",
+        description: "",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <div>
+    <div className="main">
       <h2>Historial de la mascota</h2>
-      {historialData ? (
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Título</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Fecha de creación</th>
-            </tr>
-          </thead>
-          <tbody>
-            {historialData.map(
-              ({ id, title, description, create_at, user_id }) => (
+      <form onSubmit={handleSubmit} className="historial">
+        <input
+          type="text"
+          name="title"
+          placeholder="Título"
+          value={newEntry.title}
+          onChange={handleInputChange}
+        />
+        <textarea
+          name="description"
+          placeholder="Descripción"
+          value={newEntry.description}
+          onChange={handleInputChange}
+          style={{ resize: "none" }}
+          rows={4}
+          cols={50}
+          maxLength={200}
+          required
+        ></textarea>
+        <button type="submit">Agregar al historial</button>
+      </form>
+      <div className="detalles">
+        {historialData ? (
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Fecha de creación</th>
+              </tr>
+            </thead>
+            <tbody>
+              {historialData.map(({ id, title, description, create_at }) => (
                 <tr key={id}>
-                  <th scope="row">{id}</th>
+                  <th scope="row"></th>
                   <td>{title}</td>
                   <td>{description}</td>
                   <td>
@@ -52,13 +95,13 @@ export const Historial = () => {
                     })}
                   </td>
                 </tr>
-              )
-            )}
-          </tbody>
-        </table>
-      ) : (
-        <p>Loading history...</p>
-      )}
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>Loading history...</p>
+        )}
+      </div>
     </div>
   );
 };
