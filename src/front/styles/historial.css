@@ -1,0 +1,38 @@
+.historial {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+}
+
+textarea {
+  width: 50%;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+input[type="text"] {
+  width: 50%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+button {
+  width: 50%;
+}
+
+.detalles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+  width: 50%;
+  margin-top: 20px;
+}

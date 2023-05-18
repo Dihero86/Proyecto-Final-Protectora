@@ -1,5 +1,5 @@
-export const URL = `${process.env.BACKEND_URL}`;
 
+export const URL = `${process.env.BACKEND_URL}`;
 
 
 export * from "./pet";
