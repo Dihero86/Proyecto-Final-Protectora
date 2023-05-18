@@ -1,4 +1,6 @@
 #cardpet {
+  width: 300px;
+  height: 400px;
   border-radius: 5px;
   transition: transform 0.2s;
   border: solid 5px #42a0bd;

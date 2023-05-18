@@ -20,8 +20,8 @@ export const loginUser = async (user) => {
       body: JSON.stringify(user),
     });
     const data = await res.json();
-    console.log(data);
     localStorage.setItem("token", data.token);
+    return data.rol
   } catch (err) {
     console.log("ERROR LOGIN USER", err);
   }

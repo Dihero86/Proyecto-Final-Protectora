@@ -13,7 +13,7 @@ export const Home = () => {
 
   const getPetInfo = async () => {
     const data = await getAllPets();
-    setPet(data.slice(-3))
+    setPet(data.slice(-4))
     setSpin(true)
   }
 

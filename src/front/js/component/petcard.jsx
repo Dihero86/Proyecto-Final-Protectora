@@ -26,7 +26,7 @@ export const Petcard = ({ pet }) => {
     }
 
     return (
-        <div onClick={handleClick} className="card col-lg-3 my-2 col-sm-10 p-0" id="cardpet">
+        <div onClick={handleClick} className="card col-lg-3 m-2 col-sm-10 p-0" id="cardpet">
             <img src={pet.pet_Gallery[0].image_url} className="petimage" />
             <div className="card-body align-bottom">
                 <h5 className="card-title">{pet.name}</h5>
