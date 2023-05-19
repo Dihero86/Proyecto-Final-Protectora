@@ -13,7 +13,7 @@ export const FormPet = () => {
     breed: "",
     type: "",
     size: "",
-    company_id: 1,
+    company_id: 4,
     description: "",
     status: "",
   });

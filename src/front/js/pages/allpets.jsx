@@ -6,45 +6,50 @@ import { Petcard } from "../component/petcard.jsx";
 export const AllPets = () => {
   const [pets, setPets] = useState([]);
   const [petFilter, setPetFilter] = useState([]);
-  const [checked, setChecked] = useState({})
+  const [select, setSelect] = useState({
+    city: "",
+    type: "",
+    size: "",
+  })
 
   const getPets = async () => {
     const data = await getAllPets();
     setPets(data);
+    setPetFilter(data);
   }
 
   useEffect(() => {
     getPets()
   }, []);
 
-  const filterPets = (petType) => {
-    if (petFilter.length == 0) {
-      const result = pets.filter((pet) => pet.type == petType);
-      return setPetFilter(result);
-    } else {
-      const result = petFilter.filter((pet) => pet.type == petType);
-      return setPetFilter(result);
+  const filterProccess = (pet, selector) => {
+    let city = true;
+    let type = true;
+    let size = true;
+    if (selector.city != "") {
+      city = (selector.city === pet.company.city)
     }
-  };
+    if (selector.type != "") {
+      type = (selector.type === pet.type)
+    }
+    if (selector.size != "") {
+      size = (selector.size === pet.size)
+    }
+    return city && type && size
+  }
 
-  const filterCities = (cityName) => {
-    if (petFilter.length == 0) {
-      const result = pets.filter((pet) => pet.company.city == cityName);
-      return setPetFilter(result);
-    } else {
-      const result = petFilter.filter((pet) => pet.company.city == cityName);
-      return setPetFilter(result);
+  const filterPets = (event) => {
+    const newSelection = { ...select, [event.target.name]: event.target.value }
+    const result = pets.filter((pet) => filterProccess(pet, newSelection))
+    if (result == []) {
+      setSelect({
+        city: "",
+        type: "",
+        size: "",
+      })
     }
-  };
-
-  const filterSizes = (petSize) => {
-    if (petFilter.length == 0) {
-      const result = pets.filter((pet) => pet.size == petSize);
-      return setPetFilter(result);
-    } else {
-      const result = petFilter.filter((pet) => pet.size == petSize);
-      return setPetFilter(result);
-    }
+    setSelect({ ...select, [event.target.name]: event.target.value })
+    setPetFilter([...result])
   };
 
   const petTypes = () => {
@@ -71,84 +76,86 @@ export const AllPets = () => {
         <div className="col-md-12">
           <h1 className="title">Galería de Mascotas</h1>
         </div>
-        <div className="col-md-6">
-          <button
-            className="all-pets"
-            type="button"
-            onClick={() => {
-              setPetFilter([]);
-            }}
-          >
-            Ver todas
-          </button>
-        </div>
-        <div className="col-md-4">
-          <div className="dropdown">
+        <div className="row">
+          <div className="col-md-4">
             <button
-              className="btn dropdown-toggle menu"
+              className="all-pets"
               type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+              onClick={() => {
+                setSelect({
+                  city: "",
+                  type: "",
+                  size: "",
+                })
+                setPetFilter([...pets]);
+              }}
             >
-              Ciudad
+              Ver todas
             </button>
-            <ul className="dropdown-menu">
-              {petCities().map((city) => {
-                return (
-                  <li onClick={() => filterCities(city)}>
-                    <p className="dropdown-item">{city}</p>
-                  </li>
-                );
-              })}
-            </ul>
+          </div>
+          <div className="col-md-6 ">
+            <div className="dropdown">
+              <button
+                className="btn dropdown-toggle menu mx-1"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Ciudad
+              </button>
+              <ul className="dropdown-menu">
+                {petCities().map((city) => {
+                  return (
+                    <li onClick={filterPets}>
+                      <button className={select.city == city ? "dropdown-item selected" : "dropdown-item"} name="city" value={city}>{city}</button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="dropdown">
+              <button
+                className="btn dropdown-toggle menu mx-1"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Animal
+              </button>
+              <ul className="dropdown-menu">
+                {petTypes().map((type) => {
+                  return (
+                    <li onClick={filterPets}>
+                      <button className={select.type == type ? "dropdown-item selected" : "dropdown-item"} name="type" value={type}>{type}</button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="dropdown">
+              <button
+                className="btn dropdown-toggle menu mx-1"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Tamaño
+              </button>
+              <ul className="dropdown-menu">
+                {petSizes().map((size) => {
+                  return (
+                    <li onClick={filterPets}>
+                      <button className={select.size == size ? "dropdown-item selected" : "dropdown-item"} name="size" value={size}>{size}</button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="col-md-1">
-          <div className="dropdown">
-            <button
-              className="btn dropdown-toggle menu"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Animal
-            </button>
-            <ul className="dropdown-menu">
-              {petTypes().map((type) => {
-                return (
-                  <li onClick={() => filterPets(type)}>
-                    <p className="dropdown-item">{type}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-        <div className="col-md-1">
-          <div className="dropdown">
-            <button
-              className="btn dropdown-toggle menu"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Tamaño
-            </button>
-            <ul className="dropdown-menu">
-              {petSizes().map((size) => {
-                return (
-                  <li onClick={() => filterSizes(size)}>
-                    <p className="dropdown-item">{size}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-
         <div className="row blue-background">
           {petFilter.length == 0 ?
-            pets.map((pet, index) => <Petcard key={index} pet={pet} />) :
+            <h1>No se encontraron resultados</h1> :
             petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)
           }
         </div>
