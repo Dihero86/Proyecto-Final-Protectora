@@ -19,10 +19,9 @@ class Company(db.Model):
     user = db.relationship('User')
 
 
-    def __init__(self, name, cif, logo, description, city, adress, phone, email, user_id):
+    def __init__(self, name, cif, description, city, adress, phone, email, user_id):
         self.name = name
         self.cif = cif
-        self.logo = logo 
         self.description = description
         self.city = city
         self.adress = adress
