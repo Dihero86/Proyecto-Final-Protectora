@@ -8,12 +8,12 @@ export const FormPet = () => {
   const [max, setMax] = useState(false);
 
   const [pet, setPet] = useState({
-    type: "Canina",
     name: "",
     birth_date: "",
     breed: "",
+    type: "",
     size: "",
-    company_id: 1,
+    company_id: 4,
     description: "",
     status: "",
   });
@@ -75,7 +75,7 @@ export const FormPet = () => {
         <div className="col-lg-4 col-sm-12">
           <label className="form-label">Fecha de nacimiento</label>
           <input
-            type="text"
+            type="date"
             className="form-control"
             id="edadanimal"
             name="birth_date"
@@ -102,6 +102,16 @@ export const FormPet = () => {
             <option>Grande</option>
             <option>Mediano</option>
             <option>Pequeño</option>
+          </select>
+        </div>
+
+        <div className="col-lg-4 col-sm-12">
+          <label className="form-label">Tipo Mascota</label>
+          <select className="form-select" id="Tamaño" name="type" required>
+            <option defaultValue={{}}>Seleccione tipo de mascota...</option>
+            <option>perro</option>
+            <option>gato</option>
+            <option>otro</option>
           </select>
         </div>
 

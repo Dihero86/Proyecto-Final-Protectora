@@ -28,10 +28,10 @@ export const Navbar = () => {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
-            <a className="nav-link" aria-current="page" href="/createCompany">
+            <a className="nav-link" aria-current="page" href="/companies">
               Protectoras
             </a>
-            <a className="nav-link" href="/petgallery">
+            <a className="nav-link" href="/pet_gallery">
               Animales en adopción
             </a>
             <a className="nav-link" href="#">

@@ -12,31 +12,22 @@
 }
 .blue-background {
   background-color: #99ddf2;
-  display: flex;
   width: 100%;
-  min-height: 60vh;
+  height: auto;
+  margin-bottom: 10px;
 }
+
 .list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
-.pet-card {
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  height: 100%;
-}
-.pet-photo {
-  width: 200px;
-  height: 200px;
-}
-.pet-info {
-  background-color: #42a0bd;
-  font-size: 15px;
-}
+
 .dropdown-item {
   text-align: center;
+}
+
+.selected {
+  background-color: #99ddf2;
 }

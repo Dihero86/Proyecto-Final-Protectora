@@ -4,7 +4,18 @@
   color: #275f70;
 }
 
-.btn {
-  color: white;
-  background-color: #42a0bd;
+.imgleft {
+  height: 100%;
+  width: 500px;
+}
+
+.f-login {
+  width: 70%;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
 }

@@ -13,7 +13,7 @@ export const Home = () => {
 
   const getPetInfo = async () => {
     const data = await getAllPets();
-    setPet(data.slice(-3))
+    setPet(data.slice(-4))
     setSpin(true)
   }
 
@@ -43,7 +43,7 @@ export const Home = () => {
             <p>
               Para unirte a PetsBook y empezar a compartir las mascotas disponibles para adopción, por favor regístrate como Protectora o Asociación
             </p>
-            <Link className="link" to="/create_company">
+            <Link className="link" to="/createcompany">
               <button className="btn">
                 Registro protectoras
               </button>
@@ -65,11 +65,9 @@ export const Home = () => {
           <h4>Algunos de las mascotas disponibles para adopción</h4>
           <div className="row petlist justify-content-evenly p-0">
             {spin ? pet.map((pet, index) => <Petcard key={index} pet={pet} />)
-
-
               :
-              <div class="spinner-grow" role="status">
-                <span class="visually-hidden">Loading...</span>
+              <div className="spinner-grow" role="status">
+                <span className="visually-hidden">Loading...</span>
               </div>}
           </div>
           <Link className="link" to="/pet_gallery">
