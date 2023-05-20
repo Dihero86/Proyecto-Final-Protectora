@@ -6,7 +6,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: "Kaisei HarunoUmi";
+  font-family: "Kaisei HarunoUmi", "Arial";
 }
 
 footer {
