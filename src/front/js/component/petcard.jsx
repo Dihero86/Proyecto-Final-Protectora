@@ -13,7 +13,7 @@ export const Petcard = ({ pet }) => {
     const age = (date) => {
         const today = new Date();
         const birthday = new Date(date)
-        const edad = today.getFullYear() - birthday.getFullYear()
+        let edad = today.getFullYear() - birthday.getFullYear()
         const mes = today.getMonth() - birthday.getMonth();
 
         if (edad < 1) {
@@ -22,6 +22,8 @@ export const Petcard = ({ pet }) => {
         if (mes < 0 || (mes === 0 && today.getDate() < birthday.getDate())) {
             edad--;
         }
+
+
         return edad + " años"
     }
 

@@ -66,8 +66,8 @@ export const Home = () => {
           <div className="row petlist justify-content-evenly p-0">
             {spin ? pet.map((pet, index) => <Petcard key={index} pet={pet} />)
               :
-              <div class="spinner-grow" role="status">
-                <span class="visually-hidden">Loading...</span>
+              <div className="spinner-grow" role="status">
+                <span className="visually-hidden">Loading...</span>
               </div>}
           </div>
           <Link className="link" to="/pet_gallery">

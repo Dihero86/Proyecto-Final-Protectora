@@ -27,3 +27,7 @@
 .dropdown-item {
   text-align: center;
 }
+
+.selected {
+  background-color: #99ddf2;
+}

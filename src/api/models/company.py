@@ -3,26 +3,21 @@ from api.models.db import db
 
 class Company(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-
     name = db.Column(db.String(100),unique=True, nullable=False)
-    cif = db.Column(db.Integer,unique=True, nullable=False)
+    cif = db.Column(db.String(60),unique=True, nullable=False)
     logo = db.Column(db.String(255), unique=True, nullable=True) 
-    description = db.Column(db.String(500), unique=False, nullable=True)
+    description = db.Column(db.String(500), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=False)
     adress = db.Column(db.String(255), unique=True, nullable=False)
     phone = db.Column(db.Integer, unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-
-
-
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User')
 
 
-    def __init__(self, name, cif, logo, description, city, adress, phone, email, user_id):
+    def __init__(self, name, cif, description, city, adress, phone, email, user_id):
         self.name = name
         self.cif = cif
-        self.logo = logo 
         self.description = description
         self.city = city
         self.adress = adress
