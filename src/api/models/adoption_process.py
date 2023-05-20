@@ -25,5 +25,6 @@ class Adoption_process(db.Model):
         "pet_id": self.pet_id,
         "description": self.description,
         "status": self.status,
-
+        "user": self.user.serialize(),
+        "pet": self.pet.serialize()
         }

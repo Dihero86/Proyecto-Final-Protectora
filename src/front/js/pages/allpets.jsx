@@ -106,7 +106,7 @@ export const AllPets = () => {
               <ul className="dropdown-menu">
                 {petCities().map((city) => {
                   return (
-                    <li onClick={filterPets}>
+                    <li key={city} onClick={filterPets}>
                       <button className={select.city == city ? "dropdown-item selected" : "dropdown-item"} name="city" value={city}>{city}</button>
                     </li>
                   );
@@ -125,7 +125,7 @@ export const AllPets = () => {
               <ul className="dropdown-menu">
                 {petTypes().map((type) => {
                   return (
-                    <li onClick={filterPets}>
+                    <li key={type} onClick={filterPets}>
                       <button className={select.type == type ? "dropdown-item selected" : "dropdown-item"} name="type" value={type}>{type}</button>
                     </li>
                   );
@@ -144,7 +144,7 @@ export const AllPets = () => {
               <ul className="dropdown-menu">
                 {petSizes().map((size) => {
                   return (
-                    <li onClick={filterPets}>
+                    <li key={size} onClick={filterPets}>
                       <button className={select.size == size ? "dropdown-item selected" : "dropdown-item"} name="size" value={size}>{size}</button>
                     </li>
                   );
@@ -154,10 +154,7 @@ export const AllPets = () => {
           </div>
         </div>
         <div className="row blue-background">
-          {petFilter.length == 0 ?
-            <h1>No se encontraron resultados</h1> :
-            petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)
-          }
+          {petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)}
         </div>
       </div>
     </div>
