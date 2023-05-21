@@ -12,6 +12,7 @@ export const LoginUser = () => {
     email: "",
     password: "",
   });
+  const [loginerror, setError] = useState(false)
 
   const handleChange = ({ target }) => {
     setUserAccess({ ...userAccess, [target.name]: target.value });
@@ -20,11 +21,16 @@ export const LoginUser = () => {
   const handleSubmbit = async (e) => {
     e.preventDefault();
     const data = await loginUser(userAccess);
-    if (data == "admin" || data == "volunteer") {
-      navigate("/")
+    if (data == undefined) {
+      setError(true)
     }
     else {
-      navigate("/pet_gallery")
+      if (data.rol == "admin" || data.rol == "volunteer") {
+        navigate("/company_dashboard")
+      }
+      else {
+        navigate("/pet_gallery")
+      }
     }
   };
 
@@ -62,7 +68,7 @@ export const LoginUser = () => {
               value={userAccess.password}
               required
             ></input>
-
+            {loginerror ? <p className="errorlogin">Usuario o contraseña no validos</p> : null}
             <button type="submit" value="Enviar" className="btn">Enviar</button>
 
           </form>
