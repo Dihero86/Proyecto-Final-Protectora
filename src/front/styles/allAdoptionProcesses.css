@@ -2,15 +2,9 @@
   background-color: #99ddf2;
   display: flex;
 }
-.adoption-process-list {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
 .adoption-process-item {
   margin: 10px;
+  list-style: none;
 }
 .adoption-process-card {
   flex-wrap: wrap;

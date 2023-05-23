@@ -31,7 +31,10 @@ export const Petcard = ({ pet }) => {
       className="card col-lg-3 m-2 col-sm-10 p-0"
       id="cardpet"
     >
-      <img src={pet.pet_Gallery[0].image_url} className="petimage" />
+      <img
+        src={pet.pet_Gallery[0] ? pet.pet_Gallery[0].image_url : null}
+        className="petimage"
+      />
       <div className="card-body align-bottom">
         <h5 className="card-title">{pet.name}</h5>
         <p className="card-text m-0">Edad: {age(pet.birth_date)}</p>
