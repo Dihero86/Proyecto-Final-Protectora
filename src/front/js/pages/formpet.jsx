@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { createPet } from "../service";
 import "../../styles/formpet.css";
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const FormPet = () => {
   const [file, setFile] = useState([]);
   const [fileUrl, setFileUrl] = useState([]);
   const [max, setMax] = useState(false);
+  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
 
   const [pet, setPet] = useState({
     name: "",
@@ -13,10 +17,11 @@ export const FormPet = () => {
     breed: "",
     type: "",
     size: "",
-    company_id: 4,
+    company_id: store.company.id,
     description: "",
     status: "",
   });
+  console.log(pet)
 
   const handleChange = async ({ target }) => {
     if (target.name == "fotos" && target.files) {
@@ -54,6 +59,7 @@ export const FormPet = () => {
     fotos.map((foto, index) => form.append(`foto${index}`, foto));
     form.append("pet", JSON.stringify(pet));
     await createPet(form);
+    navigate("/company_dashboard");
   };
 
   return (

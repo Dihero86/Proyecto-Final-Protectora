@@ -1,11 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
+
 
 export const Navbar = () => {
+
+  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    localStorage.removeItem("token");
+    actions.deleteCompany();
+    navigate("/");
+  }
+
   return (
     <nav
       className="navbar navbar-dark navbar-expand-lg "
-      style={{ backgroundColor: "#275F70" }}
+      style={{ backgroundColor: "#275F70", height: "8vh" }}
     >
       <div className="container-fluid">
         <Link className="link" to="/">
@@ -28,26 +40,43 @@ export const Navbar = () => {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
-            <a className="nav-link" aria-current="page" href="/companies">
-              Protectoras
-            </a>
-            <a className="nav-link" href="/pet_gallery">
-              Animales en adopción
-            </a>
+            <Link className="link" to="/companies">
+              <p className="nav-link my-0">
+                Protectoras
+              </p>
+            </Link>
+            <Link className="link" to="/pet_gallery">
+              <p className="nav-link my-0">
+                Animales en adopción
+              </p>
+            </Link>
             <a className="nav-link" href="#">
               Colabora
             </a>
-
-            <Link className="link" to="/login_user">
-              <button className="btn">
-
-                Acceder
-              </button>
-            </Link>
+            {Object.keys(store.company).length == 0 ?
+              <Link className="link" to="/login_user">
+                <button className="btn">
+                  Acceder
+                </button>
+              </Link> :
+              <div className="btn-group">
+                <button type="button" className="btn btn-secondary dropdown-toggle my-0" data-bs-toggle="dropdown" aria-expanded="false">
+                  {store.company.name}
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <Link className="link" to="/company_dashboard">
+                      <button className="dropdown-item" type="button">Dashboard</button>
+                    </Link>
+                  </li>
+                  <li><button onClick={handleClick} className="dropdown-item" type="button">Cerrar Sesion</button></li>
+                </ul>
+              </div>
+            }
 
           </div>
         </div>
       </div>
-    </nav>
+    </nav >
   );
 };
