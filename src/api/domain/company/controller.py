@@ -41,5 +41,5 @@ def get_companyid_pets(user):
         return {"msg": "Forbidden", "error": True, "status": 403 }
     company = get_company(volunteer.company_id) #compruebo compañia
     pets = Pet_Controller.get_allpet_company(company.id)
-    return {"pets":pets,"company_id":company.id}
+    return {"pets":pets,"company":company.serialize()}
         

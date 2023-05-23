@@ -21,7 +21,7 @@ export const loginUser = async (user) => {
     });
     const data = await res.json();
     localStorage.setItem("token", data.token);
-    return data.rol
+    return data
   } catch (err) {
     console.log("ERROR LOGIN USER", err);
   }

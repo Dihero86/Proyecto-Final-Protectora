@@ -1,0 +1,32 @@
+.sidebardash {
+  background-color: #496770;
+  height: 100%;
+  color: white;
+}
+
+.dashcontainer {
+  height: 100%;
+}
+
+@media only screen and (max-width: 991px) {
+  .sidebardash {
+    height: auto;
+  }
+  .dashcontainer {
+    height: auto;
+  }
+}
+
+.dashboardtitle {
+  margin: 10px auto;
+}
+
+.sidebartitle {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.sidelink {
+  color: white;
+  text-decoration: none;
+}
