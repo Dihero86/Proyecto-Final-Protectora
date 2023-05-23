@@ -21,6 +21,7 @@ import { Historial } from "./pages/historial.jsx";
 
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
+import { CompanyDashboard } from "./pages/companyDashboard.jsx";
 
 //create your first component
 const Layout = () => {
@@ -51,10 +52,8 @@ const Layout = () => {
               path="/adoption_processes/:company_id"
             />
             <Route element={<Historial />} path="/historial/:pet_id" />
-            <Route
-              element={<FormVolunteer />}
-              path="/register_volunteer/:company_id"
-            />
+            <Route element={<FormVolunteer />} path="/register_volunteer/:company_id" />
+            <Route element={<CompanyDashboard />} path="/company_dashboard" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

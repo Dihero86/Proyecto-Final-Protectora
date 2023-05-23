@@ -14,8 +14,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      company: {}
     },
-    actions: {},
+    actions: {
+      addCompany: (company) => {
+        setStore({ company: company })
+      },
+      deleteCompany: () => {
+        setStore({ company: {} })
+      }
+    },
   };
 };
 

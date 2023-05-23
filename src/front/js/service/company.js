@@ -14,15 +14,6 @@ export const createCompany = async (company, userId) => {
 
     return data;
 
-    console.log(data);
-    setCompany({
-      name: "",
-      cif: "",
-      logo: "",
-      adress: "",
-      description: "",
-      user_id: "",
-    });
   } catch (error) {
     console.log("error register company", error);
   }
@@ -68,3 +59,21 @@ export const addNewUsers = async (data) => {
     console.log(err);
   }
 };
+
+export const companyDash = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${URL}/api/company/dashboard`, {
+      method: ['GET'],
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    const data = await response.json();
+    return data
+
+  }
+  catch {
+
+  }
+}
