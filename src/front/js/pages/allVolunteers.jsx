@@ -27,7 +27,7 @@ export const AllVolunteers = () => {
           <ul className="list">
             {volunteers.map((volunteer) => {
               return (
-                <li key={volunteer.id} className="volunteer-list">
+                <li key={volunteer.id} className="volunteer-item">
                   <div className="volunteer-card my-2 col-10 p-0">
                     <img
                       src={

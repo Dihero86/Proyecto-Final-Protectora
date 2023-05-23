@@ -10,6 +10,7 @@ import { RegisterUser } from "./pages/registerUser.jsx";
 import { LoginUser } from "./pages/loginUser.jsx";
 import { AllCompanies } from "./pages/allCompanies.jsx";
 import { AllVolunteers } from "./pages/allVolunteers.jsx";
+import { AllAdoptionProcesses } from "./pages/allAdoptionProcesses.jsx";
 
 import injectContext from "./store/appContext";
 import { FormCompany } from "./pages/company.jsx";
@@ -46,6 +47,10 @@ const Layout = () => {
             <Route element={<OnePet />} path="/one_pet/:pet_id" />
             <Route element={<AllCompanies />} path="/companies" />
             <Route element={<AllVolunteers />} path="/volunteers/:company_id" />
+            <Route
+              element={<AllAdoptionProcesses />}
+              path="/adoption_processes/:company_id"
+            />
             <Route element={<Historial />} path="/historial/:pet_id" />
             <Route element={<FormVolunteer />} path="/register_volunteer/:company_id" />
             <Route element={<CompanyDashboard />} path="/company_dashboard" />

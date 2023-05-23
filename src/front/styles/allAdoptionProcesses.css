@@ -1,0 +1,46 @@
+.adoption-process-background {
+  background-color: #99ddf2;
+  display: flex;
+}
+.adoption-process-item {
+  margin: 10px;
+  list-style: none;
+}
+.adoption-process-card {
+  flex-wrap: wrap;
+  border-radius: 5px;
+  transition: transform 0.2s;
+  border: solid 5px #42a0bd;
+  background-color: #42a0bd;
+}
+.adoption-process-card:hover {
+  transform: scale(1.4);
+  cursor: pointer;
+}
+.user-avatar {
+  width: 200px;
+  height: 200px;
+}
+.pet-photo {
+  width: 200px;
+  height: 200px;
+}
+.adoption-process-info {
+  background-color: #42a0bd;
+  font-size: 15px;
+}
+.user-full-name {
+  color: #496770;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.user-email {
+  color: #53ccf0;
+}
+.pet-name {
+  color: white;
+}
+
+.adoption-process-status {
+  color: #275f70;
+}

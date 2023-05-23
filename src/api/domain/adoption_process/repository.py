@@ -5,6 +5,11 @@ def get_all_adoption_processes():
     adoption_processes_serializes = list(map(lambda adoption_process : adoption_process.serialize(), adoption_processes))
     return adoption_processes_serializes
 
+def get_all_adoption_processes_by_company(company_id):
+    adoption_processes = Adoption_process.query.filter_by(company_id = company_id)
+    adoption_processes_serializes = list(map(lambda adoption_process : adoption_process.serialize(), adoption_processes))
+    return adoption_processes_serializes
+
 def create_adoption_process(user_id, pet_id, description, status,company_id):
     new_process = Adoption_process(user_id, pet_id, description, status,company_id)
     db.session.add(new_process)

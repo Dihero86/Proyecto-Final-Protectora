@@ -1,7 +1,9 @@
 .blue-background {
   background-color: #99ddf2;
 }
-
+.list {
+  list-style: none;
+}
 .volunteer-card {
   border-radius: 5px;
   transition: transform 0.2s;
