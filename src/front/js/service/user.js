@@ -21,7 +21,7 @@ export const loginUser = async (user) => {
     });
     const data = await res.json();
     localStorage.setItem("token", data.token);
-    return data
+    return data;
   } catch (err) {
     console.log("ERROR LOGIN USER", err);
   }
@@ -54,5 +54,22 @@ export const getAllVolunteers = async (company_id) => {
     return data;
   } catch (err) {
     console.log("ERROR GET ALL VOLUNTEERS OF A COMPANY", err);
+  }
+};
+
+export const getClient = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const res = await fetch(`${URL}/api/user/client`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    console.log("ERROR GET USER", err);
   }
 };
