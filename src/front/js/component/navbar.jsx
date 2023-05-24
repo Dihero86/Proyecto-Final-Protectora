@@ -66,7 +66,7 @@ export const Navbar = () => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <Link className="link" to="/company_dashboard">
-                      <button className="dropdown-item" type="button">Dashboard</button>
+                      <button className="dropdown-item" type="button">Compañía</button>
                     </Link>
                   </li>
                   <li><button onClick={handleClick} className="dropdown-item" type="button">Cerrar Sesion</button></li>
