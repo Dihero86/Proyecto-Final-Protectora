@@ -45,3 +45,9 @@ def create_user_admin():
     result = CompanyUserController.create_user_admin(body)
 
     return jsonify(result), 200
+
+@api.route('/client', methods=['GET'])
+@jwt_required()
+def get_client():
+    user = get_jwt()['sub']
+    return jsonify(user)
