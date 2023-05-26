@@ -22,7 +22,7 @@ export const FormCompany = () => {
     adress: "",
     user_id: "",
   });
-  //duda, el user ID va ser el 1 que es el que hace alusión al Admin?
+
   const handleInputChange = (event) => {
     setCompany({
       ...company,
@@ -32,12 +32,10 @@ export const FormCompany = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user.password, passwordCheck);
     if (user.password == passwordCheck) {
       try {
         const data = await addNewUserAndCompany(user, company);
-        console.log(data);
-        navigate("/petgallery");
+        navigate("/login_user");
       } catch (error) {
         console.log(error);
         alert("Error creating user or company.");

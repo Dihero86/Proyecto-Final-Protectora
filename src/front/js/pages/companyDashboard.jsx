@@ -10,6 +10,7 @@ export const CompanyDashboard = () => {
   const [pets, setPets] = useState([]);
   const [company, setCompany] = useState({});
   const { store, actions } = useContext(Context);
+  console.log(store)
   const navigate = useNavigate();
 
     const getPets = async () => {

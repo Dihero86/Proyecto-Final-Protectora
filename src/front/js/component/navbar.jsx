@@ -7,10 +7,12 @@ export const Navbar = () => {
 
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
+  console.log(store)
 
   const handleClick = () => {
     localStorage.removeItem("token");
     actions.deleteCompany();
+    actions.setUserRol("")
     navigate("/");
   }
 
@@ -53,7 +55,7 @@ export const Navbar = () => {
             <a className="nav-link" href="#">
               Colabora
             </a>
-            {Object.keys(store.company).length == 0 ?
+            {store.userRol=="" ?
               <Link className="link" to="/login_user">
                 <button className="btn">
                   Acceder
@@ -65,9 +67,15 @@ export const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
+                    {store.userRol=="client"?               
+                    <Link className="link" to="/my_profile">
+                      <button className="dropdown-item" type="button">Mi espacio</button>
+                    </Link>:
                     <Link className="link" to="/company_dashboard">
                       <button className="dropdown-item" type="button">Compañía</button>
                     </Link>
+                    } 
+
                   </li>
                   <li><button onClick={handleClick} className="dropdown-item" type="button">Cerrar Sesion</button></li>
                 </ul>
