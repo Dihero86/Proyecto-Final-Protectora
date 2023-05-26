@@ -7,10 +7,10 @@ import { Context } from "../store/appContext";
 import { ModalVolunteer } from "../component/modalVolunteer.jsx";
 
 export const CompanyDashboard = () => {
-    const [pets, setPets] = useState([]);
-    const [company, setCompany] = useState({});
-    const { store, actions } = useContext(Context);
-    const navigate = useNavigate();
+  const [pets, setPets] = useState([]);
+  const [company, setCompany] = useState({});
+  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
 
     const getPets = async () => {
         const data = await companyDash();
@@ -26,9 +26,9 @@ export const CompanyDashboard = () => {
         }
     }
 
-    useEffect(() => {
-        getPets()
-    }, []);
+  useEffect(() => {
+    getPets();
+  }, []);
 
     return (
         <div className="d-flex row dashcontainer">
