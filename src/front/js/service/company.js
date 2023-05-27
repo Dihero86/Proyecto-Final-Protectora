@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { URL } from ".";
 const HEADERS = {
   "Content-Type": "application/json",
@@ -62,6 +63,7 @@ export const addNewUsers = async (data) => {
 
 export const companyDash = async () => {
   try {
+
     const token = localStorage.getItem("token");
     const response = await fetch(`${URL}/api/company/dashboard`, {
       method: ['GET'],
@@ -70,10 +72,10 @@ export const companyDash = async () => {
       }
     })
     const data = await response.json();
+
     return data
-
   }
-  catch {
-
+  catch (err) {
+    console.log("error company dashboard", err)
   }
 }
