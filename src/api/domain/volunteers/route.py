@@ -5,6 +5,9 @@ from api.utils import generate_sitemap, APIException
 import api.domain.volunteers.controller as Controller
 import smtplib
 from email.mime.text import MIMEText
+import os
+
+PASSWORD_MAIL=os.environ.get("EMAIL_APP_PASS")
 
 api = Blueprint('/api/volunteers', __name__)
 
@@ -24,7 +27,7 @@ def sendemail():
         conexion = smtplib.SMTP(host='smtp-mail.outlook.com',port=587)
         conexion.ehlo()
         conexion.starttls()
-        conexion.login(user="petsbookproject@hotmail.com", password="petsbook1")
+        conexion.login(user="petsbookproject@hotmail.com", password=PASSWORD_MAIL)
         conexion.sendmail("petsbookproject@hotmail.com", body["email"],mensaje.as_string())
         conexion.quit()
     return jsonify('sent')

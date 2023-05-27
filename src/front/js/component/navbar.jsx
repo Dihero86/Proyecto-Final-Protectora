@@ -7,7 +7,6 @@ export const Navbar = () => {
 
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
-  console.log(store)
 
   const handleClick = () => {
     localStorage.removeItem("token");
@@ -18,7 +17,7 @@ export const Navbar = () => {
 
   return (
     <nav
-      className="navbar navbar-dark navbar-expand-lg "
+      className="z-3 navbar navbar-dark navbar-expand-lg "
       style={{ backgroundColor: "#275F70", height: "8vh" }}
     >
       <div className="container-fluid">
@@ -38,8 +37,9 @@ export const Navbar = () => {
           <span className="navbar-toggler-icon white"></span>
         </button>
         <div
-          className="collapse navbar-collapse justify-content-end text-white"
+          className="Z-3 collapse navbar-collapse justify-content-end text-white"
           id="navbarNavAltMarkup"
+          style={{backgroundColor:"#275f70"}}
         >
           <div className="navbar-nav">
             <Link className="link" to="/companies">

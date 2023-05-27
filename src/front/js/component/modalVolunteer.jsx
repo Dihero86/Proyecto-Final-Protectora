@@ -2,8 +2,8 @@ import React, {useContext, useState,useEffect} from "react";
 import "../../styles/modalVolunteer.css";
 import { Context } from "../store/appContext";
 import { volunteerinvitation } from "../service/volunteers";
+import { URL } from "../service"; 
 
-const basename = process.env.BASENAME;
 
 export const ModalVolunteer = () => {
 
@@ -21,7 +21,8 @@ export const ModalVolunteer = () => {
 
     const handleClick =async(event)=>{
         event.preventDefault();
-        const defaultMessage= `Hola la asociacion ${store.company.id} quires que te unas como voluntario, para ello utiliza el siguiente enlace:\nhttp://localhost:3000/register_volunteer/${store.company.id}. Mensaje de la compañia: ${msg.message}`;
+        const defaultMessage= `Hola la asociacion ${store.company.name} quires que te unas como voluntario, para ello utiliza el siguiente enlace:\n${URL}/register_volunteer/${store.company.id}. Mensaje de la compañia: ${msg.message}`;
+        
         const resp= await volunteerinvitation(msg.email,defaultMessage);
 
         if (resp===200){
