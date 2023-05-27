@@ -21,10 +21,14 @@ def delete_company(company_id):
     return jsonify(delete_company), 201
 
 @api.route('/company/<int:company_id>', methods=['PUT'])
+@jwt_required()
 def update_company(company_id):
     data = request.get_json()
+    print(data)
+    user = get_jwt()['sub']
+    print("es el user", user)
     update_company = Controller.update_company(company_id, data)
-    return jsonify(update_company), 200
+    return jsonify("update_company"), 200
 
 @api.route('/company/<int:company_id>',methods=['GET'])
 def get_company(company_id):

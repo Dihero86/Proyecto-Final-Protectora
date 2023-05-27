@@ -119,7 +119,7 @@ export const AllAdoptionProcesses = () => {
                   <img
                     src={
                       adoption_process.pet.pet_Gallery[0]
-                        ? adoption_process.pet.pet_Gallery[0]
+                        ? adoption_process.pet.pet_Gallery[0].image_url
                         : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
                     }
                     className="pet-photo"

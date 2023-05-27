@@ -18,8 +18,11 @@ export const FormCompany = () => {
     name: "",
     cif: "",
     logo: "",
-    description: "",
     adress: "",
+    city: "",
+    phone: "",
+    email: "",
+    description: "",
     user_id: "",
   });
   //duda, el user ID va ser el 1 que es el que hace alusión al Admin?
@@ -32,7 +35,6 @@ export const FormCompany = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user.password, passwordCheck);
     if (user.password == passwordCheck) {
       try {
         const data = await addNewUserAndCompany(user, company);
