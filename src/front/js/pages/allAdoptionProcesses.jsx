@@ -9,6 +9,7 @@ export const AllAdoptionProcesses = () => {
   const [select, setSelect] = useState({
     status: "",
   });
+  
   const params = useParams();
 
   const getAdoptionProcesses = async (company_id) => {

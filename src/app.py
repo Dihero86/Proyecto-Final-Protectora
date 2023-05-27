@@ -21,6 +21,7 @@ import api.domain.adoption_process.route as api_adoption_process
 import api.domain.pet_history.route as api_history_pet
 from flask_jwt_extended import JWTManager
 import cloudinary
+import datetime
 
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(
@@ -41,6 +42,7 @@ MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
 app.config["JWT_SECRET_KEY"] = os.environ['JWT_SECRET_KEY']
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(seconds=1200)
 jwt=JWTManager(app)
 
 app.config['CLOUD_NAME'] = os.environ.get('CLOUD_NAME')
