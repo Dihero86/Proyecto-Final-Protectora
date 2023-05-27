@@ -18,8 +18,11 @@ export const FormCompany = () => {
     name: "",
     cif: "",
     logo: "",
-    description: "",
     adress: "",
+    city: "",
+    phone: "",
+    email: "",
+    description: "",
     user_id: "",
   });
 
