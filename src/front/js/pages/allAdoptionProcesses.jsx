@@ -59,18 +59,16 @@ export const AllAdoptionProcesses = () => {
   const handleDescriptionChange = (adoptionProcessId, newDescription) => {
     const updatedProcess = {
       description: newDescription,
-      status: "pending", // Provide the appropriate status value here
+      status: "pending",
     };
 
     setEditedDescription(newDescription);
 
     updateAdoptionProcessDescription(adoptionProcessId, updatedProcess)
       .then((response) => {
-        // Handle success or update UI if needed
         console.log("Description updated successfully:", response);
       })
       .catch((error) => {
-        // Handle error or show error filterProccess
         console.log("Error updating description:", error);
       });
   };
