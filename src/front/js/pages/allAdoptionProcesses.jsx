@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/allAdoptionProcesses.css";
-import { getAllAdoptionProcesses } from "../service/adoption_process.js";
+import {
+  getAllAdoptionProcesses,
+  updateAdoptionProcessDescription,
+} from "../service/adoption_process.js";
 import { useParams } from "react-router-dom";
 
 export const AllAdoptionProcesses = () => {
@@ -54,8 +57,14 @@ export const AllAdoptionProcesses = () => {
   };
 
   const handleDescriptionChange = (adoptionProcessId, newDescription) => {
+    const updatedProcess = {
+      description: newDescription,
+      status: "pending", // Provide the appropriate status value here
+    };
+
     setEditedDescription(newDescription);
-    updateAdoptionProcessDescription(adoptionProcessId, newDescription)
+
+    updateAdoptionProcessDescription(adoptionProcessId, updatedProcess)
       .then((response) => {
         // Handle success or update UI if needed
         console.log("Description updated successfully:", response);
@@ -163,6 +172,12 @@ export const AllAdoptionProcesses = () => {
                     className="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target={`#exampleModal-${adoption_process.id}`}
+                    onClick={() =>
+                      handleDescriptionChange(
+                        adoption_process,
+                        editedDescription
+                      )
+                    }
                   >
                     Editar
                   </button>
@@ -217,6 +232,7 @@ export const AllAdoptionProcesses = () => {
                               );
                               setEditedDescription("");
                             }}
+                            data-bs-dismiss="modal"
                           >
                             Guardar Cambios
                           </button>

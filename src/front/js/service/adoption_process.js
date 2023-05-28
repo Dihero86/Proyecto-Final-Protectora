@@ -22,19 +22,19 @@ export const getAllAdoptionProcesses = async (company_id) => {
 
 export const updateAdoptionProcessDescription = async (
   adoptionProcessId,
-  newDescription
+  updatedProcess
 ) => {
   try {
     const token = localStorage.getItem("token");
     const res = await fetch(
-      `${URL}/api/adoption_process/${adoptionProcessId}`,
+      `${URL}/api/adoption_process/update/${adoptionProcessId}`,
       {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ description: newDescription }),
+        body: JSON.stringify(updatedProcess),
       }
     );
 
