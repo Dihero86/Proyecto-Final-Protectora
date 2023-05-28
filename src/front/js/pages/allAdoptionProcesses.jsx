@@ -9,6 +9,7 @@ export const AllAdoptionProcesses = () => {
   const [select, setSelect] = useState({
     status: "",
   });
+  const [editedDescription, setEditedDescription] = useState("");
   const params = useParams();
 
   const getAdoptionProcesses = async (company_id) => {
@@ -53,6 +54,7 @@ export const AllAdoptionProcesses = () => {
   };
 
   const handleDescriptionChange = (adoptionProcessId, newDescription) => {
+    setEditedDescription(newDescription);
     updateAdoptionProcessDescription(adoptionProcessId, newDescription)
       .then((response) => {
         // Handle success or update UI if needed
@@ -191,14 +193,10 @@ export const AllAdoptionProcesses = () => {
                           <textarea
                             className="form-control"
                             rows="4"
-                            value={adoption_process.description}
-                            onChange={(e) => {
-                              const newDescription = e.target.value;
-                              handleDescriptionChange(
-                                adoption_process.id,
-                                newDescription
-                              );
-                            }}
+                            value={editedDescription}
+                            onChange={(e) =>
+                              setEditedDescription(e.target.value)
+                            }
                           ></textarea>
                         </div>
                         <div className="modal-footer">
@@ -209,7 +207,17 @@ export const AllAdoptionProcesses = () => {
                           >
                             Cerrar
                           </button>
-                          <button type="button" className="btn btn-primary">
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={() => {
+                              handleDescriptionChange(
+                                adoption_process.id,
+                                editedDescription
+                              );
+                              setEditedDescription("");
+                            }}
+                          >
                             Guardar Cambios
                           </button>
                         </div>
