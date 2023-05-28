@@ -67,6 +67,15 @@ export const AllAdoptionProcesses = () => {
     updateAdoptionProcessDescription(adoptionProcessId, updatedProcess)
       .then((response) => {
         console.log("Description updated successfully:", response);
+
+        const updatedProcesses = adoption_processes.map((process) => {
+          if (process.id === adoptionProcessId) {
+            return { ...process, description: newDescription };
+          }
+          return process;
+        });
+        setAdoptionProcesses(updatedProcesses);
+        setFilter(updatedProcesses);
       })
       .catch((error) => {
         console.log("Error updating description:", error);
@@ -204,7 +213,7 @@ export const AllAdoptionProcesses = () => {
                         </div>
                         <div className="modal-body">
                           <div>
-                            <hi>Description</hi>
+                            <hi>Nueva Descripción</hi>
                             <textarea
                               className="form-control"
                               rows="4"
