@@ -70,7 +70,7 @@ export const AllAdoptionProcesses = () => {
         console.log("Description updated successfully:", response);
       })
       .catch((error) => {
-        // Handle error or show error message
+        // Handle error or show error filterProccess
         console.log("Error updating description:", error);
       });
   };
@@ -205,14 +205,32 @@ export const AllAdoptionProcesses = () => {
                           ></button>
                         </div>
                         <div className="modal-body">
-                          <textarea
-                            className="form-control"
-                            rows="4"
-                            value={editedDescription}
-                            onChange={(e) =>
-                              setEditedDescription(e.target.value)
-                            }
-                          ></textarea>
+                          <div>
+                            <hi>Description</hi>
+                            <textarea
+                              className="form-control"
+                              rows="4"
+                              value={editedDescription}
+                              onChange={(e) =>
+                                setEditedDescription(e.target.value)
+                              }
+                            ></textarea>
+                          </div>
+                          <div>
+                            <select
+                              className="form-select"
+                              value={select.status}
+                              onChange={filterAdoptionProcesses}
+                              name="status"
+                            >
+                              <option value="">Selecciona el estado</option>
+                              {adoptionProcessStatus().map((status) => (
+                                <option key={status} value={status}>
+                                  {status}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
                         </div>
                         <div className="modal-footer">
                           <button
