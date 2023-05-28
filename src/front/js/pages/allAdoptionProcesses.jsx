@@ -160,15 +160,15 @@ export const AllAdoptionProcesses = () => {
                     type="button"
                     className="btn btn-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    data-bs-target={`#exampleModal-${adoption_process.id}`}
                   >
                     Editar
                   </button>
                   <div
                     className="modal fade"
-                    id="exampleModal"
+                    id={`exampleModal-${adoption_process.id}`}
                     tabIndex="-1"
-                    aria-labelledby="exampleModalLabel"
+                    aria-labelledby={`exampleModalLabel-${adoption_process.id}`}
                     aria-hidden="true"
                   >
                     <div className="modal-dialog">
@@ -176,7 +176,7 @@ export const AllAdoptionProcesses = () => {
                         <div className="modal-header">
                           <h1
                             className="modal-title fs-5"
-                            id="exampleModalLabel"
+                            id={`exampleModalLabel-${adoption_process.id}`}
                           >
                             Edita el proceso de adopción
                           </h1>
