@@ -52,6 +52,18 @@ export const AllAdoptionProcesses = () => {
     return [...listStatus];
   };
 
+  const handleDescriptionChange = (adoptionProcessId, newDescription) => {
+    updateAdoptionProcessDescription(adoptionProcessId, newDescription)
+      .then((response) => {
+        // Handle success or update UI if needed
+        console.log("Description updated successfully:", response);
+      })
+      .catch((error) => {
+        // Handle error or show error message
+        console.log("Error updating description:", error);
+      });
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -175,7 +187,20 @@ export const AllAdoptionProcesses = () => {
                             aria-label="Close"
                           ></button>
                         </div>
-                        <div className="modal-body">...</div>
+                        <div className="modal-body">
+                          <textarea
+                            className="form-control"
+                            rows="4"
+                            value={adoption_process.description}
+                            onChange={(e) => {
+                              const newDescription = e.target.value;
+                              handleDescriptionChange(
+                                adoption_process.id,
+                                newDescription
+                              );
+                            }}
+                          ></textarea>
+                        </div>
                         <div className="modal-footer">
                           <button
                             type="button"
