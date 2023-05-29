@@ -33,8 +33,11 @@ def update_company(data, company_id):
     company.name = data.get('name')
     company.CIF = data.get('cif')
     company.logo = data.get('logo')
-    company.description = data.get('description')
     company.address = data.get('adress')
+    company.city = data.get('city')
+    company.phone = data.get('phone')
+    company.email = data.get ('email')
+    company.description = data.get('description')
     db.session.commit()
     return company.serialize(), 200
 

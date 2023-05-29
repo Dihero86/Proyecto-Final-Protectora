@@ -4,60 +4,72 @@ import { companyDash } from "../service";
 import "../../styles/companyDashboard.css";
 import { Petcard } from "../component/petcard.jsx";
 import { Context } from "../store/appContext";
+import { ModalVolunteer } from "../component/modalVolunteer.jsx";
 
 export const CompanyDashboard = () => {
-    const [pets, setPets] = useState([]);
-    const [company, setCompany] = useState({});
-    const { store, actions } = useContext(Context);
+  const [pets, setPets] = useState([]);
+  const [company, setCompany] = useState({});
+  const { store, actions } = useContext(Context);
+ 
+  const navigate = useNavigate();
 
     const getPets = async () => {
         const data = await companyDash();
-        setPets(data.pets);
-        setCompany(data.company)
-        actions.addCompany(data.company)
+        if (data.hasOwnProperty("msg")) {
+            localStorage.removeItem("token");
+            actions.deleteCompany();
+            navigate("/login_user")
+        }
+        else {
+            setPets(data.pets);
+            setCompany(data.company)
+            actions.addCompany(data.company)
+        }
     }
 
-    useEffect(() => {
-        getPets()
-    }, []);
+  useEffect(() => {
+    getPets();
+  }, []);
 
     return (
         <div className="d-flex row dashcontainer">
 
-            <div class="col-lg-2 flex-shrink-0 p-3 sidebardash" >
-                <ul class="list-unstyled ps-0">
-                    <li class="mb-1">
-                        <p class="sidebartitle" >
+            <div className="col-lg-2 flex-shrink-0 p-3 sidebardash" >
+                <ul className="list-unstyled ps-0">
+                    <li className="mb-1">
+                        <p className="sidebartitle" >
                             {company.name}
                         </p>
                     </li>
                     <hr></hr>
-                    <li class="mb-1">
-                        <p class="sidebartext" >
+                    <li className="mb-1">
+                        <p className="sidebartext" >
                             Editar datos empresa
                         </p>
                     </li>
                     <Link className="sidelink" to="/create_pet">
-                        <li class="mb-1">
-                            <p class="sidebartext" >
+                        <li className="mb-1">
+                            <p className="sidebartext" >
                                 Agregar una mascota
                             </p>
                         </li>
                     </Link>
-                    <li class="mb-1">
-                        <p class="sidebartext" >
-                            Procesos de Adopción
-                        </p>
-                    </li>
-                    <li class="mb-1">
-                        <p class="sidebartext" >
+                    <Link className="sidelink" to={`/adoption_processes/${company.id}`}>
+                        <li className="mb-1">
+                            <p className="sidebartext" >
+                                Procesos de Adopción
+                            </p>
+                        </li>
+                    </Link>
+
+                    <li className="mb-1">
+                        <ModalVolunteer />
+                        <p className="sidebartext" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
                             Invitar a un Voluntario
                         </p>
                     </li>
                 </ul>
             </div>
-
-
 
             <div className="col-lg-10 col-sm-12 px-5">
 

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { loginUser } from "../service/user";
 import dog2Image from "../../img/dog2.png";
 import "../../styles/loginUser.css";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const LoginUser = () => {
 
   const navigate = useNavigate();
+  const {store,actions}=useContext(Context)
 
   const [userAccess, setUserAccess] = useState({
     email: "",
@@ -26,10 +28,12 @@ export const LoginUser = () => {
     }
     else {
       if (data.rol == "admin" || data.rol == "volunteer") {
+        actions.setUserRol(data.rol)
         navigate("/company_dashboard")
       }
       else {
-        navigate("/pet_gallery")
+        actions.setUserRol(data.rol)
+        navigate("/my_profile")
       }
     }
   };

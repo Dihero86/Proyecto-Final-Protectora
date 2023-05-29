@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { createPet } from "../service";
 import "../../styles/formpet.css";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const FormPet = () => {
   const [file, setFile] = useState([]);
@@ -21,7 +21,6 @@ export const FormPet = () => {
     description: "",
     status: "",
   });
-  console.log(pet)
 
   const handleChange = async ({ target }) => {
     if (target.name == "fotos" && target.files) {
@@ -170,9 +169,16 @@ export const FormPet = () => {
         </div>
 
         <div className="col-12">
-          <button className="btn text-white" type="submit" disabled={max}>
-            CREAR
+          <button className="btn text-white mx-1" type="submit" disabled={max}>
+            Crear
           </button>
+          <Link className="link" to="/company_dashboard">
+            <button className="btn text-white mx-1">
+              Volver
+            </button>
+
+          </Link>
+
         </div>
       </form>
     </div>

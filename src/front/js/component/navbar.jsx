@@ -11,12 +11,13 @@ export const Navbar = () => {
   const handleClick = () => {
     localStorage.removeItem("token");
     actions.deleteCompany();
+    actions.setUserRol("")
     navigate("/");
   }
 
   return (
     <nav
-      className="navbar navbar-dark navbar-expand-lg "
+      className="z-3 navbar navbar-dark navbar-expand-lg "
       style={{ backgroundColor: "#275F70", height: "8vh" }}
     >
       <div className="container-fluid">
@@ -36,8 +37,9 @@ export const Navbar = () => {
           <span className="navbar-toggler-icon white"></span>
         </button>
         <div
-          className="collapse navbar-collapse justify-content-end text-white"
+          className="Z-3 collapse navbar-collapse justify-content-end text-white"
           id="navbarNavAltMarkup"
+          style={{backgroundColor:"#275f70"}}
         >
           <div className="navbar-nav">
             <Link className="link" to="/companies">
@@ -53,7 +55,7 @@ export const Navbar = () => {
             <a className="nav-link" href="#">
               Colabora
             </a>
-            {Object.keys(store.company).length == 0 ?
+            {store.userRol=="" ?
               <Link className="link" to="/login_user">
                 <button className="btn">
                   Acceder
@@ -65,9 +67,15 @@ export const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
+                    {store.userRol=="client"?               
+                    <Link className="link" to="/my_profile">
+                      <button className="dropdown-item" type="button">Mi espacio</button>
+                    </Link>:
                     <Link className="link" to="/company_dashboard">
-                      <button className="dropdown-item" type="button">Dashboard</button>
+                      <button className="dropdown-item" type="button">Compañía</button>
                     </Link>
+                    } 
+
                   </li>
                   <li><button onClick={handleClick} className="dropdown-item" type="button">Cerrar Sesion</button></li>
                 </ul>

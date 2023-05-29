@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      company: {}
+      company: {},
+      userRol: ""
     },
     actions: {
       addCompany: (company) => {
@@ -22,6 +23,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       deleteCompany: () => {
         setStore({ company: {} })
+      },
+      setUserRol:(rol)=>{
+        setStore({userRol:rol})
       }
     },
   };

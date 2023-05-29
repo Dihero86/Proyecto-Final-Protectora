@@ -11,9 +11,11 @@ import { LoginUser } from "./pages/loginUser.jsx";
 import { AllCompanies } from "./pages/allCompanies.jsx";
 import { AllVolunteers } from "./pages/allVolunteers.jsx";
 import { AllAdoptionProcesses } from "./pages/allAdoptionProcesses.jsx";
+import { AllUserAdoptionProcesses } from "./pages/allUserAdoptionProcesses.jsx";
 
 import injectContext from "./store/appContext";
 import { FormCompany } from "./pages/company.jsx";
+import { EditCompany } from "./pages/editCompany.jsx";
 import { FormVolunteer } from "./pages/formvolunteer.jsx";
 import { AllPets } from "./pages/allpets.jsx";
 import { OnePet } from "./pages/onePet.jsx";
@@ -40,6 +42,7 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<FormCompany />} path="/createcompany" />
+            <Route element={<EditCompany />} path="/edit_company/:company_id" />
             <Route element={<AllPets />} path="/pet_gallery" />
             <Route element={<FormPet />} path="/create_pet" />
             <Route element={<RegisterUser />} path="/register_user" />
@@ -51,8 +54,12 @@ const Layout = () => {
               element={<AllAdoptionProcesses />}
               path="/adoption_processes/:company_id"
             />
+            <Route element={<AllUserAdoptionProcesses />} path="/my_profile" />
             <Route element={<Historial />} path="/historial/:pet_id" />
-            <Route element={<FormVolunteer />} path="/register_volunteer/:company_id" />
+            <Route
+              element={<FormVolunteer />}
+              path="/register_volunteer/:company_id"
+            />
             <Route element={<CompanyDashboard />} path="/company_dashboard" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
