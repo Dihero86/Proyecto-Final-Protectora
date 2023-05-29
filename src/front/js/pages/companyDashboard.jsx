@@ -7,11 +7,11 @@ import { Context } from "../store/appContext";
 import { ModalVolunteer } from "../component/modalVolunteer.jsx";
 
 export const CompanyDashboard = () => {
-  const [pets, setPets] = useState([]);
-  const [company, setCompany] = useState({});
-  const { store, actions } = useContext(Context);
- 
-  const navigate = useNavigate();
+    const [pets, setPets] = useState([]);
+    const [company, setCompany] = useState({});
+    const { store, actions } = useContext(Context);
+
+    const navigate = useNavigate();
 
     const getPets = async () => {
         const data = await companyDash();
@@ -27,9 +27,9 @@ export const CompanyDashboard = () => {
         }
     }
 
-  useEffect(() => {
-    getPets();
-  }, []);
+    useEffect(() => {
+        getPets();
+    }, []);
 
     return (
         <div className="d-flex row dashcontainer">
@@ -41,12 +41,24 @@ export const CompanyDashboard = () => {
                             {company.name}
                         </p>
                     </li>
-                    <hr></hr>
-                    <li className="mb-1">
-                        <p className="sidebartext" >
-                            Editar datos empresa
-                        </p>
+                    <li className="mb-1 list-item">
+                        <img
+                            src={
+                                company.logo
+                                    ? company.logo
+                                    : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                            }
+                            width={"100 %"}
+                        />
                     </li>
+                    <hr></hr>
+                    <Link className="sidelink" to="/edit_company">
+                        <li className="mb-1">
+                            <p className="sidebartext" >
+                                Editar datos empresa
+                            </p>
+                        </li>
+                    </Link>
                     <Link className="sidelink" to="/create_pet">
                         <li className="mb-1">
                             <p className="sidebartext" >

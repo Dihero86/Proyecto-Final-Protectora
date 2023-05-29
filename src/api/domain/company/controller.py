@@ -2,6 +2,8 @@ from api.models.index import db, Company, CompanyVolunteers
 import api.domain.company.repository as Repository
 import api.domain.volunteers.controller as Volunteer_Controller
 import api.domain.pet.controller as Pet_Controller
+import json
+from cloudinary.uploader import upload
 
 def get_all_companies(data):
     if len(data) == 0:
@@ -22,11 +24,20 @@ def delete_company(company_id):
     Repository.delete_company(company_id)
     return {'message': 'Compañiía borrada satisfactoriamente'}, 204
 
-def update_company(company_id, data):
+def update_company(company_id, data, user,foto):
+    volunteer = Volunteer_Controller.get_volunteer(user["id"])
+    if not isinstance(volunteer, CompanyVolunteers): #compruebo que existe el voluntario
+        return {"msg": "Forbidden", "error": True, "status": 403 }
     company = Company.query.get(company_id)
     if not company:
         return {'error': 'Company not found'}, 404
-    Repository.update_company(data, company_id)
+    datajson= json.loads(data)  
+    print(datajson)
+    url_logo=datajson["logo"]
+    if foto!="":    
+        logo= upload(foto)
+        url_logo=logo["secure_url"]
+    update= Repository.update_company(datajson, company_id,url_logo)
     return {'message': 'Company updated successfully'}, 200
 
 def get_company(company_id):
