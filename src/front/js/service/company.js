@@ -83,10 +83,9 @@ export const editCompany = async (company, company_id) => {
     const response = await fetch(`${URL}/api/company/${company_id}`, {
       method: ["PUT"],
       headers: {
-        ...HEADERS,
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(company),
+      body: company,
     });
     const data = await response.json();
     return data;
