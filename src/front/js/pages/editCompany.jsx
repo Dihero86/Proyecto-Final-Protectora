@@ -1,51 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { editCompany, getOneCompany } from "../service/company.js";
 import { useParams, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const EditCompany = () => {
+
+  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+  const [file, setFile] = useState("");
+  const [fileUrl, setFileUrl] = useState("");
+
   const [company, setCompany] = useState({
-    name: "",
-    cif: "",
-    address: "",
-    city: "",
-    phone: "",
-    email: "",
-    description: "",
+    name: store.company.name,
+    cif: store.company.cif,
+    adress: store.company.adress,
+    logo: store.company.logo,
+    city: store.company.city,
+    phone: store.company.phone,
+    email: store.company.email,
+    description: store.company.description,
   });
 
-  const params = useParams();
-
-  useEffect(() => {
-    const fetchCompany = async () => {
-      try {
-        const company = await getOneCompany(params.company_id);
-        setCompany(company);
-      } catch (err) {
-        console.log(err);
-      }
+  const handleInputChange = ({ target }) => {
+    if (target.name == "logo" && target.files) {
+      setFile(target.files[0]);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (reader.readyState === 2) {
+          setFileUrl(reader.result);
+        }
+      };
+      reader.readAsDataURL(target.files[0]);
+    }
+    if (target.name != "logo") {
+      setCompany({ ...company, [target.name]: target.value });
     };
-    fetchCompany();
-  }, []);
-
-  const handleInputChange = (event) => {
-    setCompany({
-      ...company,
-      [event.target.name]: event.target.value,
-    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await editCompany(company, company.id);
-      console.log(data);
-      navigate("/company_dashboard");
-    } catch (error) {
-      console.log(error);
-    }
+    const form = new FormData();
+    form.append("img", file)
+    form.append("company", JSON.stringify(company));
+    await editCompany(form, store.company.id);
+
+    //navigate("/company_dashboard");
+
   };
 
-  console.log("es la company", company);
   return (
     <div className="container-fluid p-4 ">
       <h2 className="p-4">Editar datos de la compañía</h2>
@@ -68,7 +70,6 @@ export const EditCompany = () => {
             placeholder="Añade el Nombre"
             name="name"
             value={company.name}
-            onChange={handleInputChange}
           />
         </div>
         <div className="col-5 text-start">
@@ -85,7 +86,6 @@ export const EditCompany = () => {
             placeholder="Introduce el CIF"
             name="cif"
             value={company.cif}
-            onChange={handleInputChange}
           />
         </div>
         <div className="col-5 text-start">
@@ -99,7 +99,6 @@ export const EditCompany = () => {
             placeholder="Introduce tu dirección"
             name="adress"
             value={company.adress}
-            onChange={handleInputChange}
           />
         </div>
         <div className="col-5 text-start">
@@ -113,7 +112,6 @@ export const EditCompany = () => {
             placeholder="Introduce tu dirección"
             name="city"
             value={company.city}
-            onChange={handleInputChange}
           />
         </div>
         <div className="col-5 text-start">
@@ -128,7 +126,6 @@ export const EditCompany = () => {
             placeholder="Introduce tu número de teléfono"
             name="phone"
             value={company.phone}
-            onChange={handleInputChange}
           />
         </div>
         <div className="col-5 text-start">
@@ -142,7 +139,6 @@ export const EditCompany = () => {
             placeholder="Introduce tu dirección de correo electrónico"
             name="email"
             value={company.email}
-            onChange={handleInputChange}
           />
         </div>
         <div className="col-md-5 text-start">
@@ -169,13 +165,15 @@ export const EditCompany = () => {
               id="file-upload"
               type="file"
               className="form-control"
-              name="fotos"
+              name="logo"
               placeholder="hola"
               style={{ display: "none" }}
               multiple
             />
           </div>
-          <div className="fotos"></div>
+          <div className="fotos">
+            <img src={file ? fileUrl : company.logo} style={{ width: "200px" }} />
+          </div>
         </div>
         <div>
           <button type="submit" className="col-md-2 mt-5">
