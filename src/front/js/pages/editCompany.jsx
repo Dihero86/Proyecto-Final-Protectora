@@ -43,8 +43,7 @@ export const EditCompany = () => {
     form.append("img", file)
     form.append("company", JSON.stringify(company));
     await editCompany(form, store.company.id);
-
-    //navigate("/company_dashboard");
+    navigate("/company_dashboard");
 
   };
 
