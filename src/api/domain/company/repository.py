@@ -13,8 +13,6 @@ def new_company(data):
     db.session.commit()
     return new_company
 
-
-
 def delete_company(company_id):
     company = Company.query.get(company_id)
     db.session.delete(company)
@@ -22,19 +20,20 @@ def delete_company(company_id):
     return "Company borrada satisfactoriamente.",201
 
 
-
-def update_company(data, company_id):
-    print(data)
+def update_company(data, company_id,url_logo):
     if not isinstance(data, dict):
         return {'error': 'Formato inválido'}, 400
     company = Company.query.get(company_id)
     if not company:
         return {'error': 'Company not found'}, 404
     company.name = data.get('name')
-    company.CIF = data.get('cif')
-    company.logo = data.get('logo')
+    company.cif = data.get('cif')
+    company.logo = url_logo
+    company.adress = data.get('adress')
+    company.city = data.get('city')
+    company.phone = data.get('phone')
+    company.email = data.get ('email')
     company.description = data.get('description')
-    company.address = data.get('adress')
     db.session.commit()
     return company.serialize(), 200
 

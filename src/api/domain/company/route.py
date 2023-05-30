@@ -21,10 +21,20 @@ def delete_company(company_id):
     return jsonify(delete_company), 201
 
 @api.route('/company/<int:company_id>', methods=['PUT'])
+@jwt_required()
 def update_company(company_id):
-    data = request.get_json()
-    update_company = Controller.update_company(company_id, data)
-    return jsonify(update_company), 200
+    try:
+        body = request.form.to_dict()
+        if "img" in body:
+            foto=""
+        else:
+            foto = request.files["img"]
+        user = get_jwt()["sub"]
+        company = Controller.update_company(company_id, body["company"], user,foto)
+        return jsonify("ya"), 200
+    except Exception as error:
+        return jsonify("error interno"),500
+   
 
 @api.route('/company/<int:company_id>',methods=['GET'])
 def get_company(company_id):

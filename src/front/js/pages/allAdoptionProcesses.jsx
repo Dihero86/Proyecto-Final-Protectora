@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/allAdoptionProcesses.css";
-import { getAllAdoptionProcesses } from "../service/adoption_process.js";
+import {
+  getAllAdoptionProcesses,
+  updateAdoptionProcessDescription,
+} from "../service/adoption_process.js";
 import { useParams } from "react-router-dom";
 
 export const AllAdoptionProcesses = () => {
@@ -10,6 +13,7 @@ export const AllAdoptionProcesses = () => {
     status: "",
   });
   
+  const [editedDescription, setEditedDescription] = useState("");
   const params = useParams();
 
   const getAdoptionProcesses = async (company_id) => {
@@ -51,6 +55,32 @@ export const AllAdoptionProcesses = () => {
     const listStatus = new Set(status);
     console.log("list status", listStatus);
     return [...listStatus];
+  };
+
+  const handleDescriptionChange = (adoptionProcessId, newDescription) => {
+    const updatedProcess = {
+      description: newDescription,
+      status: "pending",
+    };
+
+    setEditedDescription(newDescription);
+
+    updateAdoptionProcessDescription(adoptionProcessId, updatedProcess)
+      .then((response) => {
+        console.log("Description updated successfully:", response);
+
+        const updatedProcesses = adoption_processes.map((process) => {
+          if (process.id === adoptionProcessId) {
+            return { ...process, description: newDescription };
+          }
+          return process;
+        });
+        setAdoptionProcesses(updatedProcesses);
+        setFilter(updatedProcesses);
+      })
+      .catch((error) => {
+        console.log("Error updating description:", error);
+      });
   };
 
   return (
@@ -142,6 +172,99 @@ export const AllAdoptionProcesses = () => {
                     <p className="card-text m-0 adoption-process-status">
                       {adoption_process.status}
                     </p>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target={`#exampleModal-${adoption_process.id}`}
+                    onClick={() =>
+                      handleDescriptionChange(
+                        adoption_process,
+                        editedDescription
+                      )
+                    }
+                  >
+                    Editar
+                  </button>
+                  <div
+                    className="modal fade"
+                    id={`exampleModal-${adoption_process.id}`}
+                    tabIndex="-1"
+                    aria-labelledby={`exampleModalLabel-${adoption_process.id}`}
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h1
+                            className="modal-title fs-5"
+                            id={`exampleModalLabel-${adoption_process.id}`}
+                          >
+                            Edita el proceso de adopción
+                          </h1>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          <div>
+                            <hi>Nueva Descripción</hi>
+                            <textarea
+                              className="form-control"
+                              rows="4"
+                              value={editedDescription}
+                              onChange={(e) =>
+                                setEditedDescription(e.target.value)
+                              }
+                            ></textarea>
+                          </div>
+                          <div>
+                            <select
+                              className="form-select"
+                              value={select.status}
+                              onChange={filterAdoptionProcesses}
+                              name="status"
+                            >
+                              <option value="">Selecciona el estado</option>
+                              {adoptionProcessStatus().map((status) => (
+                                <option key={status} value={status}>
+                                  {status}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Cerrar
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={() => {
+                              handleDescriptionChange(
+                                adoption_process.id,
+                                editedDescription
+                              );
+                              setEditedDescription("");
+                            }}
+                            data-bs-dismiss="modal"
+                          >
+                            Guardar Cambios
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </li>

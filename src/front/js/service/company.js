@@ -14,7 +14,6 @@ export const createCompany = async (company, userId) => {
     const data = await response.json();
 
     return data;
-
   } catch (error) {
     console.log("error register company", error);
   }
@@ -31,7 +30,6 @@ export const getAllCompanies = async () => {
     console.log("ERROR GET ALL COMPANIES", err);
   }
 };
-
 
 export const getOneCompany = async (company_id) => {
   try {
@@ -66,16 +64,32 @@ export const companyDash = async () => {
 
     const token = localStorage.getItem("token");
     const response = await fetch(`${URL}/api/company/dashboard`, {
-      method: ['GET'],
+      method: ["GET"],
       headers: {
         Authorization: `Bearer ${token}`,
-      }
-    })
+      },
+    });
     const data = await response.json();
 
-    return data
+    return data;
+  } catch (err) {
+    console.log(err);
   }
-  catch (err) {
-    console.log("error company dashboard", err)
+};
+
+export const editCompany = async (company, company_id) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${URL}/api/company/${company_id}`, {
+      method: ["PUT"],
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: company,
+    });
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
   }
-}
+};

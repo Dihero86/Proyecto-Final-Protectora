@@ -22,7 +22,7 @@ def create_adoption_process(body, user, pet_id):
         return {"msg": "Bad Request: Esta mascota ya tiene un proceso de adopción abierto", "error": True, "status": 404 }
     company_id = pet.company_id
     Repository.create_adoption_process(user['id'], pet_id, body['description'], 'pending', company_id)
-    return "el proceso de adopción se creó correctramente"
+    return {"msg":"el proceso de adopción se creó correctramente","status":200}
 
 
 def delete_adoption_process(adoption_process, volunteer):
@@ -44,17 +44,17 @@ def update_adoption_process(data, adoption_process_id):
     adoption_process = Repository.get_adoption_process(adoption_process_id)
 
     if not isinstance(adoption_process, Adoption_process):
-        return {"msg": "Bad Request: Adoption Process not Found", "error": True, "status": 404}
+         return {"msg": "Bad Request: Adoption Process not Found", "error": True, "status": 404}
 
     pet = PetController.get_one_pet(adoption_process.pet_id)
 
     if not isinstance(pet, Pet):
-        return {"msg": "Bad Request: Pet not Found", "error": True, "status": 404}
+         return {"msg": "Bad Request: Pet not Found", "error": True, "status": 404}
 
     company = CompanyController.get_company_by_id(pet.company_id)
 
     if not isinstance(company, Company):
-        return {"msg": "Bad Request: Company not Found", "error": True, "status": 404}
+         return {"msg": "Bad Request: Company not Found", "error": True, "status": 404}
 
     Repository.update_adoption_process(data, adoption_process_id)
 
