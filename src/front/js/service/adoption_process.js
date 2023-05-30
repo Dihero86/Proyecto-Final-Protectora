@@ -43,6 +43,9 @@ export const updateAdoptionProcessDescription = async (
     return data;
   } catch (err) {
     console.log("ERROR UPDATING ADOPTION PROCESS DESCRIPTION", err);
+  }
+}
+
 
 export const getAllUserAdoptionProcesses = async (user_id) => {
   try {
