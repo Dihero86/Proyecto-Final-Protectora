@@ -1,6 +1,6 @@
 import api.domain.pet.repository as Repository
 from cloudinary.uploader import upload
-from api.models.index import Status, Company, CompanyVolunteers
+from api.models.index import Status, Company, CompanyVolunteers, Pet
 import api.domain.company.controller as Company_contoller
 import json
 import api.domain.volunteers.controller as Volunteer_controller
@@ -46,3 +46,12 @@ def get_one_pet(id):
 
 def get_allpet_company(id):   
     return Repository.get_allpet_company(id)
+
+def update_pet(pet_id, data):
+    pet = Pet.query.get(pet_id)
+    status= Status.query.filter_by(type=data["status"]).first()
+    data['status_id'] = status.id
+    if not pet:
+        return {'error': 'Pet not found'}, 404
+    Repository.update_pet(data, pet_id)
+    return {'message': 'Pet updated successfully'}, 200

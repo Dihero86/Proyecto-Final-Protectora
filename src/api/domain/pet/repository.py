@@ -26,3 +26,20 @@ def add_url_to_pet_gallery(image_url,pet_id):
     db.session.add(new_photo)
     db.session.commit()
     return new_photo
+
+def update_pet(data, pet_id):
+    print(data)
+    if not isinstance(data, dict):
+        return {'error': 'Formato inválido'}, 400
+    pet = Pet.query.get(pet_id)
+    if not pet:
+        return {'error': 'Pet not found'}, 404
+    pet.type = data.get('type')
+    pet.name = data.get('name')
+    pet.birth_date = data.get('birth_date')
+    pet.breed = data.get('breed')
+    pet.size = data.get('size')
+    pet.description = data.get('description')
+    pet.status_id = data.get ('status_id')
+    db.session.commit()
+    return pet.serialize(), 200
