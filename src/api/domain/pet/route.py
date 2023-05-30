@@ -33,7 +33,17 @@ def get_one_pet(pet_id):
         return jsonify(one_pet.serialize()),200
     return jsonify(one_pet),one_pet["status"]
 
-@api.route('/company/<int:company_id>', methods=['GET']) #get una mascota
+@api.route('/company/<int:company_id>', methods=['GET']) #get todas las mascotas de una compañia
 def get_allpet_company(company_id):
     all_pets = Controller.get_allpet_company(company_id)
     return jsonify(all_pets),200
+
+@api.route('/<int:pet_id>', methods=['PUT'])
+@jwt_required()
+def update_pet(pet_id):
+    data = request.get_json()
+    print(data)
+    user = get_jwt()['sub']
+    print("es el user", user)
+    update_pet = Controller.update_pet(pet_id, data)
+    return jsonify("update_pet"), 200

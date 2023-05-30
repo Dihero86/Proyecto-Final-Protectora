@@ -233,18 +233,19 @@ export const FormCompany = () => {
               value={company.email}
             />
           </div>
-          <div className="col-md-4 text-start">
-            <label htmlFor="exampleFormControlInput1" className="form-label">
-              Descripción
-            </label>
-            <textarea
-              className="form-control"
-              id="message-text"
-              style={{ resize: "none" }}
+          <div className="col-md-5 text-start">
+            <label className="form-label">Descripción</label>
+            <select
+              className="form-select"
+              id="description"
               name="description"
-              onChange={handleInputChange}
-              value={company.description}
-            ></textarea>
+              required
+            >
+              <option defaultValue={{}}>Selecciona una opción</option>
+              <option>Protectora</option>
+              <option>Asociación Animalista</option>
+              <option>Refugio</option>
+            </select>
           </div>
         </div>
         <button type="submit" className="mt-5" onClick={handleSubmit}>

@@ -52,3 +52,21 @@ export const startAdoptionProcess = async (body, pet_id) => {
     console.log("Error getting items: ", error);
   }
 };
+
+export const editPet = async (pet, pet_id) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${URL}/api/pet/${pet_id}`, {
+      method: ["PUT"],
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(pet),
+    });
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -1,71 +1,60 @@
-import React, { useState, useContext } from "react";
-import { createPet } from "../service";
-import "../../styles/formpet.css";
-import { Context } from "../store/appContext";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { getOnePet, editPet } from "../service/petgallery.js";
+import { useParams, useNavigate } from "react-router-dom";
 
-export const FormPet = () => {
-  const [file, setFile] = useState([]);
-  const [fileUrl, setFileUrl] = useState([]);
-  const [max, setMax] = useState(false);
-  const { store, actions } = useContext(Context);
-  const navigate = useNavigate();
-
+export const EditPet = () => {
+  const params = useParams();
   const [pet, setPet] = useState({
+    type: "",
     name: "",
     birth_date: "",
     breed: "",
-    type: "",
     size: "",
-    company_id: store.company.id,
     description: "",
     status: "",
+    pet_Gallery: [],
   });
 
-  const handleChange = async ({ target }) => {
-    if (target.name == "fotos" && target.files) {
-      if (target.files.length > 5) {
-        setMax(true);
-      } else {
-        setMax(false);
-        setFile(target.files);
-        const keyFiles = Object.keys(target.files);
-        Promise.all(
-          keyFiles.map((key) => readAsDataURL(target.files[key]))
-        ).then((urls) => setFileUrl(urls));
-      }
-    }
-    if (target.name != "fotos") {
-      setPet({ ...pet, [target.name]: target.value });
-    }
-  };
+  console.log("es el pet", pet);
 
-  const readAsDataURL = (file) => {
-    return new Promise((resolve, reject) => {
-      const fr = new FileReader();
-      fr.onerror = reject;
-      fr.onload = function () {
-        resolve(fr.result);
-      };
-      fr.readAsDataURL(file);
+  useEffect(() => {
+    const fetchPet = async () => {
+      try {
+        const pet = await getOnePet(params.pet_id);
+        setPet(pet);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPet();
+  }, []);
+
+  const handleInputChange = (event) => {
+    setPet({
+      ...pet,
+      [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const fotos = [...file];
-    const form = new FormData();
-    fotos.map((foto, index) => form.append(`foto${index}`, foto));
-    form.append("pet", JSON.stringify(pet));
-    await createPet(form);
-    navigate("/company_dashboard");
+    try {
+      const data = await editPet(pet, pet.id);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="container mt-3">
-      <h2>Agregar Mascota</h2>
+      <h2>Editar Mascota</h2>
 
-      <form className="row g-3" onChange={handleChange} onSubmit={handleSubmit}>
+      <form
+        className="row g-3"
+        onChange={handleInputChange}
+        onSubmit={handleSubmit}
+      >
         <div className="col-lg-4 col-sm-12">
           <label className="form-label">Nombre</label>
           <input
@@ -73,6 +62,7 @@ export const FormPet = () => {
             className="form-control"
             id="nombreanimal"
             name="name"
+            value={pet.name}
             required
           />
         </div>
@@ -84,13 +74,20 @@ export const FormPet = () => {
             className="form-control"
             id="edadanimal"
             name="birth_date"
+            value={pet.birth_date}
             required
           />
         </div>
 
         <div className="col-lg-4 col-sm-12">
           <label className="form-label">Tipo Mascota</label>
-          <select className="form-select" id="Tamaño" name="type" required>
+          <select
+            className="form-select"
+            id="Tamaño"
+            name="type"
+            value={pet.type}
+            required
+          >
             <option defaultValue={{}}>Seleccione tipo de mascota...</option>
             <option>perro</option>
             <option>gato</option>
@@ -100,7 +97,13 @@ export const FormPet = () => {
 
         <div className="col-lg-4 col-sm-12">
           <label className="form-label">Tamaño</label>
-          <select className="form-select" id="Tamaño" name="size" required>
+          <select
+            className="form-select"
+            id="Tamaño"
+            name="size"
+            value={pet.size}
+            required
+          >
             <option defaultValue={{}}>Seleccione Tamaño...</option>
             <option>Grande</option>
             <option>Mediano</option>
@@ -116,13 +119,20 @@ export const FormPet = () => {
             id="razanimal"
             aria-describedby="inputGroupPrepend"
             name="breed"
+            value={pet.breed}
             required
           />
         </div>
 
         <div className="col-lg-4 col-sm-12">
           <label className="form-label">Estado</label>
-          <select className="form-select" id="estado" name="status" required>
+          <select
+            className="form-select"
+            id="estado"
+            name="status"
+            value={pet.status.type}
+            required
+          >
             <option defaultValue={{}}>Seleccione Estado...</option>
             <option>disponible</option>
             <option>fallecido</option>
@@ -147,15 +157,9 @@ export const FormPet = () => {
             />
           </div>
           <div className="fotos">
-            {max ? (
-              <div className="alert alert-danger" role="alert">
-                Maximo cinco Imagenes!!!
-              </div>
-            ) : (
-              fileUrl.map((ima, index) => (
-                <img key={index} src={ima} style={{ width: "200px" }} />
-              ))
-            )}
+            {pet.pet_Gallery.map((ima, index) => (
+              <img key={index} src={ima.image_url} style={{ width: "200px" }} />
+            ))}
           </div>
         </div>
 
@@ -165,15 +169,15 @@ export const FormPet = () => {
             className="form-control"
             id="description"
             name="description"
+            value={pet.description}
           ></textarea>
         </div>
 
         <div className="col-12">
-          <Link className="link" to="/company_dashboard">
-            <button className="btn text-white mx-1">Volver</button>
-          </Link>
-          <button className="btn text-white mx-1" type="submit" disabled={max}>
-            Crear
+          <button className="btn text-white mx-1">Volver</button>
+
+          <button className="btn text-white mx-1" type="submit">
+            Actualizar
           </button>
         </div>
       </form>
