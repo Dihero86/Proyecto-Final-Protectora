@@ -19,7 +19,7 @@ def create_adoption_process(pet_id):
     adoption_process = Controller.create_adoption_process(body, user, pet_id)
     if isinstance(adoption_process, Adoption_process):
         return jsonify(adoption_process.serialize()), 200
-    return jsonify(adoption_process)
+    return jsonify(adoption_process),adoption_process["status"]
         
         
 

@@ -22,7 +22,7 @@ def create_adoption_process(body, user, pet_id):
         return {"msg": "Bad Request: Esta mascota ya tiene un proceso de adopción abierto", "error": True, "status": 404 }
     company_id = pet.company_id
     Repository.create_adoption_process(user['id'], pet_id, body['description'], 'pending', company_id)
-    return "el proceso de adopción se creó correctramente"
+    return {"msg":"el proceso de adopción se creó correctramente","status":200}
 
 
 def delete_adoption_process(adoption_process, volunteer):
