@@ -46,6 +46,7 @@ export const updateAdoptionProcessDescription = async (
   }
 }
 
+
 export const getAllUserAdoptionProcesses = async (user_id) => {
   try {
     const token = localStorage.getItem("token");
