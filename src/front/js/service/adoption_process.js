@@ -20,7 +20,6 @@ export const getAllAdoptionProcesses = async (company_id) => {
   }
 };
 
-
 export const updateAdoptionProcessDescription = async (
   adoptionProcessId,
   updatedProcess
@@ -43,6 +42,8 @@ export const updateAdoptionProcessDescription = async (
     return data;
   } catch (err) {
     console.log("ERROR UPDATING ADOPTION PROCESS DESCRIPTION", err);
+  }
+};
 
 export const getAllUserAdoptionProcesses = async (user_id) => {
   try {
@@ -61,6 +62,5 @@ export const getAllUserAdoptionProcesses = async (user_id) => {
     return data;
   } catch (err) {
     console.log("ERROR GET ALL USER ADOPTION PROCESSES", err);
-
   }
 };

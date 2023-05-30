@@ -12,7 +12,7 @@ export const AllAdoptionProcesses = () => {
   const [select, setSelect] = useState({
     status: "",
   });
-  
+
   const [editedDescription, setEditedDescription] = useState("");
   const params = useParams();
 
@@ -177,15 +177,9 @@ export const AllAdoptionProcesses = () => {
                 <div>
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn"
                     data-bs-toggle="modal"
                     data-bs-target={`#exampleModal-${adoption_process.id}`}
-                    onClick={() =>
-                      handleDescriptionChange(
-                        adoption_process,
-                        editedDescription
-                      )
-                    }
                   >
                     Editar
                   </button>
@@ -214,7 +208,7 @@ export const AllAdoptionProcesses = () => {
                         </div>
                         <div className="modal-body">
                           <div>
-                            <hi>Nueva Descripción</hi>
+                            <h5>Nueva Descripción</h5>
                             <textarea
                               className="form-control"
                               rows="4"
