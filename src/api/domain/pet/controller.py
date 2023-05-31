@@ -49,7 +49,6 @@ def get_allpet_company(id):
 
 def update_pet(data,fotos,user):
     body = json.loads(data)
-    print(body)
     checkdata = get_volunteer_company(user["id"], body["company_id"])
     pet = get_one_pet(body["id"])
     if pet is None:
@@ -60,4 +59,4 @@ def update_pet(data,fotos,user):
     Repository.update_pet(body, pet.id)
     images = upload_fotos(fotos)
     add_images= list(map(lambda url: Repository.add_url_to_pet_gallery(url, pet.id),images))
-    return {'message': 'Pet updated successfully'}, 200
+    return {'message': 'Pet updated successfully',"status": 200}

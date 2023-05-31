@@ -46,15 +46,7 @@ def update_pet(pet_id):
         fotos = request.files
         body = request.form.to_dict()
         pet = Controller.update_pet(body["pet"],fotos,user)
-        # if isinstance(pet, Pet):
-        #     return jsonify(pet.serialize()),201
-        return jsonify("pet")
+        return jsonify("pet"),pet["status"]
     except Exception as error:
         return jsonify("error interno"),500
     
-    # data = request.get_json()
-    # print(data)
-    # user = get_jwt()['sub']
-    # print("es el user", user)
-    # update_pet = Controller.update_pet(pet_id, data)
-    # return jsonify("update_pet"), 200
