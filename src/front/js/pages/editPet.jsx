@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { getOnePet, editPet } from "../service/petgallery.js";
 import { useParams, useNavigate } from "react-router-dom";
+import "../../styles/editPet.css";
 
 export const EditPet = () => {
+
+  const [file, setFile] = useState([]);
+  const [fileUrl, setFileUrl] = useState([]);
+  const [max, setMax] = useState(false);
   const params = useParams();
+  const navigate = useNavigate();
   const [pet, setPet] = useState({
     type: "",
     name: "",
@@ -15,36 +21,53 @@ export const EditPet = () => {
     pet_Gallery: [],
   });
 
-  console.log("es el pet", pet);
+  const getPet = async (id) => {
+    const petdata = await getOnePet(id)
+    setPet(petdata)
+  }
 
   useEffect(() => {
-    const fetchPet = async () => {
-      try {
-        const pet = await getOnePet(params.pet_id);
-        setPet(pet);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchPet();
+    getPet(params.pet_id);
   }, []);
 
-  const handleInputChange = (event) => {
-    setPet({
-      ...pet,
-      [event.target.name]: event.target.value,
+  const handleInputChange = ({ target }) => {
+    if (target.name == "fotos" && target.files) {
+      if (target.files.length > (5 - pet.pet_Gallery.length)) {
+        setMax(true);
+      } else {
+        setMax(false);
+        setFile(target.files);
+        const keyFiles = Object.keys(target.files);
+        Promise.all(
+          keyFiles.map((key) => readAsDataURL(target.files[key]))
+        ).then((urls) => setFileUrl(urls));
+      }
+    }
+    if (target.name != "fotos") {
+      setPet({ ...pet, [target.name]: target.value });
+    }
+  };
+
+  const readAsDataURL = (file) => {
+    return new Promise((resolve, reject) => {
+      const fr = new FileReader();
+      fr.onerror = reject;
+      fr.onload = function () {
+        resolve(fr.result);
+      };
+      fr.readAsDataURL(file);
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await editPet(pet, pet.id);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    const fotos = [...file];
+    const form = new FormData();
+    fotos.map((foto, index) => form.append(`foto${index}`, foto));
+    form.append("pet", JSON.stringify(pet));
+    await editPet(form, params.pet_id)
+    navigate("/company_dashboard")
+  }
 
   return (
     <div className="container mt-3">
@@ -144,7 +167,7 @@ export const EditPet = () => {
           <label className="form-label">Fotografias</label>
           <div className="botoninput d-flex justify-content-center">
             <label htmlFor="file-upload" id="subir" className="form-label">
-              <i className="fas fa-cloud-upload-alt"></i>Subir fotos (max. 5)
+              <i className="fas fa-cloud-upload-alt"></i>Subir fotos (Max: {5 - pet.pet_Gallery.length} nuevas)
             </label>
             <input
               id="file-upload"
@@ -156,10 +179,25 @@ export const EditPet = () => {
               multiple
             />
           </div>
-          <div className="fotos">
-            {pet.pet_Gallery.map((ima, index) => (
-              <img key={index} src={ima.image_url} style={{ width: "200px" }} />
-            ))}
+          <div className="row my-4">
+            <div className="col-lg-6 col-sm-12">
+              <p>Imagenes subidas</p>
+              {pet.pet_Gallery.map((ima, index) => (
+                <img key={index} src={ima.image_url} className="fotos" />
+              ))}
+            </div>
+            <div className="col-lg-6 col-sm-12">
+              <p>Imagenes nuevas</p>
+              {max ? (
+                <div className="alert alert-danger" role="alert">
+                  Maximo cinco Imagenes en total!!!
+                </div>
+              ) : (
+                fileUrl.map((ima, index) => (
+                  <img key={index} src={ima} className="fotos" />
+                ))
+              )}
+            </div>
           </div>
         </div>
 
@@ -174,9 +212,9 @@ export const EditPet = () => {
         </div>
 
         <div className="col-12">
-          <button className="btn text-white mx-1">Volver</button>
+          <button className="btn text-white mx-1" onClick={() => navigate(`/one_pet/${pet.id}`)}>Volver</button>
 
-          <button className="btn text-white mx-1" type="submit">
+          <button className="btn text-white mx-1" type="submit" disabled={max}>
             Actualizar
           </button>
         </div>

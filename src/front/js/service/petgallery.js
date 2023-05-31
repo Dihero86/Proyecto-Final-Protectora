@@ -59,10 +59,9 @@ export const editPet = async (pet, pet_id) => {
     const response = await fetch(`${URL}/api/pet/${pet_id}`, {
       method: ["PUT"],
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(pet),
+      body: pet
     });
     const data = await response.json();
     return data;
