@@ -58,10 +58,6 @@ export const AllVolunteers = () => {
 };
 
 {
-  /* <p className="volunteer-phone">
-                          <i class="fa-solid fa-phone"></i>
-                          {` ${volunteer.user.phone} `}
-                        </p> */
 }
 
 // falta el onclick en el div de la volunteer-card para acceder a ese voluntario en particular
