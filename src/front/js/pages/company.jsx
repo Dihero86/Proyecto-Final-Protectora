@@ -13,6 +13,7 @@ export const FormCompany = () => {
     email: "",
     password: "",
   });
+  const [check, setCheck] = useState(false)
 
   const [company, setCompany] = useState({
     name: "",
@@ -36,15 +37,11 @@ export const FormCompany = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user.password == passwordCheck) {
-      try {
-        const data = await addNewUserAndCompany(user, company);
-        navigate("/login_user");
-      } catch (error) {
-        console.log(error);
-        alert("Error creating user or company.");
-      }
+      const data = await addNewUserAndCompany(user, company);
+      console.log(data)
+      navigate("/login_user");
     } else {
-      alert("Passwords do not match.");
+      setCheck(true)
     }
   };
 
@@ -137,6 +134,7 @@ export const FormCompany = () => {
               }}
               required
             />
+            {check ? <p style={{ color: "red" }}>Las contraseñas no coinciden</p> : null}
           </div>
         </div>
 
