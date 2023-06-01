@@ -13,8 +13,10 @@ export const FormCompany = () => {
     email: "",
     password: "",
   });
+
   const [check, setCheck] = useState(false);
   const [spin, setSpin] = useState(true);
+
   const [company, setCompany] = useState({
     name: "",
     cif: "",
@@ -271,5 +273,6 @@ export const FormCompany = () => {
         </div>
       )}
     </form>
+
   );
 };

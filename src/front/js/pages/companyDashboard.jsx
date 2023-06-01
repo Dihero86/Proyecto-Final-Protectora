@@ -7,6 +7,7 @@ import { Context } from "../store/appContext";
 import { ModalVolunteer } from "../component/modalVolunteer.jsx";
 
 export const CompanyDashboard = () => {
+
   const [pets, setPets] = useState([]);
   const [company, setCompany] = useState({});
   const { store, actions } = useContext(Context);
@@ -24,6 +25,7 @@ export const CompanyDashboard = () => {
       setCompany(data.company);
       actions.addCompany(data.company);
       setSpin(true);
+
     }
   };
 
@@ -98,4 +100,5 @@ export const CompanyDashboard = () => {
       </div>
     </div>
   );
+
 };
