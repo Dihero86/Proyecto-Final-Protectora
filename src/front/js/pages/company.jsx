@@ -13,8 +13,8 @@ export const FormCompany = () => {
     email: "",
     password: "",
   });
-  const [check, setCheck] = useState(false)
-  const [spin, setSpin] = useState(true)
+  const [check, setCheck] = useState(false);
+  const [spin, setSpin] = useState(true);
   const [company, setCompany] = useState({
     name: "",
     cif: "",
@@ -36,13 +36,13 @@ export const FormCompany = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSpin(false)
+    setSpin(false);
     if (user.password == passwordCheck) {
       const data = await addNewUserAndCompany(user, company);
       navigate("/login_user");
     } else {
-      setSpin(true)
-      setCheck(true)
+      setSpin(true);
+      setCheck(true);
     }
   };
 
@@ -53,8 +53,8 @@ export const FormCompany = () => {
 
   return (
     <form>
-      <h2 className="mb-5 title">Registros de Protectoras/Asociaciones</h2>
-      {spin ?
+      <h2 className="mb-5 title">Registro de Protectoras/Asociaciones</h2>
+      {spin ? (
         <div className="p-4">
           <div className="row g-4">
             <h5 className="text-start">Datos de Usuario Administrador</h5>
@@ -136,11 +136,15 @@ export const FormCompany = () => {
                 }}
                 required
               />
-              {check ? <p style={{ color: "red" }}>Las contraseñas no coinciden</p> : null}
+              {check ? (
+                <p style={{ color: "red" }}>Las contraseñas no coinciden</p>
+              ) : null}
             </div>
           </div>
           <div className="row g-4">
-            <h5 className="text-start mt-5">Datos de la Protectora/Asociación</h5>
+            <h5 className="text-start mt-5">
+              Datos de la Protectora/Asociación
+            </h5>
             <div className="col-md-6 text-start">
               <label htmlFor="name" className="form-label">
                 Nombre
@@ -242,6 +246,8 @@ export const FormCompany = () => {
                 className="form-select"
                 id="description"
                 name="description"
+                onChange={handleInputChange}
+                value={company.description}
                 required
               >
                 <option defaultValue={{}}>Selecciona una opción</option>
@@ -254,12 +260,16 @@ export const FormCompany = () => {
           <button type="submit" className="mt-5" onClick={handleSubmit}>
             Enviar
           </button>
-        </div> :
-        <div className="spinner-grow" role="status">
-          <span className="visually-hidden">Loading...</span>
         </div>
-      }
+      ) : (
+        <div
+          class="spinner-border"
+          style={{ color: "#275F70", width: "3rem", height: "3rem" }}
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      )}
     </form>
-
   );
 };

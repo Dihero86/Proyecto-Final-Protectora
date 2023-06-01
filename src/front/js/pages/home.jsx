@@ -8,18 +8,18 @@ import { getAllPets } from "../service/petgallery";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-  const [pet, setPet] = useState([])
-  const [spin, setSpin] = useState(false)
+  const [pet, setPet] = useState([]);
+  const [spin, setSpin] = useState(false);
 
   const getPetInfo = async () => {
     const data = await getAllPets();
-    setPet(data.slice(-4))
-    setSpin(true)
-  }
+    setPet(data.slice(-4));
+    setSpin(true);
+  };
 
   useEffect(() => {
     getPetInfo();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -29,34 +29,34 @@ export const Home = () => {
           <div className="texto">
             <h2 className="card-title-welcometitle">Bienvenidos a PetsBook!</h2>
             <p className="card-text-pagedescription">
-              Este es el primer sitio web donde conviven todas las protectoras de España.
-              Si quieres unirte a la familia PetsBook regístrate como usuario o
-              protectora/asociación y empieza a colaborar!</p>
+              Este es el primer sitio web donde conviven todas las protectoras
+              de España. Si quieres unirte a la familia PetsBook regístrate como
+              usuario o protectora/asociación y empieza a colaborar!
+            </p>
           </div>
         </div>
       </div>
 
       <div className="container-fluid justify-content-center">
-
         <div className="row justify-content-center mx-2">
           <div className="col-lg-4 mx-4 my-4 boxini">
             <p>
-              Para unirte a PetsBook y empezar a compartir las mascotas disponibles para adopción, por favor regístrate como Protectora o Asociación
+              Para unirte a PetsBook y empezar a compartir las mascotas
+              disponibles para adopción, por favor regístrate como Protectora o
+              Asociación
             </p>
             <Link className="link" to="/createcompany">
-              <button className="btn">
-                Registro protectoras
-              </button>
+              <button className="btn">Registro protectoras</button>
             </Link>
           </div>
           <div className="col-lg-4 mx-4 my-4 boxini">
             <p>
-              Para poder solicitar un proceso de adopción de nuestras mascotas disponibles, por favor regístrate como usuario. Estamos deseando conocerte!
+              Para poder solicitar un proceso de adopción de nuestras mascotas
+              disponibles, por favor regístrate como usuario. Estamos deseando
+              conocerte!
             </p>
             <Link className="link" to="/register_user">
-              <button className="btn">
-                Registro usuario
-              </button>
+              <button className="btn">Registro usuario</button>
             </Link>
           </div>
         </div>
@@ -64,20 +64,23 @@ export const Home = () => {
         <div className="row justify-content-center p-2 m-auto mb-5 petsbox">
           <h4>Algunos de las mascotas disponibles para adopción</h4>
           <div className="row petlist justify-content-evenly p-0">
-            {spin ? pet.map((pet, index) => <Petcard key={index} pet={pet} />)
-              :
-              <div className="spinner-grow" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>}
+            {spin ? (
+              pet.map((pet, index) => <Petcard key={index} pet={pet} />)
+            ) : (
+              <div
+                class="spinner-border"
+                style={{ color: "#275F70", width: "3rem", height: "3rem" }}
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            )}
           </div>
           <Link className="link" to="/pet_gallery">
-            <button className="btn">
-              Ver todas
-            </button>
+            <button className="btn">Ver todas</button>
           </Link>
         </div>
       </div>
     </>
-
   );
 };
