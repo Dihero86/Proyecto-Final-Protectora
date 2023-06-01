@@ -10,28 +10,22 @@ export const EditUser = () => {
     name: "",
     last_name: "",
     email: "",
-    password: "",
   });
-  const [passwordCheck, setPasswordCheck] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (user.password === passwordCheck) {
-      try {
-        const response = await editUser(user_id, user);
+    try {
+      const response = await editUser(user_id, user);
 
-        if (response.ok) {
-          navigate("/company_dashboard");
-        } else {
-          console.log("Error updating user details:", response.statusText);
-        }
-      } catch (error) {
-        console.log("Error updating user details:", error);
+      if (response.ok) {
+        navigate("/my_profile");
+      } else {
+        console.log("Error updating user details:", response.statusText);
       }
-    } else {
-      console.log("Las contraseñas no coinciden");
+    } catch (error) {
+      console.log("Error updating user details:", error);
     }
   };
 

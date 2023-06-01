@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../../styles/allUserAdoptionProcesses.css";
 import { getAllUserAdoptionProcesses } from "../service/adoption_process.js";
 import { getClient } from "../service/user.js";
@@ -8,12 +8,12 @@ import { Context } from "../store/appContext";
 export const AllUserAdoptionProcesses = () => {
   const [user, setUser] = useState({});
   const [adoption_processes, setAdoptionProcesses] = useState([]);
-  const {store,actions}=useContext(Context)
+  const { store, actions } = useContext(Context);
 
   const getUserAdoptionProcesses = async () => {
     const userInfo = await getClient();
     setUser(userInfo);
-    actions.addCompany(userInfo)
+    actions.addCompany(userInfo);
     const userProcesses = await getAllUserAdoptionProcesses(userInfo.id);
     setAdoptionProcesses(userProcesses);
   };
@@ -40,7 +40,7 @@ export const AllUserAdoptionProcesses = () => {
             </p>
           </li>
           <hr></hr>
-          <Link className="sidelink" to="/register_user">
+          <Link className="sidelink" to={`/edit_user/${user.id}`}>
             <li className="mb-1">
               <p className="sidebartext">Editar usuario</p>
             </li>
