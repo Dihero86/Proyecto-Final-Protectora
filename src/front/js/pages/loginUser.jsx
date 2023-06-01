@@ -48,7 +48,7 @@ export const LoginUser = () => {
           <img src={dog2Image} className="imgleft" />
         </div>
         <div className="col-md-8">
-          <h1 className="title">Acceso Usuario</h1>
+          <h2 className="title">Acceso Usuario</h2>
           {spin ?
             <form className="d-flex flex-column m-auto f-login" onChange={handleChange} onSubmit={handleSubmbit}>
 
