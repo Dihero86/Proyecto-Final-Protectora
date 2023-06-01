@@ -30,3 +30,12 @@
   color: white;
   text-decoration: none;
 }
+
+.sidelink:hover {
+  color: #99ddf2;
+  text-decoration: none;
+}
+
+.sidebartext:hover {
+  color: #99ddf2;
+}

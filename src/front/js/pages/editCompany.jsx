@@ -4,7 +4,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const EditCompany = () => {
-
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
   const [file, setFile] = useState("");
@@ -34,17 +33,16 @@ export const EditCompany = () => {
     }
     if (target.name != "logo") {
       setCompany({ ...company, [target.name]: target.value });
-    };
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = new FormData();
-    form.append("img", file)
+    form.append("img", file);
     form.append("company", JSON.stringify(company));
     await editCompany(form, store.company.id);
     navigate("/company_dashboard");
-
   };
 
   return (
@@ -146,6 +144,7 @@ export const EditCompany = () => {
             className="form-select"
             id="description"
             name="description"
+            value={company.description}
             required
           >
             <option defaultValue={{}}>Selecciona una opción</option>
@@ -171,7 +170,10 @@ export const EditCompany = () => {
             />
           </div>
           <div className="fotos">
-            <img src={file ? fileUrl : company.logo} style={{ width: "200px" }} />
+            <img
+              src={file ? fileUrl : company.logo}
+              style={{ width: "200px" }}
+            />
           </div>
         </div>
         <div>

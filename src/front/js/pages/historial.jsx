@@ -47,10 +47,11 @@ export const Historial = () => {
   };
 
   return (
-    <div className="main">
+    <div className="main p-4">
       <h2>Historial de la mascota</h2>
       <form onSubmit={handleSubmit} className="historial">
         <input
+          className="m-3 text-center"
           type="text"
           name="title"
           placeholder="Título"
@@ -58,6 +59,7 @@ export const Historial = () => {
           onChange={handleInputChange}
         />
         <textarea
+          className="text-center"
           name="description"
           placeholder="Descripción"
           value={newEntry.description}
@@ -68,7 +70,9 @@ export const Historial = () => {
           maxLength={200}
           required
         ></textarea>
-        <button type="submit">Agregar al historial</button>
+        <button className="m-3 text-center" type="submit">
+          Agregar al historial
+        </button>
       </form>
       <div className="detalles">
         {historialData ? (
