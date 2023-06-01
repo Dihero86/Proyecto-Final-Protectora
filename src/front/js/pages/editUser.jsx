@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "../../styles/registerUser.css";
 import catImage from "../../img/cat.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { editUser } from "../service/user.js";
 
 export const EditUser = () => {
+  const { user_id } = useParams();
   const [user, setUser] = useState({
     name: "",
     last_name: "",
@@ -19,10 +20,10 @@ export const EditUser = () => {
 
     if (user.password === passwordCheck) {
       try {
-        const response = await editUser(user);
+        const response = await editUser(user_id, user);
 
         if (response.ok) {
-          navigate("/login_user");
+          navigate("/company_dashboard");
         } else {
           console.log("Error updating user details:", response.statusText);
         }
@@ -88,36 +89,7 @@ export const EditUser = () => {
                 required
               ></input>
             </div>
-            <div className="mb-3">
-              <label htmlFor="inputPassword1" className="form-label">
-                CONTRASEÑA
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="inputPassword1"
-                name="password"
-                onChange={handleChange}
-                value={user.password}
-                required
-              ></input>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="inputPassword2" className="form-label">
-                REPETIR CONTRASEÑA
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="inputPassword2"
-                name="passwordCheck"
-                value={passwordCheck}
-                onChange={(e) => {
-                  setPasswordCheck(e.target.value);
-                }}
-                required
-              ></input>
-            </div>
+
             <div>
               <button className="btn m-5" type="submit">
                 Enviar

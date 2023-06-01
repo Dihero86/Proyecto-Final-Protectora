@@ -60,7 +60,7 @@ const Layout = () => {
               element={<FormVolunteer />}
               path="/register_volunteer/:company_id"
             />
-            <Route element={<EditUser />} path="/edit_user" />
+            <Route element={<EditUser />} path="/edit_user/:user_id" />
             <Route element={<CompanyDashboard />} path="/company_dashboard" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
