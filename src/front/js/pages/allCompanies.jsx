@@ -65,71 +65,73 @@ export const AllCompanies = () => {
           <ul className="list">
             {filter.length == 0
               ? companies.map((company) => {
-                return (
-                  <li key={company.id} className="company-card">
-                    {company.logo ? (
-                      <img
-                        src={company.logo}
-                        className="card-img-top company-logo"
-                      />
-
-                    ) : (
-                      <img
-                        src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
-                        className="card-img-top company-logo"
-                        alt="..."
-                      />
-                    )}
-                    <div className="company-info">
-                      <p className="company-name">{company.name}</p>
-                      <p className="company-address">
-                        <i class="fa-solid fa-location-dot"></i>
-                        {` ${company.adress}`} <br />
-                        {company.city}
-                      </p>
-                      <p className="company-phone">
-                        <i class="fa-solid fa-phone"></i>
-                        {` ${company.phone} `}
-                      </p>
-                      <p className="company-email">
-                        <i class="fa-solid fa-envelope"></i>
-                        {` ${company.email} `}
-                      </p>
-                    </div>
-                  </li>
-                );
-              })
+                  return (
+                    <li key={company.id} className="company-card">
+                      <div className="volunteer-card my-2 col-10 p-0">
+                        <img
+                          src={
+                            company.logo
+                              ? company.logo
+                              : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                          }
+                          className="company-logo"
+                        />
+                        <div className="card-body align-bottom company-info">
+                          <h5 className="card-title company-name">
+                            {company.name}
+                          </h5>
+                          <p className="card-text m-0 company-adress">
+                            <i class="fa-solid fa-location-dot"></i>
+                            {` ${company.adress}`} <br />
+                            {company.city}
+                          </p>
+                          <p className="card-text m-0 company-phone">
+                            <i class="fa-solid fa-phone"></i>
+                            {` ${company.phone} `}
+                          </p>
+                          <p className="card-text m-0 company-email">
+                            <i class="fa-solid fa-envelope"></i>
+                            {` ${company.email} `}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })
               : filter.map((company) => {
-                return (
-                  <li key={company.id} className="company-card">
-                    {company.logo ? (
-                      company.logo
-                    ) : (
-                      <img
-                        src="https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
-                        className="card-img-top company-logo"
-                        alt="..."
-                      />
-                    )}
-                    <div className="company-info">
-                      <p className="company-name">{company.name}</p>
-                      <p className="company-address">
-                        <i class="fa-solid fa-location-dot"></i>
-                        {` ${company.adress}`} <br />
-                        {company.city}
-                      </p>
-                      <p className="company-phone">
-                        <i class="fa-solid fa-phone"></i>
-                        {` ${company.phone} `}
-                      </p>
-                      <p className="company-email">
-                        <i class="fa-solid fa-envelope"></i>
-                        {` ${company.email} `}
-                      </p>
-                    </div>
-                  </li>
-                );
-              })}
+                  return (
+                    <li key={company.id} className="company-card">
+                      <div className="volunteer-card my-2 col-10 p-0">
+                        <img
+                          src={
+                            company.logo
+                              ? company.logo
+                              : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                          }
+                          className="company-logo"
+                        />
+                        <div className="card-body align-bottom company-info">
+                          <h5 className="card-title company-name">
+                            {company.name}
+                          </h5>
+                          <p className="card-text m-0 company-adress">
+                            <i class="fa-solid fa-location-dot px-2"></i>{" "}
+                            {` ${company.adress}`} <br />
+                            {company.city}
+                          </p>
+                          <p className="card-text m-0 company-phone">
+                            <i class="fa-solid fa-phone px-2"></i>
+                            {` ${company.phone} `}
+                          </p>
+                          <p className="card-text m-0 company-email">
+                            <i class="fa-solid fa-envelope px-2"></i>
+                            {` ${company.email} `}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })}
           </ul>
         </div>
       </div>
