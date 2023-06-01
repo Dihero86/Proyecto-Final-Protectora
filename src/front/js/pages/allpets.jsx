@@ -6,6 +6,7 @@ import { Petcard } from "../component/petcard.jsx";
 export const AllPets = () => {
   const [pets, setPets] = useState([]);
   const [petFilter, setPetFilter] = useState([]);
+  const [spin, setSpin] = useState(false);
   const [select, setSelect] = useState({
     city: "",
     type: "",
@@ -16,6 +17,7 @@ export const AllPets = () => {
     const data = await getAllPets();
     setPets(data);
     setPetFilter(data);
+    setSpin(true)
   }
 
   useEffect(() => {
@@ -154,7 +156,11 @@ export const AllPets = () => {
           </div>
         </div>
         <div className="row blue-background">
-          {petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)}
+          {spin ?
+            petFilter.map((pet, index) => <Petcard key={index} pet={pet} />) :
+            <div className="spinner-grow" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>}
         </div>
       </div>
     </div>

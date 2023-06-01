@@ -10,7 +10,7 @@ export const CompanyDashboard = () => {
     const [pets, setPets] = useState([]);
     const [company, setCompany] = useState({});
     const { store, actions } = useContext(Context);
-
+    const [spin, setSpin] = useState(false);
     const navigate = useNavigate();
 
     const getPets = async () => {
@@ -24,6 +24,7 @@ export const CompanyDashboard = () => {
             setPets(data.pets);
             setCompany(data.company)
             actions.addCompany(data.company)
+            setSpin(true)
         }
     }
 
@@ -87,7 +88,10 @@ export const CompanyDashboard = () => {
 
                 <h2 className="dashboardtitle">Listado de Mascotas</h2>
                 <div className="row blue-background">
-                    {pets.map((pet, index) => <Petcard key={index} pet={pet} />)}
+                    {spin ? pets.map((pet, index) => <Petcard key={index} pet={pet} />) :
+                        <div className="spinner-grow" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>}
                 </div>
 
             </div>

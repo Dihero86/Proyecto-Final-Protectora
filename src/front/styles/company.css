@@ -1,5 +1,6 @@
-h2 {
-  font-family: Arial;
+.title {
+  margin: 20px;
+  font-size: 20px;
   color: #275f70;
 }
 

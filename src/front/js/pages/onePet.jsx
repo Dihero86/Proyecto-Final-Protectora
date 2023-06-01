@@ -199,7 +199,7 @@ export const OnePet = () => {
             < button
               type="button"
               className=" col-xs-12 btn"
-              onClick={() => navigate(`/historial/${pet.id}`)}
+              onClick={() => navigate(`/edit_pet/${pet.id}`)}
             >
               Editar
             </button> : null
