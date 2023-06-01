@@ -47,11 +47,16 @@ def get_one_pet(id):
 def get_allpet_company(id):   
     return Repository.get_allpet_company(id)
 
-def update_pet(pet_id, data):
-    pet = Pet.query.get(pet_id)
-    status= Status.query.filter_by(type=data["status"]).first()
-    data['status_id'] = status.id
-    if not pet:
-        return {'error': 'Pet not found'}, 404
-    Repository.update_pet(data, pet_id)
-    return {'message': 'Pet updated successfully'}, 200
+def update_pet(data,fotos,user):
+    body = json.loads(data)
+    checkdata = get_volunteer_company(user["id"], body["company_id"])
+    pet = get_one_pet(body["id"])
+    if pet is None:
+        return {"msg": "Bad Request: Pet not Found", "error": True, "status": 404 }
+    if type(body["status"]) is not dict:
+        status= Status.query.filter_by(type=body["status"]).first()
+        body['status_id'] = status.id
+    Repository.update_pet(body, pet.id)
+    images = upload_fotos(fotos)
+    add_images= list(map(lambda url: Repository.add_url_to_pet_gallery(url, pet.id),images))
+    return {'message': 'Pet updated successfully',"status": 200}
