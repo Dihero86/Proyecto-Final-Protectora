@@ -223,6 +223,7 @@ export const AllAdoptionProcesses = () => {
                             <textarea
                               className="form-control"
                               rows="4"
+                              style={{ resize: "none" }}
                               value={editedDescription}
                               onChange={(e) =>
                                 setEditedDescription(e.target.value)
