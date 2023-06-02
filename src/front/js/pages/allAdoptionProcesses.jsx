@@ -255,7 +255,7 @@ export const AllAdoptionProcesses = () => {
                           </button>
                           <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn"
                             onClick={() => {
                               handleDescriptionChange(
                                 adoption_process.id,
