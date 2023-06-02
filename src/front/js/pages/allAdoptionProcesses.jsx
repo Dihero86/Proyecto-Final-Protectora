@@ -229,6 +229,11 @@ export const AllAdoptionProcesses = () => {
                               }
                             ></textarea>
                           </div>
+                          {editedDescription === "" && (
+                            <p className="text">
+                              Por favor, añade una nueva descripción.
+                            </p>
+                          )}
                           <div className="col-lg-4 col-sm-12">
                             <label className="form-label">Estado</label>
                             <select
@@ -244,6 +249,7 @@ export const AllAdoptionProcesses = () => {
                             </select>
                           </div>
                         </div>
+
                         <div className="modal-footer">
                           <button
                             type="button"
