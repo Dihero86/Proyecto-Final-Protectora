@@ -1,15 +1,16 @@
 .sidebardash {
   background-color: #496770;
-  height: 100%;
+  min-height: 86vh;
   color: white;
 }
 
 .dashcontainer {
-  height: 100%;
+  height: auto;
 }
 
 @media only screen and (max-width: 991px) {
   .sidebardash {
+    min-height: auto;
     height: auto;
   }
   .dashcontainer {
