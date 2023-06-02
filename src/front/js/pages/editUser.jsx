@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/registerUser.css";
 import catImage from "../../img/cat3.jpg";
 import { useNavigate, useParams } from "react-router-dom";
 import { editUser } from "../service/user.js";
 
+import { Context } from "../store/appContext";
+
 export const EditUser = () => {
+  const { store, actions } = useContext(Context);
   const { user_id } = useParams();
   const [user, setUser] = useState({
     name: "",
@@ -20,7 +23,10 @@ export const EditUser = () => {
       const response = await editUser(user_id, user);
 
       if (response.ok) {
-        navigate("/my_profile");
+        localStorage.removeItem("token");
+        actions.deleteCompany();
+        actions.setUserRol("");
+        navigate("/");
       } else {
         console.log("Error updating user details:", response.statusText);
       }

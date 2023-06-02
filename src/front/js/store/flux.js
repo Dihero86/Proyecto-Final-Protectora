@@ -21,15 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       addCompany: (company) => {
         setStore({ company: company });
       },
-      updateUser: (user) => {
-        const store = getStore();
-        const editUser = { ...store.company };
-        editUser["name"] = user.name;
-        editUser["lastname"] = user.lastname;
-        editUser["email"] = user.email;
-        console.log(editUser);
-        console.log(user);
-      },
+
       deleteCompany: () => {
         setStore({ company: {} });
       },
