@@ -14,6 +14,7 @@ export const AllAdoptionProcesses = () => {
   });
 
   const [editedDescription, setEditedDescription] = useState("");
+  const [editedStatus, setEditedStatus] = useState("");
   const params = useParams();
 
   const getAdoptionProcesses = async (company_id) => {
@@ -60,10 +61,11 @@ export const AllAdoptionProcesses = () => {
   const handleDescriptionChange = (adoptionProcessId, newDescription) => {
     const updatedProcess = {
       description: newDescription,
-      status: "pending",
+      status: editedStatus || "pending",
     };
 
     setEditedDescription(newDescription);
+    setEditedStatus("");
 
     updateAdoptionProcessDescription(adoptionProcessId, updatedProcess)
       .then((response) => {
@@ -71,7 +73,11 @@ export const AllAdoptionProcesses = () => {
 
         const updatedProcesses = adoption_processes.map((process) => {
           if (process.id === adoptionProcessId) {
-            return { ...process, description: newDescription };
+            return {
+              ...process,
+              description: newDescription,
+              status: updatedProcess.status,
+            };
           }
           return process;
         });
@@ -81,6 +87,12 @@ export const AllAdoptionProcesses = () => {
       .catch((error) => {
         console.log("Error updating description:", error);
       });
+  };
+
+  const handleStatusChange = (event) => {
+    const selectedStatus =
+      event.target.value === "" ? "pending" : event.target.value;
+    setEditedStatus(selectedStatus);
   };
 
   return (
@@ -218,19 +230,18 @@ export const AllAdoptionProcesses = () => {
                               }
                             ></textarea>
                           </div>
-                          <div>
+                          <div className="col-lg-4 col-sm-12">
+                            <label className="form-label">Estado</label>
                             <select
                               className="form-select"
-                              value={select.status}
-                              onChange={filterAdoptionProcesses}
                               name="status"
+                              value={editedStatus}
+                              onChange={handleStatusChange}
                             >
-                              <option value="">Selecciona el estado</option>
-                              {adoptionProcessStatus().map((status) => (
-                                <option key={status} value={status}>
-                                  {status}
-                                </option>
-                              ))}
+                              <option value="">Seleccione Estado...</option>
+                              <option value="Grande">Grande</option>
+                              <option value="Mediano">Mediano</option>
+                              <option value="Pequeño">Pequeño</option>
                             </select>
                           </div>
                         </div>
