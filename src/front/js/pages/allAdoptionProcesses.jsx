@@ -205,12 +205,12 @@ export const AllAdoptionProcesses = () => {
                     <div className="modal-dialog">
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h1
+                          <h2
                             className="modal-title fs-5"
                             id={`exampleModalLabel-${adoption_process.id}`}
                           >
                             Edita el proceso de adopción
-                          </h1>
+                          </h2>
                           <button
                             type="button"
                             className="btn-close"
@@ -220,7 +220,6 @@ export const AllAdoptionProcesses = () => {
                         </div>
                         <div className="modal-body">
                           <div>
-                            <h5>Nueva Descripción</h5>
                             <textarea
                               className="form-control"
                               rows="4"
