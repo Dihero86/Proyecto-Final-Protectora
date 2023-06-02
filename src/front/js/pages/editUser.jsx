@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/registerUser.css";
-import catImage from "../../img/cat.png";
+import catImage from "../../img/cat3.jpg";
 import { useNavigate, useParams } from "react-router-dom";
 import { editUser } from "../service/user.js";
 
@@ -37,7 +37,7 @@ export const EditUser = () => {
 
   return (
     <div className="container-fluid">
-      <h1>Modifica los datos</h1>
+      <h2>Modifica los datos</h2>
       <div className="row">
         <div className="col-8 p-5">
           <form onSubmit={handleSubmit}>
