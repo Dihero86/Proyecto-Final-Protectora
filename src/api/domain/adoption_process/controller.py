@@ -16,13 +16,13 @@ def get_all_adoption_processes():
 def create_adoption_process(body, user, pet_id):
     pet = PetController.get_one_pet(pet_id)
     if not isinstance(pet, Pet): #compruebo que existe la mascota
-        return {"msg": "Bad Request: Pet not Found", "error": True, "status": 404 }
+        return {"msg": "Pet not Found", "error": True, "status": 404 }
     adoption_check = Adoption_process.query.filter_by(user_id=user['id'], pet_id=pet_id).first()
     if isinstance(adoption_check, Adoption_process):
-        return {"msg": "Bad Request: Esta mascota ya tiene un proceso de adopción abierto", "error": True, "status": 404 }
+        return {"msg": "Esta mascota ya tiene un proceso de adopción abierto", "error": True, "status": 404 }
     company_id = pet.company_id
     Repository.create_adoption_process(user['id'], pet_id, body['description'], 'pending', company_id)
-    return {"msg":"el proceso de adopción se creó correctramente","status":200}
+    return {"msg":"El proceso de adopción se creó correctamente","status":200}
 
 
 def delete_adoption_process(adoption_process, volunteer):

@@ -26,9 +26,7 @@ def login(body):
     user_verify = verify_user_email_and_pass(body)
     if user_verify.get('error') is not None:
         return user_verify
-
     user = Repository.get_user_by_email(body['email'])
-   
     if user is None:
         return {"msg": "User not found", "error": True, "status": 404}
     if bcrypt.checkpw(body['password'].encode(), user.password.encode()):

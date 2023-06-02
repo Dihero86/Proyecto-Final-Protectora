@@ -6,8 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const OnePet = () => {
-
-  const { store, actions } = useContext(Context)
+  const { store, actions } = useContext(Context);
 
   const [pet, setPet] = useState({});
   const [company, setCompany] = useState({});
@@ -35,13 +34,12 @@ export const OnePet = () => {
 
   const getInputValue = (e) => {
     setInput({ description: e.target.value });
-
   };
 
   const startAdoption = async () => {
     const resp = await startAdoptionProcess(input, pet.id);
-    setMsg(resp.msg)
-  }
+    setMsg(resp.msg);
+  };
 
   return (
     <div className="container_fluid">
@@ -111,25 +109,25 @@ export const OnePet = () => {
           </div>
         </div>
         <div className="col-12 mb-3 buttons-div">
-          {store.userRol == "client" ?
-            < button
+          {store.userRol == "client" ? (
+            <button
               type="button"
               className=" col-xs-12 btn adoption-process"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
             >
               <i className="fa-solid fa-heart"></i> ADOPTAR
-            </button> : null
-          }
-          {store.company.id == pet.company_id ?
-            < button
+            </button>
+          ) : null}
+          {store.company.id == pet.company_id ? (
+            <button
               type="button"
               className=" col-xs-12 btn"
               onClick={() => navigate(`/historial/${pet.id}`)}
             >
               Historial
-            </button> : null
-          }
+            </button>
+          ) : null}
           <div
             className="modal fade"
             id="staticBackdrop"
@@ -167,7 +165,7 @@ export const OnePet = () => {
                       onChange={(e) => getInputValue(e)}
                     ></textarea>
                   </div>
-                  {msg == "" ? null : <p style={{ color: "red" }}>{msg}</p>}
+                  {msg == "" ? null : <p style={{ color: "#275F70" }}>{msg}</p>}
                 </div>
                 <div className="modal-footer">
                   <button
@@ -185,27 +183,26 @@ export const OnePet = () => {
                   >
                     Enviar
                   </button>
-
                 </div>
               </div>
             </div>
           </div>
-          {store.userRol == "client" ?
+          {store.userRol == "client" ? (
             <button type="button" className=" col-xs-12 btn donation-process">
               <i className="fa-solid fa-hand-holding-dollar"></i> APADRINAR
-            </button> : null
-          }
-          {store.company.id == pet.company_id ?
-            < button
+            </button>
+          ) : null}
+          {store.company.id == pet.company_id ? (
+            <button
               type="button"
               className=" col-xs-12 btn"
-              onClick={() => navigate(`/historial/${pet.id}`)}
+              onClick={() => navigate(`/edit_pet/${pet.id}`)}
             >
               Editar
-            </button> : null
-          }
+            </button>
+          ) : null}
         </div>
       </div>
-    </div >
+    </div>
   );
 };

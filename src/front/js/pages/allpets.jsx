@@ -6,20 +6,22 @@ import { Petcard } from "../component/petcard.jsx";
 export const AllPets = () => {
   const [pets, setPets] = useState([]);
   const [petFilter, setPetFilter] = useState([]);
+  const [spin, setSpin] = useState(false);
   const [select, setSelect] = useState({
     city: "",
     type: "",
     size: "",
-  })
+  });
 
   const getPets = async () => {
     const data = await getAllPets();
     setPets(data);
     setPetFilter(data);
-  }
+    setSpin(true);
+  };
 
   useEffect(() => {
-    getPets()
+    getPets();
   }, []);
 
   const filterProccess = (pet, selector) => {
@@ -27,29 +29,29 @@ export const AllPets = () => {
     let type = true;
     let size = true;
     if (selector.city != "") {
-      city = (selector.city === pet.company.city)
+      city = selector.city === pet.company.city;
     }
     if (selector.type != "") {
-      type = (selector.type === pet.type)
+      type = selector.type === pet.type;
     }
     if (selector.size != "") {
-      size = (selector.size === pet.size)
+      size = selector.size === pet.size;
     }
-    return city && type && size
-  }
+    return city && type && size;
+  };
 
   const filterPets = (event) => {
-    const newSelection = { ...select, [event.target.name]: event.target.value }
-    const result = pets.filter((pet) => filterProccess(pet, newSelection))
+    const newSelection = { ...select, [event.target.name]: event.target.value };
+    const result = pets.filter((pet) => filterProccess(pet, newSelection));
     if (result == []) {
       setSelect({
         city: "",
         type: "",
         size: "",
-      })
+      });
     }
-    setSelect({ ...select, [event.target.name]: event.target.value })
-    setPetFilter([...result])
+    setSelect({ ...select, [event.target.name]: event.target.value });
+    setPetFilter([...result]);
   };
 
   const petTypes = () => {
@@ -86,7 +88,7 @@ export const AllPets = () => {
                   city: "",
                   type: "",
                   size: "",
-                })
+                });
                 setPetFilter([...pets]);
               }}
             >
@@ -107,7 +109,17 @@ export const AllPets = () => {
                 {petCities().map((city) => {
                   return (
                     <li key={city} onClick={filterPets}>
-                      <button className={select.city == city ? "dropdown-item selected" : "dropdown-item"} name="city" value={city}>{city}</button>
+                      <button
+                        className={
+                          select.city == city
+                            ? "dropdown-item selected"
+                            : "dropdown-item"
+                        }
+                        name="city"
+                        value={city}
+                      >
+                        {city}
+                      </button>
                     </li>
                   );
                 })}
@@ -126,7 +138,17 @@ export const AllPets = () => {
                 {petTypes().map((type) => {
                   return (
                     <li key={type} onClick={filterPets}>
-                      <button className={select.type == type ? "dropdown-item selected" : "dropdown-item"} name="type" value={type}>{type}</button>
+                      <button
+                        className={
+                          select.type == type
+                            ? "dropdown-item selected"
+                            : "dropdown-item"
+                        }
+                        name="type"
+                        value={type}
+                      >
+                        {type}
+                      </button>
                     </li>
                   );
                 })}
@@ -145,7 +167,17 @@ export const AllPets = () => {
                 {petSizes().map((size) => {
                   return (
                     <li key={size} onClick={filterPets}>
-                      <button className={select.size == size ? "dropdown-item selected" : "dropdown-item"} name="size" value={size}>{size}</button>
+                      <button
+                        className={
+                          select.size == size
+                            ? "dropdown-item selected"
+                            : "dropdown-item"
+                        }
+                        name="size"
+                        value={size}
+                      >
+                        {size}
+                      </button>
                     </li>
                   );
                 })}
@@ -154,7 +186,17 @@ export const AllPets = () => {
           </div>
         </div>
         <div className="row blue-background">
-          {petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)}
+          {spin ? (
+            petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)
+          ) : (
+            <div
+              class="spinner-border"
+              style={{ color: "#275F70", width: "3rem", height: "3rem" }}
+              role="status"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
