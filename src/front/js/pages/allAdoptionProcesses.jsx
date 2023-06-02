@@ -239,9 +239,9 @@ export const AllAdoptionProcesses = () => {
                               onChange={handleStatusChange}
                             >
                               <option value="">Seleccione Estado...</option>
-                              <option value="Grande">Grande</option>
-                              <option value="Mediano">Mediano</option>
-                              <option value="Pequeño">Pequeño</option>
+                              <option value="Pendiente">Pendiente</option>
+                              <option value="Completado">Completado</option>
+                              <option value="Rechazado">Rechazado</option>
                             </select>
                           </div>
                         </div>
