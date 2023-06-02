@@ -15,18 +15,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       company: {},
-      userRol: ""
+      userRol: "",
     },
     actions: {
       addCompany: (company) => {
-        setStore({ company: company })
+        setStore({ company: company });
+      },
+      updateUser: (user) => {
+        const store = getStore();
+        const editUser = { ...store.company };
+        editUser["name"] = user.name;
+        editUser["lastname"] = user.lastname;
+        editUser["email"] = user.email;
+        console.log(editUser);
+        console.log(user);
       },
       deleteCompany: () => {
-        setStore({ company: {} })
+        setStore({ company: {} });
       },
-      setUserRol:(rol)=>{
-        setStore({userRol:rol})
-      }
+      setUserRol: (rol) => {
+        setStore({ userRol: rol });
+      },
     },
   };
 };
