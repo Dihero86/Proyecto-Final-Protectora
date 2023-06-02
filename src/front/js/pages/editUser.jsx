@@ -30,7 +30,6 @@ export const EditUser = () => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };

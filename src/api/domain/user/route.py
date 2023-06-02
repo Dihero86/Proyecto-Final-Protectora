@@ -37,7 +37,8 @@ def create_volunteer(company_id):
     return jsonify(volunteer),volunteer['status']
 
 
-    
+
+
 
 @api.route('/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
