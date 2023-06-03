@@ -11,7 +11,6 @@ export const ModalVolunteer = () => {
     message: "",
   });
   const [send, setSend] = useState(false);
-  const [spin, setSpin] = useState(true);
 
   const handleChange = (event) => {
     setSend(false);
@@ -25,6 +24,7 @@ export const ModalVolunteer = () => {
 
     const resp = await volunteerinvitation(msg.email, defaultMessage);
     setSpin(true)
+
     if (resp === 200) {
       setSend(true);
     }
@@ -56,6 +56,7 @@ export const ModalVolunteer = () => {
                 aria-label="Close"
               ></button>
             </div>
+
             {spin ? <div className="modal-body">
               <p>
                 Un correo se enviará de forma automática a la dirección de email
@@ -86,6 +87,7 @@ export const ModalVolunteer = () => {
                     id="message-text"
                     value={msg.message}
                   ></textarea>
+
                 </div>
               </form>
               {send ? (
@@ -104,6 +106,7 @@ export const ModalVolunteer = () => {
                 </div>
               </div>
             }
+
             <div className="modal-footer">
               <button
                 type="button"

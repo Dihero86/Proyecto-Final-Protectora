@@ -271,6 +271,7 @@ export const FormCompany = () => {
         >
           <span className="visually-hidden">Loading...</span>
         </div>
+
       )}
     </form>
 

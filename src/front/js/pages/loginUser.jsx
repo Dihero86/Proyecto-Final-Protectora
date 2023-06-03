@@ -85,11 +85,13 @@ export const LoginUser = () => {
             </form>
           ) : (
             <div
+
               className="spinner-border"
               style={{ color: "#275F70", width: "3rem", height: "3rem" }}
               role="status"
             >
               <span className="visually-hidden">Loading...</span>
+
             </div>
           )}
         </div>

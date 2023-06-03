@@ -65,6 +65,7 @@ export const AllCompanies = () => {
           <ul className="list">
             {filter.length == 0
               ? companies.map((company) => {
+
                 return (
 
                   <div className="company-card my-2 col-10 p-0" key={company.id}>
@@ -132,6 +133,7 @@ export const AllCompanies = () => {
                   </li>
                 );
               })}
+
           </ul>
         </div>
       </div>
