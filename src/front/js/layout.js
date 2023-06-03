@@ -12,7 +12,7 @@ import { AllCompanies } from "./pages/allCompanies.jsx";
 import { AllVolunteers } from "./pages/allVolunteers.jsx";
 import { AllAdoptionProcesses } from "./pages/allAdoptionProcesses.jsx";
 import { AllUserAdoptionProcesses } from "./pages/allUserAdoptionProcesses.jsx";
-
+import { EditUser } from "./pages/editUser.jsx";
 import injectContext from "./store/appContext";
 import { FormCompany } from "./pages/company.jsx";
 import { EditCompany } from "./pages/editCompany.jsx";
@@ -62,6 +62,7 @@ const Layout = () => {
               element={<FormVolunteer />}
               path="/register_volunteer/:company_id"
             />
+            <Route element={<EditUser />} path="/edit_user/:user_id" />
             <Route element={<CompanyDashboard />} path="/company_dashboard" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>

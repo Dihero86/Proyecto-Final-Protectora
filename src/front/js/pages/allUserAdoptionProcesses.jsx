@@ -10,10 +10,11 @@ export const AllUserAdoptionProcesses = () => {
   const [adoption_processes, setAdoptionProcesses] = useState([]);
   const { store, actions } = useContext(Context)
 
+
   const getUserAdoptionProcesses = async () => {
     const userInfo = await getClient();
     setUser(userInfo);
-    actions.addCompany(userInfo)
+    actions.addCompany(userInfo);
     const userProcesses = await getAllUserAdoptionProcesses(userInfo.id);
     setAdoptionProcesses(userProcesses);
   };
@@ -41,7 +42,7 @@ export const AllUserAdoptionProcesses = () => {
           </li>
 
           <hr></hr>
-          <Link className="sidelink" to="/register_user">
+          <Link className="sidelink" to={`/edit_user/${user.id}`}>
             <li className="mb-1">
               <p className="sidebartext">Editar usuario</p>
             </li>

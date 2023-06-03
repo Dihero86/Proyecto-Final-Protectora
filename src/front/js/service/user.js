@@ -73,3 +73,29 @@ export const getClient = async () => {
     console.log("ERROR GET USER", err);
   }
 };
+
+export const editUser = async (user_id, data) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${URL}/api/user/${user_id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log(responseData);
+      return response;
+    } else {
+      console.log("Error updating user details:", response.statusText);
+      return response;
+    }
+  } catch (error) {
+    console.log("Error updating user details:", error);
+    throw error;
+  }
+};
