@@ -76,7 +76,7 @@ export const AllPets = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-12">
-          <h1 className="title">Galería de Mascotas</h1>
+          <h2 className="title">Galería de Mascotas</h2>
         </div>
         <div className="row">
           <div className="col-md-4">
@@ -190,11 +190,12 @@ export const AllPets = () => {
             petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)
           ) : (
             <div
-              class="spinner-border"
+              className="spinner-border"
               style={{ color: "#275F70", width: "3rem", height: "3rem" }}
               role="status"
             >
-              <span class="visually-hidden">Loading...</span>
+              <span className="visually-hidden">Loading...</span>
+
             </div>
           )}
         </div>

@@ -19,9 +19,11 @@ export const ModalVolunteer = () => {
 
   const handleClick = async (event) => {
     event.preventDefault();
+    setSpin(false)
     const defaultMessage = `Hola la ${store.company.description} ${store.company.name} quiere que te registres como voluntario, para ello utiliza el siguiente enlace:\n${URL}/register_volunteer/${store.company.id}. Mensaje de la compañia: ${msg.message}`;
 
     const resp = await volunteerinvitation(msg.email, defaultMessage);
+    setSpin(true)
 
     if (resp === 200) {
       setSend(true);
@@ -54,7 +56,8 @@ export const ModalVolunteer = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+
+            {spin ? <div className="modal-body">
               <p>
                 Un correo se enviará de forma automática a la dirección de email
                 que nos indique en la siguiente casilla. Dicho correo contendrá
@@ -84,6 +87,7 @@ export const ModalVolunteer = () => {
                     id="message-text"
                     value={msg.message}
                   ></textarea>
+
                 </div>
               </form>
               {send ? (
@@ -91,7 +95,18 @@ export const ModalVolunteer = () => {
                   Mensaje enviado!!!
                 </p>
               ) : null}
-            </div>
+            </div> :
+              <div className="row">
+                <div
+                  className="spinner-border"
+                  style={{ color: "#275F70", width: "3rem", height: "3rem" }}
+                  role="status"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            }
+
             <div className="modal-footer">
               <button
                 type="button"

@@ -12,8 +12,9 @@ export const AllAdoptionProcesses = () => {
   const [select, setSelect] = useState({
     status: "",
   });
-  
+
   const [editedDescription, setEditedDescription] = useState("");
+  const [editedStatus, setEditedStatus] = useState("");
   const params = useParams();
 
   const getAdoptionProcesses = async (company_id) => {
@@ -60,10 +61,11 @@ export const AllAdoptionProcesses = () => {
   const handleDescriptionChange = (adoptionProcessId, newDescription) => {
     const updatedProcess = {
       description: newDescription,
-      status: "pending",
+      status: editedStatus || "pending",
     };
 
     setEditedDescription(newDescription);
+    setEditedStatus("");
 
     updateAdoptionProcessDescription(adoptionProcessId, updatedProcess)
       .then((response) => {
@@ -71,7 +73,11 @@ export const AllAdoptionProcesses = () => {
 
         const updatedProcesses = adoption_processes.map((process) => {
           if (process.id === adoptionProcessId) {
-            return { ...process, description: newDescription };
+            return {
+              ...process,
+              description: newDescription,
+              status: updatedProcess.status,
+            };
           }
           return process;
         });
@@ -81,6 +87,12 @@ export const AllAdoptionProcesses = () => {
       .catch((error) => {
         console.log("Error updating description:", error);
       });
+  };
+
+  const handleStatusChange = (event) => {
+    const selectedStatus =
+      event.target.value === "" ? "pending" : event.target.value;
+    setEditedStatus(selectedStatus);
   };
 
   return (
@@ -177,15 +189,9 @@ export const AllAdoptionProcesses = () => {
                 <div>
                   <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn"
                     data-bs-toggle="modal"
                     data-bs-target={`#exampleModal-${adoption_process.id}`}
-                    onClick={() =>
-                      handleDescriptionChange(
-                        adoption_process,
-                        editedDescription
-                      )
-                    }
                   >
                     Editar
                   </button>
@@ -199,12 +205,12 @@ export const AllAdoptionProcesses = () => {
                     <div className="modal-dialog">
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h1
+                          <h2
                             className="modal-title fs-5"
                             id={`exampleModalLabel-${adoption_process.id}`}
                           >
                             Edita el proceso de adopción
-                          </h1>
+                          </h2>
                           <button
                             type="button"
                             className="btn-close"
@@ -214,32 +220,37 @@ export const AllAdoptionProcesses = () => {
                         </div>
                         <div className="modal-body">
                           <div>
-                            <hi>Nueva Descripción</hi>
                             <textarea
                               className="form-control"
                               rows="4"
+                              style={{ resize: "none" }}
                               value={editedDescription}
                               onChange={(e) =>
                                 setEditedDescription(e.target.value)
                               }
                             ></textarea>
                           </div>
-                          <div>
+                          {editedDescription === "" && (
+                            <p className="text">
+                              Por favor, añade una nueva descripción.
+                            </p>
+                          )}
+                          <div className="col-lg-4 col-sm-12">
+                            <label className="form-label">Estado</label>
                             <select
                               className="form-select"
-                              value={select.status}
-                              onChange={filterAdoptionProcesses}
                               name="status"
+                              value={editedStatus}
+                              onChange={handleStatusChange}
                             >
-                              <option value="">Selecciona el estado</option>
-                              {adoptionProcessStatus().map((status) => (
-                                <option key={status} value={status}>
-                                  {status}
-                                </option>
-                              ))}
+                              <option value="">Seleccione Estado...</option>
+                              <option value="Pendiente">Pendiente</option>
+                              <option value="Completado">Completado</option>
+                              <option value="Rechazado">Rechazado</option>
                             </select>
                           </div>
                         </div>
+
                         <div className="modal-footer">
                           <button
                             type="button"
@@ -250,7 +261,7 @@ export const AllAdoptionProcesses = () => {
                           </button>
                           <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn"
                             onClick={() => {
                               handleDescriptionChange(
                                 adoption_process.id,
