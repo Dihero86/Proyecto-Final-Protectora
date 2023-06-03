@@ -7,7 +7,6 @@
   list-style: none;
 }
 .adoption-process-card {
-  flex-wrap: wrap;
   border-radius: 5px;
   transition: transform 0.2s;
   border: solid 5px #42a0bd;
@@ -20,10 +19,12 @@
 .user-avatar {
   width: 200px;
   height: 200px;
+  object-fit: cover;
 }
 .pet-photo {
   width: 200px;
   height: 200px;
+  object-fit: cover;
 }
 .adoption-process-info {
   background-color: #42a0bd;
