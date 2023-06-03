@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_jwt_extended import jwt_required, get_jwt
-from api.models.index import User, User_rol
+from api.models.index import db, User, User_rol
 from api.utils import generate_sitemap, APIException
 import api.domain.user.controller as Controller
+
 
 import api.domain.companyuser.controller as CompanyUserController
 
@@ -34,6 +35,21 @@ def create_volunteer(company_id):
     if isinstance(volunteer, User):
         return jsonify(volunteer.serialize()), 200
     return jsonify(volunteer),volunteer['status']
+
+
+
+
+
+@api.route('/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    data = request.get_json()
+    updated_user = Controller.update_user(user_id, data)
+    if updated_user:
+        return jsonify({'message': 'User updated successfully', 'user': updated_user.serialize()}), 200
+    else:
+        return jsonify({'error': 'User not found'}), 404
+
+
 
 
 

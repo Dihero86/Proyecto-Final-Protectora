@@ -43,3 +43,10 @@ def create_volunteer(body,company_id):
     user=create_user(body,"volunteer")
     add_volunteer = Volunteer_controller.add_volunteer(user.id, company_id)
     return user
+
+def update_user(user_id, data):
+    user = User.query.get(user_id)
+    if not user:
+        return None
+    Repository.update_user_details(user, data)
+    return user

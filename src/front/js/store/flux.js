@@ -15,18 +15,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       company: {},
-      userRol: ""
+      userRol: "",
     },
     actions: {
       addCompany: (company) => {
-        setStore({ company: company })
+        setStore({ company: company });
       },
+
       deleteCompany: () => {
-        setStore({ company: {} })
+        setStore({ company: {} });
       },
-      setUserRol:(rol)=>{
-        setStore({userRol:rol})
-      }
+      setUserRol: (rol) => {
+        setStore({ userRol: rol });
+      },
     },
   };
 };
