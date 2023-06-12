@@ -21,10 +21,12 @@ import { FormVolunteer } from "./pages/formvolunteer.jsx";
 import { AllPets } from "./pages/allpets.jsx";
 import { OnePet } from "./pages/onePet.jsx";
 import { Historial } from "./pages/historial.jsx";
-
+import { Apadrina } from "./pages/apadrina.jsx";
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { CompanyDashboard } from "./pages/companyDashboard.jsx";
+import { Pago } from "./pages/pago.jsx";
+import { Gracias } from "./pages/gracias.jsx";
 
 //create your first component
 const Layout = () => {
@@ -64,6 +66,9 @@ const Layout = () => {
             />
             <Route element={<EditUser />} path="/edit_user/:user_id" />
             <Route element={<CompanyDashboard />} path="/company_dashboard" />
+            <Route element={<Apadrina />} path="/colabora" />
+            <Route element={<Pago />} path="/pago" />
+            <Route element={<Gracias />} path="/gracias" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

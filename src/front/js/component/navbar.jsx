@@ -39,7 +39,7 @@ export const Navbar = () => {
         <div
           className="Z-3 collapse navbar-collapse justify-content-end text-white"
           id="navbarNavAltMarkup"
-          style={{backgroundColor:"#275f70"}}
+          style={{ backgroundColor: "#275f70" }}
         >
           <div className="navbar-nav">
             <Link className="link" to="/companies">
@@ -52,10 +52,12 @@ export const Navbar = () => {
                 Animales en adopción
               </p>
             </Link>
-            <a className="nav-link" href="#">
-              Colabora
-            </a>
-            {store.userRol=="" ?
+            <Link className="link" to="/colabora">
+              <p className="nav-link my-0">
+                Colabora
+              </p>
+            </Link>
+            {store.userRol == "" ?
               <Link className="link" to="/login_user">
                 <button className="btn">
                   Acceder
@@ -67,14 +69,14 @@ export const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    {store.userRol=="client"?               
-                    <Link className="link" to="/my_profile">
-                      <button className="dropdown-item" type="button">Mi espacio</button>
-                    </Link>:
-                    <Link className="link" to="/company_dashboard">
-                      <button className="dropdown-item" type="button">Compañía</button>
-                    </Link>
-                    } 
+                    {store.userRol == "client" ?
+                      <Link className="link" to="/my_profile">
+                        <button className="dropdown-item" type="button">Mi espacio</button>
+                      </Link> :
+                      <Link className="link" to="/company_dashboard">
+                        <button className="dropdown-item" type="button">Compañía</button>
+                      </Link>
+                    }
 
                   </li>
                   <li><button onClick={handleClick} className="dropdown-item" type="button">Cerrar Sesion</button></li>
