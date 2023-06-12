@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       setCash: (amount) => {
         setStore({ amount: amount })
       },
+
       deleteCompany: () => {
         setStore({ company: {} });
       },
