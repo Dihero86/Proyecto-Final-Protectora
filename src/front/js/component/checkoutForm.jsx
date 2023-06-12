@@ -5,6 +5,7 @@ import {
     useStripe,
     useElements
 } from "@stripe/react-stripe-js";
+import { URL } from "../service";
 
 export default function CheckoutForm() {
     const stripe = useStripe();
@@ -60,7 +61,7 @@ export default function CheckoutForm() {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "https://3000-dihero86-proyectofinalp-mqxlo9pha78.ws-eu99.gitpod.io/gracias",
+                return_url: `${URL}/gracias`,
             },
         });
 
