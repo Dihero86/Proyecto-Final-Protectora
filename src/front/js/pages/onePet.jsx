@@ -125,7 +125,7 @@ export const OnePet = () => {
               <i className="fa-solid fa-heart"></i> ADOPTAR
             </button>
           ) : null}
-          {store.company.id == pet.company_id ? (
+          {(store.userRol == "admin" || store.userRol == "volunteer") && store.company.id == pet.company_id ? (
             <button
               type="button"
               className=" col-xs-12 btn"
@@ -198,7 +198,7 @@ export const OnePet = () => {
               <i className="fa-solid fa-hand-holding-dollar"></i> APADRINAR
             </button>
           ) : null}
-          {store.company.id == pet.company_id ? (
+          {(store.userRol == "admin" || store.userRol == "volunteer") && store.company.id == pet.company_id ? (
             <button
               type="button"
               className=" col-xs-12 btn"
