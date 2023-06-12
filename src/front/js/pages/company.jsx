@@ -94,7 +94,7 @@ export const FormCompany = () => {
                 value={user.last_name}
               />
             </div>
-            <div className="col-6 text-start">
+            <div className="col-4 text-start">
               <label htmlFor="exampleFormControlInput2" className="form-label">
                 Correo Electrónico
               </label>
@@ -108,7 +108,7 @@ export const FormCompany = () => {
                 value={user.email}
               />
             </div>
-            <div className="col-6 text-start">
+            <div className="col-4 text-start">
               <label htmlFor="passsowrd" className="form-label">
                 Constraseña
               </label>
@@ -122,7 +122,7 @@ export const FormCompany = () => {
                 value={user.password}
               />
             </div>
-            <div className="col-6 text-start mb-5">
+            <div className="col-4 text-start mb-5">
               <label htmlFor="password" className="form-label">
                 Repetir contraseña
               </label>
