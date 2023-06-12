@@ -11,6 +11,7 @@ export const ModalVolunteer = () => {
     message: "",
   });
   const [send, setSend] = useState(false);
+  const [spin, setSpin] = useState(true);
 
   const handleChange = (event) => {
     setSend(false);

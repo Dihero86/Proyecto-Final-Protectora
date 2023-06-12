@@ -38,15 +38,15 @@ export const Petcard = ({ pet }) => {
       <div className="card-body align-bottom">
         <h5 className="card-title">{pet.name}</h5>
         <p className="card-text m-0">
-          <i class="fa-solid fa-cake-candles px-2"></i>
+          <i className="fa-solid fa-cake-candles px-2"></i>
           {age(pet.birth_date)}
         </p>
         <p className="card-text m-0">
-          <i class="fa-solid fa-location-dot px-2"></i>
+          <i className="fa-solid fa-location-dot px-2"></i>
           {pet.company.city}
         </p>
         <p className="card-text m-0">
-          <i class="fa-solid fa-paw px-2"></i>
+          <i className="fa-solid fa-paw px-2"></i>
           {pet.type}
         </p>
       </div>

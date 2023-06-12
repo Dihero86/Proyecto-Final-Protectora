@@ -39,7 +39,13 @@ export const OnePet = () => {
   const startAdoption = async () => {
     const resp = await startAdoptionProcess(input, pet.id);
     setMsg(resp.msg);
+
   };
+
+  const handleClickApadrinar = () => {
+    actions.addPet(pet)
+    navigate("/colabora")
+  }
 
   return (
     <div className="container_fluid">
@@ -188,7 +194,7 @@ export const OnePet = () => {
             </div>
           </div>
           {store.userRol == "client" ? (
-            <button type="button" className=" col-xs-12 btn donation-process">
+            <button type="button" className=" col-xs-12 btn donation-process" onClick={handleClickApadrinar}>
               <i className="fa-solid fa-hand-holding-dollar"></i> APADRINAR
             </button>
           ) : null}

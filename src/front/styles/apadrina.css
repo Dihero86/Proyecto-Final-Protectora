@@ -1,0 +1,10 @@
+.textoapadrina {
+  height: 86hv;
+  margin: auto;
+}
+
+.imgapadrina {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}

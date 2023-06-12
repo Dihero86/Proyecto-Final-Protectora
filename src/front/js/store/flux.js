@@ -16,12 +16,19 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       company: {},
       userRol: "",
+      pet: {},
+      amount: 0
     },
     actions: {
       addCompany: (company) => {
         setStore({ company: company });
       },
-
+      addPet: (pet) => {
+        setStore({ pet: pet })
+      },
+      setCash: (amount) => {
+        setStore({ amount: amount })
+      },
       deleteCompany: () => {
         setStore({ company: {} });
       },
