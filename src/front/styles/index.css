@@ -35,6 +35,7 @@ button:hover {
 
 .titlesesion {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
   font-weight: 900;
   font-size: 40px;
   margin: auto;
@@ -63,3 +64,4 @@ button:hover {
 .nav-link {
   font-size: 18px;
 }
+

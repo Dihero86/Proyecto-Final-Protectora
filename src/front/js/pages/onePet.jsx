@@ -48,6 +48,7 @@ export const OnePet = () => {
   }
 
   return (
+
     <div className="container">
       <h2 className="titlesesion my-5">{pet.name}</h2>
       <div className="row b-background">
@@ -141,6 +142,7 @@ export const OnePet = () => {
               aria-labelledby="staticBackdropLabel"
               aria-hidden="true"
             >
+
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -187,6 +189,7 @@ export const OnePet = () => {
                     >
                       Enviar
                     </button>
+
                   </div>
                 </div>
               </div>
