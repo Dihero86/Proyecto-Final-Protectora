@@ -45,55 +45,57 @@ export const LoginUser = () => {
         <div className="d-flex col-md-4 p-0 justify-content-start">
           <img src={dog2Image} className="imgleft" />
         </div>
-        <div className="col-md-8">
-          <h2 className="title">Acceso Usuario</h2>
-          {spin ? (
-            <form
-              className="d-flex flex-column m-auto f-login"
-              onChange={handleChange}
-              onSubmit={handleSubmbit}
-            >
-              <label htmlFor="inputEmail" className="form-label">
-                EMAIL
-              </label>
-              <input
-                type="email"
-                className="form-control inp-login"
-                name="email"
-                id="inputEmail"
-                value={userAccess.email}
-                required
-              ></input>
+        <div className="col-md-8 padre">
+          <div className="hijo">
+            <h2 className="titlesesion my-5">Inicio Sesión</h2>
+            {spin ? (
+              <form
+                className="d-flex flex-column m-auto f-login"
+                onChange={handleChange}
+                onSubmit={handleSubmbit}
+              >
+                <label htmlFor="inputEmail" className="form-label">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control inp-login"
+                  name="email"
+                  id="inputEmail"
+                  value={userAccess.email}
+                  required
+                ></input>
 
-              <label htmlFor="inputPassword" className="form-label">
-                CONTRASEÑA
-              </label>
-              <input
-                type="password"
-                className="form-control inp-login"
-                name="password"
-                id="inputPassword"
-                value={userAccess.password}
-                required
-              ></input>
-              {loginerror ? (
-                <p className="errorlogin">Usuario o contraseña no validos</p>
-              ) : null}
-              <button type="submit" value="Enviar" className="btn">
-                Enviar
-              </button>
-            </form>
-          ) : (
-            <div
+                <label htmlFor="inputPassword" className="form-label">
+                  Contraseña
+                </label>
+                <input
+                  type="password"
+                  className="form-control inp-login"
+                  name="password"
+                  id="inputPassword"
+                  value={userAccess.password}
+                  required
+                ></input>
+                {loginerror ? (
+                  <p className="errorlogin">Usuario o contraseña no validos</p>
+                ) : null}
+                <button type="submit" value="Enviar" className="btn">
+                  Enviar
+                </button>
+              </form>
+            ) : (
+              <div
 
-              className="spinner-border"
-              style={{ color: "#275F70", width: "3rem", height: "3rem" }}
-              role="status"
-            >
-              <span className="visually-hidden">Loading...</span>
+                className="spinner-border"
+                style={{ color: "#275F70", width: "3rem", height: "3rem" }}
+                role="status"
+              >
+                <span className="visually-hidden">Loading...</span>
 
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

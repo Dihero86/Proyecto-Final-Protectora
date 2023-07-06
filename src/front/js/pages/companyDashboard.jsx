@@ -83,8 +83,8 @@ export const CompanyDashboard = () => {
       </div>
 
       <div className="col-lg-10 col-sm-12 px-5">
-        <h2 className="dashboardtitle">Listado de Mascotas</h2>
-        <div className="row blue-background">
+        <h2 className="titlesesion my-5">Listado de Mascotas</h2>
+        <div className="row b-background">
           {spin ? (
             pets.map((pet, index) => <Petcard key={index} pet={pet} />)
           ) : (
