@@ -62,8 +62,8 @@ export const FormPet = () => {
   };
 
   return (
-    <div className="container mt-3">
-      <h2>Agregar Mascota</h2>
+    <div className="container" >
+      <h2 className="titlesesion my-5">Agregar Mascota</h2>
 
       <form className="row g-3" onChange={handleChange} onSubmit={handleSubmit}>
         <div className="col-lg-4 col-sm-12">
@@ -160,7 +160,7 @@ export const FormPet = () => {
         </div>
 
         <div className="col-12 ">
-          <label className="form-label">DESCRIPCION</label>
+          <label className="form-label">Descripcion</label>
           <textarea
             className="form-control"
             id="description"

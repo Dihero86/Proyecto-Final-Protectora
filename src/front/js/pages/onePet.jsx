@@ -50,8 +50,8 @@ export const OnePet = () => {
   return (
     <div className="container_fluid">
       <div className="row">
-        <div className="col-md-12 m-4">
-          <h1 className="title">{pet.name}</h1>
+        <div className="col-md-12 ">
+          <h2 className="titlesesion my-5">{pet.name}</h2>
         </div>
         <div className="col-sm-5 mb-3 images-div">
           <div className="col-md-12 photo-div">
@@ -122,7 +122,7 @@ export const OnePet = () => {
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
             >
-              <i className="fa-solid fa-heart"></i> ADOPTAR
+              <i className="fa-solid fa-heart"></i> Adoptar
             </button>
           ) : null}
           {(store.userRol == "admin" || store.userRol == "volunteer") && store.company.id == pet.company_id ? (
@@ -195,7 +195,7 @@ export const OnePet = () => {
           </div>
           {store.userRol == "client" ? (
             <button type="button" className=" col-xs-12 btn donation-process" onClick={handleClickApadrinar}>
-              <i className="fa-solid fa-hand-holding-dollar"></i> APADRINAR
+              <i className="fa-solid fa-hand-holding-dollar"></i> Apadrinar
             </button>
           ) : null}
           {(store.userRol == "admin" || store.userRol == "volunteer") && store.company.id == pet.company_id ? (

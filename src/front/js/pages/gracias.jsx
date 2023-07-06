@@ -14,7 +14,7 @@ export const Gracias = () => {
 
     return (
         <>
-            <h1>Muchas Gracias por colaborar</h1>
+            <h2 className="titlesesion my-5">Muchas Gracias por colaborar</h2>
             <p>Redirigiendo a la pagina principal...</p>
             <div class="d-flex justify-content-center">
 

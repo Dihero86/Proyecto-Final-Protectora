@@ -9,13 +9,14 @@ export const UserForm = ({
   passwordCheck,
 }) => {
   return (
-    <div className="container-fluid">
+    <>
       <div className="row">
         <div className="col-8 p-5">
+          <h2 className="titlesesion my-5">Registro usuario</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="inputName" className="form-label">
-                NOMBRE
+                Nombre
               </label>
               <input
                 type="text"
@@ -29,7 +30,7 @@ export const UserForm = ({
             </div>
             <div className="mb-3">
               <label htmlFor="inputLastName" className="form-label">
-                APELLIDOS
+                Apellidos
               </label>
               <input
                 type="text"
@@ -43,7 +44,7 @@ export const UserForm = ({
             </div>
             <div className="mb-3">
               <label htmlFor="inputEmail" className="form-label">
-                EMAIL
+                Email
               </label>
               <input
                 type="email"
@@ -57,7 +58,7 @@ export const UserForm = ({
             </div>
             <div className="mb-3">
               <label htmlFor="inputPassword1" className="form-label">
-                CONTRASEÑA
+                Contraseña
               </label>
               <input
                 type="password"
@@ -71,7 +72,7 @@ export const UserForm = ({
             </div>
             <div className="mb-3">
               <label htmlFor="inputPassword2" className="form-label">
-                REPETIR CONTRASEÑA
+                Repetir contraseña
               </label>
               <input
                 type="password"
@@ -98,6 +99,6 @@ export const UserForm = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

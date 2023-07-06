@@ -32,3 +32,30 @@ button:hover {
 .link {
   text-decoration: none;
 }
+
+.titlesesion {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  margin: auto;
+}
+
+.form-control,
+.form-select {
+  border: 3px solid #496770;
+  border-radius: 8px;
+}
+
+.form-label {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+}
+
+.b-background {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  background-color: #42a0bd20;
+  border-radius: 10px;
+  padding: 40px;
+}

@@ -31,8 +31,7 @@ export const RegisterUser = () => {
   };
 
   return (
-    <div className="row ">
-      <h1 className="title m-5">Empieza a adoptar</h1>
+    <div className="container-fluid p-0">
       <UserForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { editCompany, getOneCompany } from "../service/company.js";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const EditCompany = () => {
@@ -46,8 +46,8 @@ export const EditCompany = () => {
   };
 
   return (
-    <div className="container-fluid p-4 ">
-      <h2 className="p-4">Editar datos de la compañía</h2>
+    <div className="container">
+      <h2 className="titlesesion my-5">Editar datos de la compañía</h2>
       <form
         className="row"
         onChange={handleInputChange}
@@ -177,7 +177,10 @@ export const EditCompany = () => {
           </div>
         </div>
         <div>
-          <button type="submit" className="col-md-2 mt-5">
+          <Link className="link" to="/company_dashboard">
+            <button className="btn text-white mx-1">Volver</button>
+          </Link>
+          <button type="submit" className="btn text-white mx-1" >
             Enviar
           </button>
         </div>
