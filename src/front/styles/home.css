@@ -12,6 +12,7 @@
 }
 
 .texto {
+  font-weight: 700;
   position: absolute;
   top: 120px;
   right: 50px;

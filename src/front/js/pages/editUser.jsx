@@ -42,9 +42,10 @@ export const EditUser = () => {
 
   return (
     <div className="container-fluid">
-      <h2>Modifica los datos</h2>
+
       <div className="row">
         <div className="col-8 p-5">
+          <h2 className="titlesesion">Modifica los datos</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="inputName" className="form-label">
