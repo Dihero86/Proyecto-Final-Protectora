@@ -96,10 +96,10 @@ export const AllAdoptionProcesses = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div className="row">
         <div className="col-md-12">
-          <h1 className="title">Procesos de adopción</h1>
+          <h2 className="titlesesion my-5">Procesos de adopción</h2>
         </div>
         <div className="col-md-6">
           <button
@@ -146,141 +146,143 @@ export const AllAdoptionProcesses = () => {
             </ul>
           </div>
         </div>
-        <div className="col-md-12 adoption-process-background">
-          {filter.map((adoption_process, index) => {
-            return (
-              <li key={index} className="adoption-process-item">
-                <div className=" adoption-process-card my-2">
-                  <img
-                    src={
-                      adoption_process.user.avatar
-                        ? adoption_process.user.avatar
-                        : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
-                    }
-                    className="user-avatar"
-                  />
-                  <img
-                    src={
-                      adoption_process.pet.pet_Gallery[0]
-                        ? adoption_process.pet.pet_Gallery[0].image_url
-                        : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
-                    }
-                    className="pet-photo"
-                  />
-                  <div className="card-body align-bottom adoption-process-info">
-                    <p className="card-title user-name">
-                      {adoption_process.user.name}{" "}
-                      {adoption_process.user.last_name}
-                    </p>
-                    <p className="card-text m-0 user-email">
-                      {adoption_process.user.email}
-                    </p>
-                    <p className="card-text m-0 pet-name">
-                      {adoption_process.pet.name}
-                    </p>
-                    <p className="card-text m-0 adoption-process-description">
-                      {adoption_process.description}
-                    </p>
-                    <p className="card-text m-0 adoption-process-status">
-                      {adoption_process.status}
-                    </p>
+        <div className="col-md-12 b-background">
+          <div className="row">
+            {filter.map((adoption_process, index) => {
+              return (
+                <div key={index} className="adoption-process-item">
+                  <div className=" adoption-process-card my-2">
+                    <img
+                      src={
+                        adoption_process.user.avatar
+                          ? adoption_process.user.avatar
+                          : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                      }
+                      className="user-avatar"
+                    />
+                    <img
+                      src={
+                        adoption_process.pet.pet_Gallery[0]
+                          ? adoption_process.pet.pet_Gallery[0].image_url
+                          : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
+                      }
+                      className="pet-photo"
+                    />
+                    <div className="card-body align-bottom adoption-process-info">
+                      <p className="card-title user-name">
+                        {adoption_process.user.name}{" "}
+                        {adoption_process.user.last_name}
+                      </p>
+                      <p className="card-text m-0 user-email">
+                        email: {adoption_process.user.email}
+                      </p>
+                      <p className="card-text m-0 pet-name">
+                        Mascota: {adoption_process.pet.name}
+                      </p>
+                      <p className="card-text m-0 adoption-process-description">
+                        Descripción: {adoption_process.description}
+                      </p>
+                      <p className="card-text m-0 adoption-process-status">
+                        Estado: {adoption_process.status}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    className="btn"
-                    data-bs-toggle="modal"
-                    data-bs-target={`#exampleModal-${adoption_process.id}`}
-                  >
-                    Editar
-                  </button>
-                  <div
-                    className="modal fade"
-                    id={`exampleModal-${adoption_process.id}`}
-                    tabIndex="-1"
-                    aria-labelledby={`exampleModalLabel-${adoption_process.id}`}
-                    aria-hidden="true"
-                  >
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h2
-                            className="modal-title fs-5"
-                            id={`exampleModalLabel-${adoption_process.id}`}
-                          >
-                            Edita el proceso de adopción
-                          </h2>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body">
-                          <div>
-                            <textarea
-                              className="form-control"
-                              rows="4"
-                              style={{ resize: "none" }}
-                              value={editedDescription}
-                              onChange={(e) =>
-                                setEditedDescription(e.target.value)
-                              }
-                            ></textarea>
-                          </div>
-                          {editedDescription === "" && (
-                            <p className="text">
-                              Por favor, añade una nueva descripción.
-                            </p>
-                          )}
-                          <div className="col-lg-4 col-sm-12">
-                            <label className="form-label">Estado</label>
-                            <select
-                              className="form-select"
-                              name="status"
-                              value={editedStatus}
-                              onChange={handleStatusChange}
+                  <div>
+                    <button
+                      type="button"
+                      className="btn"
+                      data-bs-toggle="modal"
+                      data-bs-target={`#exampleModal-${adoption_process.id}`}
+                    >
+                      Editar
+                    </button>
+                    <div
+                      className="modal fade"
+                      id={`exampleModal-${adoption_process.id}`}
+                      tabIndex="-1"
+                      aria-labelledby={`exampleModalLabel-${adoption_process.id}`}
+                      aria-hidden="true"
+                    >
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h2
+                              className="modal-title fs-5"
+                              id={`exampleModalLabel-${adoption_process.id}`}
                             >
-                              <option value="">Seleccione Estado...</option>
-                              <option value="Pendiente">Pendiente</option>
-                              <option value="Completado">Completado</option>
-                              <option value="Rechazado">Rechazado</option>
-                            </select>
+                              Edita el proceso de adopción
+                            </h2>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
                           </div>
-                        </div>
+                          <div className="modal-body">
+                            <div>
+                              <textarea
+                                className="form-control"
+                                rows="4"
+                                style={{ resize: "none" }}
+                                value={editedDescription}
+                                onChange={(e) =>
+                                  setEditedDescription(e.target.value)
+                                }
+                              ></textarea>
+                            </div>
+                            {editedDescription === "" && (
+                              <p className="text">
+                                Por favor, añade una nueva descripción.
+                              </p>
+                            )}
+                            <div className="col-lg-4 col-sm-12">
+                              <label className="form-label">Estado</label>
+                              <select
+                                className="form-select"
+                                name="status"
+                                value={editedStatus}
+                                onChange={handleStatusChange}
+                              >
+                                <option value="">Seleccione Estado...</option>
+                                <option value="pending">pending</option>
+                                <option value="accepted">accepted</option>
+                                <option value="refused">refused</option>
+                              </select>
+                            </div>
+                          </div>
 
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Cerrar
-                          </button>
-                          <button
-                            type="button"
-                            className="btn"
-                            onClick={() => {
-                              handleDescriptionChange(
-                                adoption_process.id,
-                                editedDescription
-                              );
-                              setEditedDescription("");
-                            }}
-                            data-bs-dismiss="modal"
-                          >
-                            Guardar Cambios
-                          </button>
+                          <div className="modal-footer">
+                            <button
+                              type="button"
+                              className="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Cerrar
+                            </button>
+                            <button
+                              type="button"
+                              className="btn"
+                              onClick={() => {
+                                handleDescriptionChange(
+                                  adoption_process.id,
+                                  editedDescription
+                                );
+                                setEditedDescription("");
+                              }}
+                              data-bs-dismiss="modal"
+                            >
+                              Guardar Cambios
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </li>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

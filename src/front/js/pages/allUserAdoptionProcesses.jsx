@@ -16,6 +16,7 @@ export const AllUserAdoptionProcesses = () => {
     setUser(userInfo);
     actions.addCompany(userInfo);
     const userProcesses = await getAllUserAdoptionProcesses(userInfo.id);
+    console.log(userProcesses)
     setAdoptionProcesses(userProcesses);
   };
 
@@ -51,43 +52,31 @@ export const AllUserAdoptionProcesses = () => {
       </div>
 
       <div className="col-lg-10 col-sm-12 px-5">
-        <h2 className="dashboardtitle m-4">Mis procesos de adopción</h2>
-        <div className="row blue-background">
+        <h2 className="titlesesion my-5">Mis procesos de adopción</h2>
+        <div className="row b-background">
           {adoption_processes.map((adoption_process, index) => (
 
-            <div className=" adoption-process-carduser my-2">
-              <img
-                src={
-                  adoption_process.user.avatar
-                    ? adoption_process.user.avatar
-                    : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
-                }
-                className="user-avatar"
-              />
+            <div className=" adoption-process-cardusuario p-0 my-2">
               <img
                 src={
                   adoption_process.pet.pet_Gallery[0]
                     ? adoption_process.pet.pet_Gallery[0].image_url
                     : "https://res.cloudinary.com/djzijohkt/image/upload/v1683051273/icono_aq4qpy.webp"
                 }
-                className="pet-photo"
+                className="pet-photo1"
               />
-              <div className="card-body align-bottom adoption-process-info">
+              <div className="card-body align-bottom ">
                 <p className="card-title user-name">
-                  {adoption_process.user.name}{" "}
-                  {adoption_process.user.last_name}
-                </p>
-                <p className="card-text m-0 user-email">
-                  {adoption_process.user.email}
-                </p>
-                <p className="card-text m-0 pet-name">
                   {adoption_process.pet.name}
                 </p>
                 <p className="card-text m-0 adoption-process-description">
-                  {adoption_process.description}
+                  Protectora: {adoption_process.pet.company.name}
                 </p>
-                <p className="card-text m-0 adoption-process-status">
-                  {adoption_process.status}
+                <p className="card-text m-0 adoption-process-sta">
+                  Estado: {adoption_process.status}
+                </p>
+                <p className="card-text m-0 adoption-process-sta">
+                  Mensaje: {adoption_process.description}
                 </p>
               </div>
             </div>
