@@ -2,21 +2,20 @@
   justify-content: space-around;
   display: flex;
 }
-.title {
-  font-size: 50px;
-  color: #275f70;
-}
+
 .subtitle {
   color: #275f70;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 900;
 }
 .images-div {
-  background-color: #9ddef2;
   padding: 20px;
   align-items: center;
   display: flex;
+  background-color: #496770;
+  border-radius: 20px;
 }
 .photo-div {
-  background-color: #42a0bd;
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
@@ -30,30 +29,37 @@
 }
 
 .info-div {
-  background-color: #42a0bd;
+  border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
 }
+
 .info-pet {
-  background-color: #9ddef2;
   justify-content: center;
   display: flex;
   flex-direction: column;
   color: #496770;
   padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
 }
 .description-pet {
-  background-color: #9ddef2;
   justify-content: center;
   display: flex;
   flex-direction: column;
   color: #496770;
   padding: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  border-bottom: solid 2px #49677020;
+  font-size: 18px;
 }
+
 .buttons-div {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: 10px;
+  max-height: 45px;
 }

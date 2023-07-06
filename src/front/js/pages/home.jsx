@@ -27,7 +27,7 @@ export const Home = () => {
         <img src={dogImage} className="portada" />
         <div className="overlay">
           <div className="texto">
-            <h2 className="card-title-welcometitle">Bienvenidos a PetsBook!</h2>
+            <h2 className="titlesesion">Bienvenidos a PetsBook!</h2>
             <p className="card-text-pagedescription">
               Este es el primer sitio web donde conviven todas las protectoras
               de España. Si quieres unirte a la familia PetsBook regístrate como
@@ -62,7 +62,7 @@ export const Home = () => {
         </div>
 
         <div className="row justify-content-center p-2 m-auto mb-5 petsbox">
-          <h4>Algunos de las mascotas disponibles para adopción</h4>
+          <h4 className="my-3">Algunos de las mascotas disponibles para adopción</h4>
           <div className="row petlist justify-content-evenly p-0">
             {spin ? (
               pet.map((pet, index) => <Petcard key={index} pet={pet} />)

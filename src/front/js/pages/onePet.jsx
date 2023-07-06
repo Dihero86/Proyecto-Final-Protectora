@@ -48,11 +48,10 @@ export const OnePet = () => {
   }
 
   return (
-    <div className="container_fluid">
-      <div className="row">
-        <div className="col-md-12 ">
-          <h2 className="titlesesion my-5">{pet.name}</h2>
-        </div>
+    <div className="container">
+      <h2 className="titlesesion my-5">{pet.name}</h2>
+      <div className="row b-background">
+
         <div className="col-sm-5 mb-3 images-div">
           <div className="col-md-12 photo-div">
             <div className="col-8 mb-3">
@@ -97,117 +96,121 @@ export const OnePet = () => {
             </div>
           </div>
         </div>
+
         <div className="col-sm-5 mb-3 info-div">
           <div className="col-md-12 info-pet">
-            <h1 className="subtitle m-4">Sus datos: </h1>
-            <p className="pet-age">Fecha de nacimiento: {pet.birth_date}</p>
-            <p className="pet-breed">Raza: {pet.breed}</p>
+            <p className="pet-age"><strong>Fecha de nacimiento: </strong>{pet.birth_date}</p>
+            <p className="pet-breed"><strong>Raza: </strong>{pet.breed}</p>
             <p className="pet-company">
-              {company.description}: {company.name}
+              <strong>{company.description}: </strong>{company.name}
             </p>
             <p className="pet-city">
-              Localización: {company.adress} ,{company.city}{" "}
+              <strong>Localización: </strong>{company.adress} ,{company.city}{" "}
             </p>
           </div>
           <div className="col-md-12 mt-4 description-pet">
-            <h1 className="subtitle m-4">Su historia: </h1>
+            <h4 className="subtitle m-4">Su historia</h4>
             <p className="description">{pet.description}</p>
           </div>
-        </div>
-        <div className="col-12 mb-3 buttons-div">
-          {store.userRol == "client" ? (
-            <button
-              type="button"
-              className=" col-xs-12 btn adoption-process"
-              data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop"
+          <div className="col-md-12 p-4 buttons-div">
+            {store.userRol == "client" ? (
+              <button
+                type="button"
+                className=" col-xs-12 btn adoption-process"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
+                <i className="fa-solid fa-heart"></i> Adoptar
+              </button>
+            ) : null}
+            {(store.userRol == "admin" || store.userRol == "volunteer") && store.company.id == pet.company_id ? (
+              <button
+                type="button"
+                className=" col-xs-12 btn"
+                onClick={() => navigate(`/historial/${pet.id}`)}
+              >
+                Historial
+              </button>
+            ) : null}
+            <div
+              className="modal fade"
+              id="staticBackdrop"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
             >
-              <i className="fa-solid fa-heart"></i> Adoptar
-            </button>
-          ) : null}
-          {(store.userRol == "admin" || store.userRol == "volunteer") && store.company.id == pet.company_id ? (
-            <button
-              type="button"
-              className=" col-xs-12 btn"
-              onClick={() => navigate(`/historial/${pet.id}`)}
-            >
-              Historial
-            </button>
-          ) : null}
-          <div
-            className="modal fade"
-            id="staticBackdrop"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabindex="-1"
-            aria-labelledby="staticBackdropLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                    Solicitud de Adopción
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  Se va a proceder a enviar una solicitud de adopción a la{" "}
-                  <b>
-                    {company.description} {company.name}
-                  </b>
-                  , en <b>{company.city}</b>. ¿Está seguro de que quiere
-                  continuar? Añada un comentario contándonos un poco más sobre
-                  Utd y porqué le gustaría adoptar/acoger a <b>{pet.name}</b>.
-                  <div className="form-floating">
-                    <textarea
-                      className="form-control my-3"
-                      id="floatingTextarea"
-                      onChange={(e) => getInputValue(e)}
-                    ></textarea>
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                      Solicitud de Adopción
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
                   </div>
-                  {msg == "" ? null : <p style={{ color: "#275F70" }}>{msg}</p>}
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn adoption-process"
-                    data-bs-dismiss="modal"
-                    onClick={() => setMsg("")}
-                  >
-                    Cerrar
-                  </button>
-                  <button
-                    type="button"
-                    className="btn adoption-process"
-                    onClick={startAdoption}
-                  >
-                    Enviar
-                  </button>
+                  <div className="modal-body">
+                    Se va a proceder a enviar una solicitud de adopción a la{" "}
+                    <b>
+                      {company.description} {company.name}
+                    </b>
+                    , en <b>{company.city}</b>. ¿Está seguro de que quiere
+                    continuar? Añada un comentario contándonos un poco más sobre
+                    Utd y porqué le gustaría adoptar/acoger a <b>{pet.name}</b>.
+                    <div className="form-floating">
+                      <textarea
+                        className="form-control my-3"
+                        id="floatingTextarea"
+                        onChange={(e) => getInputValue(e)}
+                      ></textarea>
+                    </div>
+                    {msg == "" ? null : <p style={{ color: "#275F70" }}>{msg}</p>}
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn adoption-process"
+                      data-bs-dismiss="modal"
+                      onClick={() => setMsg("")}
+                    >
+                      Cerrar
+                    </button>
+                    <button
+                      type="button"
+                      className="btn adoption-process"
+                      onClick={startAdoption}
+                    >
+                      Enviar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+            {store.userRol == "client" ? (
+              <button type="button" className=" col-xs-12 btn donation-process" onClick={handleClickApadrinar}>
+                <i className="fa-solid fa-hand-holding-dollar"></i> Apadrinar
+              </button>
+            ) : null}
+            {(store.userRol == "admin" || store.userRol == "volunteer") && store.company.id == pet.company_id ? (
+              <button
+                type="button"
+                className=" col-xs-12 btn"
+                onClick={() => navigate(`/edit_pet/${pet.id}`)}
+              >
+                Editar
+              </button>
+            ) : null}
           </div>
-          {store.userRol == "client" ? (
-            <button type="button" className=" col-xs-12 btn donation-process" onClick={handleClickApadrinar}>
-              <i className="fa-solid fa-hand-holding-dollar"></i> Apadrinar
-            </button>
-          ) : null}
-          {(store.userRol == "admin" || store.userRol == "volunteer") && store.company.id == pet.company_id ? (
-            <button
-              type="button"
-              className=" col-xs-12 btn"
-              onClick={() => navigate(`/edit_pet/${pet.id}`)}
-            >
-              Editar
-            </button>
-          ) : null}
+
         </div>
+
+
+
       </div>
     </div>
   );

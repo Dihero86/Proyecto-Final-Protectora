@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { getHistorial, createHistorialEntry } from "../service/historial";
 import "../../styles/historial.css";
 
@@ -10,6 +10,7 @@ export const Historial = () => {
     description: "",
   });
   const { pet_id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -106,6 +107,7 @@ export const Historial = () => {
           <p>Loading history...</p>
         )}
       </div>
+      <button className="btn text-white my-2 mx-1" onClick={() => navigate("/company_dashboard")}>Volver</button>
     </div>
   );
 };
