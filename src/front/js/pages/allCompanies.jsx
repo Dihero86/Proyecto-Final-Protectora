@@ -24,10 +24,10 @@ export const AllCompanies = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div className="row">
         <div className="col-md-12">
-          <h2 className="title">Protectoras/ Asociaciones/ Compañías</h2>
+          <h2 className="titlesesion my-5">Compañías</h2>
         </div>
         <div className="col-md-6">
           <button
@@ -61,7 +61,7 @@ export const AllCompanies = () => {
             </ul>
           </div>
         </div>
-        <div className="col-md-12 blue-background">
+        <div className="col-md-12 b-background">
           <ul className="list">
             {filter.length == 0
               ? companies.map((company) => {

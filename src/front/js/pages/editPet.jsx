@@ -71,7 +71,7 @@ export const EditPet = () => {
 
   return (
     <div className="container mt-3">
-      <h2>Editar Mascota</h2>
+      <h2 className="titlesesion my-5">Editar Mascota</h2>
 
       <form
         className="row g-3"

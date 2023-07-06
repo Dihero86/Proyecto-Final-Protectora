@@ -4,17 +4,12 @@
   background-color: #42a0bd;
   color: white;
 }
+
 .menu {
   float: right;
   margin-bottom: 20px;
   background-color: #42a0bd;
   color: white;
-}
-.blue-background {
-  background-color: #99ddf2;
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
 }
 
 .list {

@@ -73,10 +73,10 @@ export const AllPets = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div className="row">
         <div className="col-md-12">
-          <h2 className="title">Galería de Mascotas</h2>
+          <h2 className="titlesesion my-5">Galería de Mascotas</h2>
         </div>
         <div className="row">
           <div className="col-md-4">
@@ -185,7 +185,7 @@ export const AllPets = () => {
             </div>
           </div>
         </div>
-        <div className="row blue-background">
+        <div className="row b-background">
           {spin ? (
             petFilter.map((pet, index) => <Petcard key={index} pet={pet} />)
           ) : (

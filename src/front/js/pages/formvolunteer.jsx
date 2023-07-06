@@ -35,8 +35,7 @@ export const FormVolunteer = () => {
     setUser({ ...user, [name]: value });
   };
   return (
-    <div className="row">
-      <h1 className="title m-5">Empieza a colaborar como voluntario</h1>
+    <div className="container-fluid p-0">
       <UserForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}
